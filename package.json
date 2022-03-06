@@ -1,0 +1,17 @@
+{
+  "name": "untitled-ui",
+  "version": "0.0.1",
+  "description": "Unofficial react version of the famous Untitled UI Kit.",
+  "private": true,
+  "scripts": {
+    "components:watch": "yarn workspace @untitled-ui/components dev",
+    "components:types": "yarn workspace @untitled-ui/components types",
+    "docs:watch": "yarn workspace @untitled-ui/docs dev",
+    "types": "yarn workspace @untitled-ui/components types && yarn workspace @untitled-ui/foundation types",
+    "build": "yarn workspace @untitled-ui/components build && yarn workspace @untitled-ui/foundation build",
+    "clean": "yarn workspaces run clean"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
