@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import Head from "next/head";
 
-import { Input } from "@cube/components";
+import { FormControl, Input } from "@cube/components";
 
 import Page from "@components/Layout/Page";
 import Section from "@components/Section";
@@ -93,16 +93,48 @@ const Inputs: FC<IInputs> = () => {
             description={
               <>
                 <Keyword>FormControl</Keyword> component consists of label, hint
-                text and an error message.
+                text and an error message. In case <Keyword>error</Keyword>{" "}
+                property is populated, hint message won't showup even if the{" "}
+                <Keyword>hint</Keyword> property is populated.
               </>
             }
           >
             <Example
-              code={`<Input placeholder="jhon.doe@example.com" />
-<Input placeholder="Disabled input" disabled />
-<Input placeholder="Input with an error" error />`}
+              code={`import { FormControl } from '@cube/components'
+
+<FormControl id="email" fieldLabel="Email" hint="Enter your email.">
+  <Input name="email" id="email" placeholder="jhon.doe@example.com" />
+</FormControl>
+
+<FormControl id="email" fieldLabel="Email" hint="Enter your email." error="Email is invalid">
+  <Input name="email" id="email" placeholder="jhon.doe@example.com" error />
+</FormControl>`}
             >
-              <Input placeholder="jhon.doe@example.com" />
+              <FormControl
+                id="email-1"
+                fieldLabel="Email"
+                hint="Enter your email."
+              >
+                <Input
+                  id="email-1"
+                  name="email-1"
+                  placeholder="jhon.doe@example.com"
+                />
+              </FormControl>
+
+              <FormControl
+                id="email-2"
+                fieldLabel="Email"
+                hint="Enter your email."
+                error="Email is invalid"
+              >
+                <Input
+                  id="email-2"
+                  name="email-2"
+                  placeholder="jhon.doe@example.com"
+                  error
+                />
+              </FormControl>
             </Example>
           </Section>
         </div>
