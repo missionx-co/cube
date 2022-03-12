@@ -9,6 +9,7 @@ import Keyword from "@components/Keyword";
 import Example from "@components/Example";
 
 import { useSidebarContext } from "@components/Layout/SidebarContext";
+import CodeSnippet from "@components/CodeSnippet";
 
 interface IButtons {}
 
@@ -30,6 +31,10 @@ const Buttons: FC<IButtons> = () => {
         description="Buttons communicate actions that users can take."
       >
         <div className="space-y-16">
+          <Section title="Import">
+            <CodeSnippet>{`import { Button } from '@cube/components'`}</CodeSnippet>
+          </Section>
+
           <Section
             title="Size"
             description={

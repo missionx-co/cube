@@ -6,6 +6,7 @@ import { Badge } from "@cube/components";
 import Page from "@components/Layout/Page";
 import Section from "@components/Section";
 import Keyword from "@components/Keyword";
+import CodeSnippet from "@components/CodeSnippet";
 import Example from "@components/Example";
 import { useSidebarContext } from "@components/Layout/SidebarContext";
 
@@ -29,6 +30,10 @@ const Badges: FC<IBadges> = () => {
         description="Badges help highlight important information, such as notifications or new and unread messages. They’re primarily used for communicating secondary or additional information to text."
       >
         <div className="space-y-16">
+          <Section title="Import">
+            <CodeSnippet>{`import { Badge } from '@cube/components'`}</CodeSnippet>
+          </Section>
+
           <Section
             title="Size"
             description={

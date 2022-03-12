@@ -7,8 +7,10 @@ import { base, primary, error } from "./styles";
 import IButton from "./IButton";
 import { StyledComponentType } from "@stitches/core/types/styled-component";
 
+import Group, { IButtonsGroup } from "./Group";
+
 const StyledButton: StyledComponentType<any> = styled("button", {
-  ...tw`font-medium text-white transition-colors duration-300 ease-in-out rounded-lg focus:ring-2 focus:outline-none focus:ring-offset-1 disabled:cursor-not-allowed`,
+  ...tw`font-medium text-white transition-colors duration-300 ease-in-out border rounded-lg focus:ring-2 focus:outline-none focus:ring-offset-1 disabled:cursor-not-allowed`,
   variants: {
     area: {
       sm: {
@@ -40,7 +42,13 @@ const StyledButton: StyledComponentType<any> = styled("button", {
   compoundVariants: [...primary, ...error],
 });
 
-const Button: FC<IButton> = ({ color, variant, area, children, ...props }) => (
+const Button: FC<IButton> & { Group: FC<IButtonsGroup> } = ({
+  color,
+  variant,
+  area,
+  children,
+  ...props
+}) => (
   <StyledButton color={color} area={area} variant={variant} {...props}>
     {children}
   </StyledButton>
@@ -51,5 +59,7 @@ Button.defaultProps = {
   variant: "fill",
   area: "base",
 };
+
+Button.Group = Group;
 
 export default Button;
