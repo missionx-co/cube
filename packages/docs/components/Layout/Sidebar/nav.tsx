@@ -80,6 +80,11 @@ export const docs = [
         href: "/components/inputs",
       },
       {
+        id: "textarea",
+        text: "Textarea",
+        href: "/components/textarea",
+      },
+      {
         id: "dropdowns",
         text: "Dropdowns",
         href: "/components/dropdowns",
