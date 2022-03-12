@@ -1,11 +1,13 @@
-import React, { FC, HTMLProps } from "react";
+import React, { FC } from "react";
 import tw from "twin.macro";
-import { Color } from "@untitled-ui/foundation";
 import { styled } from "../../stitches.config";
 
 import { base, primary, error } from "./styles";
 
-const StyledButton = styled("button", {
+import IButton from "./IButton";
+import { StyledComponentType } from "@stitches/core/types/styled-component";
+
+const StyledButton: StyledComponentType<any> = styled("button", {
   ...tw`font-medium text-white transition-colors duration-300 ease-in-out rounded-lg focus:ring-2 focus:outline-none focus:ring-offset-1 disabled:cursor-not-allowed`,
   variants: {
     area: {
@@ -38,18 +40,7 @@ const StyledButton = styled("button", {
   compoundVariants: [...primary, ...error],
 });
 
-type Variant = "fill" | "light" | "outline" | "link";
-
-type Area = "sm" | "base" | "lg" | "xl" | "2xl";
-
-interface IButton extends HTMLProps<HTMLButtonElement> {
-  color?: "primary" | "error";
-  variant?: Variant;
-  area?: Area;
-}
-
 const Button: FC<IButton> = ({ color, variant, area, children, ...props }) => (
-  // @ts-ignore
   <StyledButton color={color} area={area} variant={variant} {...props}>
     {children}
   </StyledButton>
