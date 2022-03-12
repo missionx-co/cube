@@ -1,7 +1,5 @@
 import { FC, ReactNode } from "react";
 
-import Keyword from "./Keyword";
-
 interface ISection {
   title: ReactNode;
   description?: ReactNode;

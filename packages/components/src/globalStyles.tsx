@@ -3,7 +3,7 @@ import { globalCss } from "./stitches.config";
 
 const customStyles = {
   body: {
-    ...tw`font-sans bg-gray-900 font-base`,
+    ...tw`font-sans bg-gray-900`,
   },
 };
 

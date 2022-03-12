@@ -58,6 +58,9 @@ module.exports = plugin(function () {}, {
         "display-sm": ["1.875rem", "2.375rem"],
         "display-xs": ["1.5rem", "2rem"],
       },
+      spacing: {
+        '4.5': '1.125rem'
+      },
     },
   },
 });
