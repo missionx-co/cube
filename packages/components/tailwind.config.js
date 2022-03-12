@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: [require("@untitled-ui/foundation/dist/plugin")],
+  plugins: [require("@cube/foundation/dist/plugin")],
 };

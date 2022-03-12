@@ -4,12 +4,6 @@ import AirplayIcon from "@icons/airplay";
 
 export const bookmarks = [
   {
-    id: "figma-version",
-    href: "https://www.untitledui.com/",
-    icon: <FigmaIcon />,
-    text: "Buy Figma version",
-  },
-  {
     id: "application-ui-kit",
     href: "/application",
     icon: <BarChartAlt />,
@@ -61,7 +55,7 @@ export const docs = [
     text: "Components",
     children: [
       {
-        id: "button",
+        id: "buttons",
         text: "Buttons",
         href: "/components/buttons",
       },

@@ -1,11 +1,11 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { untitledUIStyles } from "@untitled-ui/components";
+import { cubeStyles } from "@cube/components";
 
 import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  untitledUIStyles();
+  cubeStyles();
   return (
     <Layout>
       <Component {...pageProps} />

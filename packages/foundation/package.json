@@ -1,6 +1,6 @@
 {
-  "name": "@untitled-ui/foundation",
-  "description": "The foundation of untitled ui: colors, typography, logs, icons, shadows, ",
+  "name": "@cube/foundation",
+  "description": "The foundation of cube: colors, typography, and shadows",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",

@@ -1,5 +1,5 @@
-export { getCssText as getUntitledUICssText } from "./stitches.config";
-export { default as untitledUIStyles } from "./globalStyles";
+export { getCssText as getCubeCssText } from "./stitches.config";
+export { default as cubeStyles } from "./globalStyles";
 
 // Components
 export { default as Button } from "./components/Button";

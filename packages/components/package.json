@@ -1,6 +1,6 @@
 {
-  "name": "@untitled-ui/components",
-  "description": "untitled ui shared components",
+  "name": "@cube/components",
+  "description": "cube shared components",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -25,7 +25,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@untitled-ui/foundation": "~0.0.1",
+    "@cube/foundation": "~0.0.1",
     "@stitches/core": "^1.2.7",
     "@stitches/react": "^1.2.7",
     "classnames": "^2.3.1"

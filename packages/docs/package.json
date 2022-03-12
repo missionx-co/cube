@@ -1,5 +1,5 @@
 {
-  "name": "@untitled-ui/docs",
+  "name": "@cube/docs",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@untitled-ui/components": "~0.0.1",
+    "@cube/components": "~0.0.1",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"

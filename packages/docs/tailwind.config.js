@@ -7,5 +7,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("@untitled-ui/foundation/dist/plugin")],
+  plugins: [require("@cube/foundation/dist/plugin")],
 };

@@ -4,7 +4,7 @@ const colors = require("./colors");
 module.exports = plugin(function () {}, {
   theme: {
     fontFamily: {
-      sans: ["Inter", "sans-serif"],
+      sans: ["Rubik", "sans-serif"],
     },
     fontSize: {
       xl: ["1.25rem", "1.875rem"],
