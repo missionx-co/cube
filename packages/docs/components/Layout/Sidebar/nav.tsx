@@ -70,6 +70,11 @@ export const docs = [
         href: "/components/badges",
       },
       {
+        id: "form-control",
+        text: "Form control",
+        href: "/components/form-control",
+      },
+      {
         id: "inputs",
         text: "Inputs",
         href: "/components/inputs",

@@ -87,56 +87,6 @@ const Inputs: FC<IInputs> = () => {
               </div>
             </Example>
           </Section>
-
-          <Section
-            title="Form Control"
-            description={
-              <>
-                <Keyword>FormControl</Keyword> component consists of label, hint
-                text and an error message. In case <Keyword>error</Keyword>{" "}
-                property is populated, hint message won't showup even if the{" "}
-                <Keyword>hint</Keyword> property is populated.
-              </>
-            }
-          >
-            <Example
-              code={`import { FormControl } from '@cube/components'
-
-<FormControl id="email" fieldLabel="Email" hint="Enter your email.">
-  <Input name="email" id="email" placeholder="jhon.doe@example.com" />
-</FormControl>
-
-<FormControl id="email" fieldLabel="Email" hint="Enter your email." error="Email is invalid">
-  <Input name="email" id="email" placeholder="jhon.doe@example.com" error />
-</FormControl>`}
-            >
-              <FormControl
-                id="email-1"
-                fieldLabel="Email"
-                hint="Enter your email."
-              >
-                <Input
-                  id="email-1"
-                  name="email-1"
-                  placeholder="jhon.doe@example.com"
-                />
-              </FormControl>
-
-              <FormControl
-                id="email-2"
-                fieldLabel="Email"
-                hint="Enter your email."
-                error="Email is invalid"
-              >
-                <Input
-                  id="email-2"
-                  name="email-2"
-                  placeholder="jhon.doe@example.com"
-                  error
-                />
-              </FormControl>
-            </Example>
-          </Section>
         </div>
       </Page>
     </>
