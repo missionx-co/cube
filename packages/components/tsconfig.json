@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
-    // "declarationDir": "./dist"
+    "downlevelIteration": true
   },
   "include": ["./src"],
   "exclude": [

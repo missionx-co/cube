@@ -134,6 +134,39 @@ const SelectPage: FC = () => {
               />
             </Example>
           </Section>
+          <Section title="Fancy Select">
+            <Example code="">
+              <Select.Fancy
+                placeholder="Select an option"
+                aria-label="Fancy Select"
+              >
+                <Select.Item key="one">Option one</Select.Item>
+                <Select.Item key="two">Option two</Select.Item>
+                <Select.Section key="group" title="Option group">
+                  <Select.Item key="three">Option three</Select.Item>
+                  <Select.Item key="four">Option four</Select.Item>
+                </Select.Section>
+              </Select.Fancy>
+              <Select.Fancy
+                placeholder="Select an option"
+                aria-label="Fancy Select"
+                disabled
+              >
+                <Select.Item key="one">Option one</Select.Item>
+                <Select.Item key="two">Option two</Select.Item>
+                <Select.Item key="three">Option three</Select.Item>
+              </Select.Fancy>
+              <Select.Fancy
+                placeholder="Select an option"
+                aria-label="Fancy Select"
+                error
+              >
+                <Select.Item key="one">Option one</Select.Item>
+                <Select.Item key="two">Option two</Select.Item>
+                <Select.Item key="three">Option three</Select.Item>
+              </Select.Fancy>
+            </Example>
+          </Section>
         </div>
       </Page>
     </>

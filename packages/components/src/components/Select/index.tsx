@@ -1,9 +1,17 @@
 import { StyledComponentProps } from "@stitches/core/types/styled-component";
-import React, { FC, useMemo } from "react";
+import React, {
+  FC,
+  PropsWithChildren,
+  ReactComponentElement,
+  ReactElement,
+} from "react";
 import tw from "twin.macro";
 import { styled } from "../../stitches.config";
+import { Item, Section } from "react-stately";
 
-import ISelect, { defaultOption, Option } from "./ISelect";
+import { ItemProps, SectionProps } from "@react-types/shared";
+import ISelect, { Option } from "./ISelect";
+import FancySelect, { IFancySelect } from "./FancySelect";
 
 const StyledSelect: StyledComponentProps<any> = styled("select", {
   ...tw`w-full px-3.5 py-2.5 border rounded-lg w-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed`,
@@ -45,8 +53,16 @@ const mapThroughOptions = (options: Option[]) => {
   });
 };
 
-const Select: FC<ISelect> = ({ options, ...props }) => {
+const Select: FC<ISelect> & {
+  Fancy: FC<IFancySelect>;
+  Item: <T>(props: ItemProps<T>) => JSX.Element;
+  Section: <T>(props: SectionProps<T>) => JSX.Element;
+} = ({ options, ...props }) => {
   return <StyledSelect {...props}>{mapThroughOptions(options)}</StyledSelect>;
 };
+
+Select.Fancy = FancySelect;
+Select.Item = Item;
+Select.Section = Section;
 
 export default Select;
