@@ -55,6 +55,11 @@ export const docs = [
     text: "Components",
     children: [
       {
+        id: "avatars",
+        text: "Avatars",
+        href: "/components/avatars",
+      },
+      {
         id: "buttons",
         text: "Buttons",
         href: "/components/buttons",
@@ -85,9 +90,9 @@ export const docs = [
         href: "/components/textarea",
       },
       {
-        id: "dropdowns",
-        text: "Dropdowns",
-        href: "/components/dropdowns",
+        id: "select",
+        text: "Select",
+        href: "/components/select",
       },
       {
         id: "toggles",
@@ -105,9 +110,9 @@ export const docs = [
         href: "/components/checkbox-groups",
       },
       {
-        id: "avatars",
-        text: "Avatars",
-        href: "/components/avatars",
+        id: "dropdowns",
+        text: "Dropdowns",
+        href: "/components/dropdowns",
       },
       {
         id: "tooltips",
