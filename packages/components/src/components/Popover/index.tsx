@@ -8,7 +8,7 @@ import { StyledComponentType } from "@stitches/core/types/styled-component";
 import IPopover from "./IPopover";
 
 const Container: StyledComponentType<any> = styled("div", {
-  ...tw`absolute z-10 w-full mt-2 overflow-hidden bg-white border border-gray-300 rounded-md shadow-md`,
+  ...tw`absolute z-10 w-full mt-2 overflow-hidden bg-white border border-gray-300 rounded-md`,
 });
 
 const Popover: FC<IPopover> = (props) => {
