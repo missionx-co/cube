@@ -29,7 +29,7 @@ const StyledIcon = styled(CheckIcon, {
   ...tw`w-5 h-5 text-pink-600`,
 });
 
-const Option: FC<OptionProps> = ({ item, state }) => {
+const Option: FC<OptionProps> = ({ optionRenderer, option, item, state }) => {
   let ref = React.useRef<HTMLLIElement>(null);
   let { optionProps, isDisabled, isSelected, isFocused } = useOption(
     {
@@ -38,6 +38,16 @@ const Option: FC<OptionProps> = ({ item, state }) => {
     state,
     ref
   );
+
+  if (optionRenderer) {
+    return optionRenderer({
+      option,
+      disabled: isDisabled,
+      focus: isFocused,
+      selected: isSelected,
+      props: optionProps,
+    });
+  }
 
   return (
     <StyledLi

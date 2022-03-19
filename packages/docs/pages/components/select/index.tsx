@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import Head from "next/head";
 
-import { Select } from "@cube/components";
+import { Select, FancySelect } from "@cube/components";
 
 import Keyword from "@components/Keyword";
 import Example from "@components/Example";
@@ -135,36 +135,47 @@ const SelectPage: FC = () => {
             </Example>
           </Section>
           <Section title="Fancy Select">
-            <Example code="">
-              <Select.Fancy
+            <Example
+              code={`<FancySelect placeholder="Select an option" aria-label="Fancy Select" options={options} />
+<FancySelect placeholder="Select an option" aria-label="Fancy Select" disabled options={options} />
+<FancySelect placeholder="Select an option" aria-label="Fancy Select" error options={options}/>`}
+            >
+              <FancySelect
                 placeholder="Select an option"
                 aria-label="Fancy Select"
-              >
-                <Select.Item key="one">Option one</Select.Item>
-                <Select.Item key="two">Option two</Select.Item>
-                <Select.Section key="group" title="Option group">
-                  <Select.Item key="three">Option three</Select.Item>
-                  <Select.Item key="four">Option four</Select.Item>
-                </Select.Section>
-              </Select.Fancy>
-              <Select.Fancy
+                options={options}
+              />
+              <FancySelect
                 placeholder="Select an option"
                 aria-label="Fancy Select"
                 disabled
-              >
-                <Select.Item key="one">Option one</Select.Item>
-                <Select.Item key="two">Option two</Select.Item>
-                <Select.Item key="three">Option three</Select.Item>
-              </Select.Fancy>
-              <Select.Fancy
+                options={options}
+              />
+              <FancySelect
                 placeholder="Select an option"
                 aria-label="Fancy Select"
                 error
-              >
-                <Select.Item key="one">Option one</Select.Item>
-                <Select.Item key="two">Option two</Select.Item>
-                <Select.Item key="three">Option three</Select.Item>
-              </Select.Fancy>
+                options={options}
+              />
+            </Example>
+
+            <Section.Title size="text-display-xs">Customization</Section.Title>
+            <p>
+              You can customize the FancySelect button and the option by using
+              `fancySelectButtonRenderer` and `optionRenderer`.
+            </p>
+            <Example code={""}>
+              <FancySelect
+                options={options}
+                aria-label="fancy select"
+                fancySelectButtonRenderer={({ props, ...otherProps }) => (
+                  <FancySelect.Input
+                    {...props}
+                    {...otherProps}
+                    placeholder="Please select one of the options"
+                  />
+                )}
+              />
             </Example>
           </Section>
         </div>

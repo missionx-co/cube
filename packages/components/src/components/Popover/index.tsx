@@ -14,7 +14,16 @@ const Container: StyledComponentType<any> = styled("div", {
 const Popover: FC<IPopover> = (props) => {
   const { x, y, refs, floating, reference, strategy } = useFloating({
     placement: "bottom",
-    middleware: [shift(), flip(), offset()],
+    middleware: [
+      shift(),
+      flip(),
+      offset(({ placement }) => {
+        if (placement.includes("top")) {
+          return 17;
+        }
+        return 0;
+      }),
+    ],
   });
   const { isOpen, onClose, children } = props;
 

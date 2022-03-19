@@ -1,5 +1,4 @@
-import React, { FC, Key } from "react";
-import type { AriaSelectProps } from "@react-types/select";
+import React, { FC, Key, ReactNode } from "react";
 import { useSelectState } from "react-stately";
 import {
   useSelect,
@@ -9,47 +8,43 @@ import {
   useFocusRing,
 } from "react-aria";
 
+import { mapItemsToAriaChildren } from "./utils";
+
 import Popover from "../../Popover";
 import ListBox from "../ListBox";
 
-import {
-  Container,
-  ValueContainer,
-  PlaceholderContainer,
-  SelectorIconContainer,
-} from "./styles";
+import { Container } from "./styles";
+import { findOption } from "../ListBox/utils";
 
-export interface IFancySelect
-  extends Omit<
-    AriaSelectProps<any>,
-    | "label"
-    | "description"
-    | "errorMessage"
-    | "validationState"
-    | "isRequired"
-    | "shouldFlip"
-    | "selectedKey"
-    | "onSelectionChange"
-    | "isDisabled"
-  > {
-  error?: boolean;
-  disabled?: boolean;
-  value?: Key;
-  onChange?: (key: Key) => any;
-}
+import Input, { IInput } from "./Input";
+import IFancySelect from "./IFancySelect";
+import Option from "../ListBox/Option";
+import { OptionProps } from "../ListBox/IListBox";
 
-const FancySelect: FC<IFancySelect> = ({
+const FancySelect: FC<IFancySelect> & {
+  Input: FC<IInput>;
+  Option: FC<OptionProps>;
+} = ({
   error,
   value,
   onChange,
   disabled,
+  options,
+  fancySelectButtonRenderer,
+  groupTitleRenderer,
+  optionRenderer,
   ...props
 }) => {
+  const handleChange = (key: Key) => {
+    onChange && onChange(findOption(options, key));
+  };
+
   const reactAriaProps = {
     ...props,
     isDisabled: disabled,
     selectedKey: value,
-    onSelectionChange: onChange,
+    onSelectionChange: handleChange,
+    children: mapItemsToAriaChildren(options),
   };
 
   let state = useSelectState(reactAriaProps);
@@ -74,23 +69,46 @@ const FancySelect: FC<IFancySelect> = ({
   return (
     <Container>
       <HiddenSelect state={state} triggerRef={ref} name={props.name} />
-      <ValueContainer
-        {...mergeProps(buttonProps, focusProps)}
-        ref={ref}
-        error={error}
-        focus={state.isOpen}
-      >
-        <PlaceholderContainer
-          {...valueProps}
-          selected={Boolean(state.selectedItem)}
-        >
-          {state.selectedItem ? state.selectedItem.rendered : props.placeholder}
-        </PlaceholderContainer>
-        <SelectorIconContainer focus={isFocusVisible} />
-      </ValueContainer>
+
+      {fancySelectButtonRenderer ? (
+        fancySelectButtonRenderer({
+          error,
+          ref: ref,
+          open: state.isOpen,
+          focus: isFocusVisible,
+          option: state.selectedItem
+            ? findOption(options, state.selectedItem.key)
+            : null,
+          props: mergeProps(buttonProps, focusProps),
+          valueProps,
+        })
+      ) : (
+        <Input
+          //@ts-ignore
+          ref={ref}
+          valueProps={valueProps}
+          placeholder={props.placeholder}
+          error={error}
+          open={state.isOpen}
+          focus={isFocusVisible}
+          option={
+            state.selectedItem
+              ? findOption(options, state.selectedItem.key)
+              : null
+          }
+          {...mergeProps(buttonProps, focusProps)}
+        />
+      )}
+
       {state.isOpen && (
         <Popover triggerRef={ref} isOpen={state.isOpen} onClose={state.close}>
-          <ListBox {...menuProps} state={state} />
+          <ListBox
+            {...menuProps}
+            state={state}
+            options={options}
+            groupTitleRenderer={groupTitleRenderer}
+            optionRenderer={optionRenderer}
+          />
         </Popover>
       )}
     </Container>
@@ -101,5 +119,8 @@ FancySelect.defaultProps = {
   error: false,
   disabled: false,
 };
+
+FancySelect.Input = Input;
+FancySelect.Option = Option;
 
 export default FancySelect;
