@@ -29,21 +29,14 @@ const options = [
     disabled: true,
   },
   {
-    id: "group",
-    value: "group",
-    text: "Options group",
-    children: [
-      {
-        id: "group-one",
-        value: "group-one",
-        text: "Option group - option one",
-      },
-      {
-        id: "group-two",
-        value: "group-two",
-        text: "Option group - option two",
-      },
-    ],
+    id: "group-one",
+    value: "group-one",
+    text: "Option group - option one",
+  },
+  {
+    id: "group-two",
+    value: "group-two",
+    text: "Option group - option two",
   },
 ];
 
@@ -135,46 +128,10 @@ const SelectPage: FC = () => {
             </Example>
           </Section>
           <Section title="Fancy Select">
-            <Example
-              code={`<FancySelect placeholder="Select an option" aria-label="Fancy Select" options={options} />
-<FancySelect placeholder="Select an option" aria-label="Fancy Select" disabled options={options} />
-<FancySelect placeholder="Select an option" aria-label="Fancy Select" error options={options}/>`}
-            >
+            <Example code="">
               <FancySelect
-                placeholder="Select an option"
-                aria-label="Fancy Select"
+                placeholder="Please select an option"
                 options={options}
-              />
-              <FancySelect
-                placeholder="Select an option"
-                aria-label="Fancy Select"
-                disabled
-                options={options}
-              />
-              <FancySelect
-                placeholder="Select an option"
-                aria-label="Fancy Select"
-                error
-                options={options}
-              />
-            </Example>
-
-            <Section.Title size="text-display-xs">Customization</Section.Title>
-            <p>
-              You can customize the FancySelect button and the option by using
-              `fancySelectButtonRenderer` and `optionRenderer`.
-            </p>
-            <Example code={""}>
-              <FancySelect
-                options={options}
-                aria-label="fancy select"
-                fancySelectButtonRenderer={({ props, ...otherProps }) => (
-                  <FancySelect.Input
-                    {...props}
-                    {...otherProps}
-                    placeholder="Please select one of the options"
-                  />
-                )}
               />
             </Example>
           </Section>

@@ -1,4 +1,4 @@
-import { HTMLProps, HTMLAttributes, RefObject, ReactElement } from "react";
+import { HTMLProps, HTMLAttributes, RefObject, ReactElement, Key } from "react";
 
 export type GroupTitleRenderer = (params: {
   option: Option;
@@ -33,7 +33,7 @@ export interface HasOptions {
 }
 
 export interface Option {
-  id: string;
+  id: Key;
   text: string;
   disabled?: boolean;
   children?: Option[];

@@ -19,6 +19,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@floating-ui/dom": "^0.4.1",
     "@floating-ui/react-dom": "^0.6.0",
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@react-aria/listbox": "^3.4.3",
     "@types/react": "^17.0.39",
