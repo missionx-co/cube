@@ -1,12 +1,13 @@
 import React, { FC, Fragment, useMemo, useRef } from "react";
 import tw from "twin.macro";
 import { styled } from "../../stitches.config";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox } from "@headlessui/react";
 import { useFloating, shift, flip, offset } from "@floating-ui/react-dom";
-import { SelectorIcon } from "@heroicons/react/solid";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 import useSelectValue from "./useSelectValue";
 import Input, { InputType } from "./Input";
+import Option, { OptionType } from "./Option";
 import IFancySelect from "./IFancySelect";
 import { StyledComponentType } from "@stitches/core/types/styled-component";
 
@@ -22,7 +23,10 @@ const OptionsList: StyledComponentType<any> = styled(Listbox.Options, {
   ...tw`max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm shadow-base absolute w-full overflow-auto bg-white border border-gray-300 rounded-md`,
 });
 
-const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
+const FancySelect: FC<IFancySelect> & {
+  Input: InputType;
+  Option: OptionType;
+} = ({
   options,
   placeholder,
   value,
@@ -31,10 +35,8 @@ const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
   inputRenderer,
   disabled,
   error,
+  optionRenderer,
 }) => {
-  const button = useRef(null);
-  const menu = useRef(null);
-
   const { value: selected, onChange: handleChange } = useSelectValue({
     value,
     defaultValue,
@@ -43,19 +45,8 @@ const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
 
   const { x, y, floating, reference } = useFloating({
     placement: "bottom",
-    middleware: [
-      shift(),
-      flip(),
-      offset(({ placement }) => {
-        if (placement.includes("top")) {
-          return 17;
-        }
-        return 5;
-      }),
-    ],
+    middleware: [shift(), flip(), offset(5)],
   });
-
-  console.log({ x, y });
 
   const selectedOption = useMemo(() => {
     if (!selected) {
@@ -67,7 +58,7 @@ const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
 
   return (
     <Listbox
-      value={value}
+      value={selected}
       onChange={handleChange}
       as={Container}
       disabled={disabled}
@@ -94,13 +85,23 @@ const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
             key={option.id}
             value={option.id}
             disabled={option.disabled}
-            className={({ active }) =>
-              `cursor-default select-none relative py-2 pl-10 pr-4 ${
-                active ? "text-amber-900 bg-amber-100" : "text-gray-900"
-              }`
-            }
+            as={Fragment}
           >
-            {option.text}
+            {({ active, selected, disabled }) => {
+              if (optionRenderer) {
+                return optionRenderer({ active, selected, disabled, option });
+              }
+              return (
+                <Option active={active} selected={selected} disabled={disabled}>
+                  <span>{option.text}</span>
+                  {selected && (
+                    <span className="w-5 h-5">
+                      <CheckIcon />
+                    </span>
+                  )}
+                </Option>
+              );
+            }}
           </Listbox.Option>
         ))}
       </OptionsList>
@@ -109,5 +110,6 @@ const FancySelect: FC<IFancySelect> & { Input: InputType } = ({
 };
 
 FancySelect.Input = Input;
+FancySelect.Option = Option;
 
 export default FancySelect;

@@ -3,7 +3,7 @@ import { Option } from "../Select/ISelect";
 
 export type FancySelectOption = Omit<Option, "children">;
 
-interface sharedProps {
+export interface sharedProps {
   placeholder?: string;
   disabled?: boolean;
   error?: boolean;
@@ -17,4 +17,10 @@ export default interface IFancySelect extends sharedProps {
   inputRenderer?: (
     props: sharedProps & { selected?: FancySelectOption; ref: LegacyRef<any> }
   ) => ReactNode;
+  optionRenderer?: (props: {
+    active: boolean;
+    disabled: boolean;
+    selected: boolean;
+    option: FancySelectOption;
+  }) => ReactNode;
 }

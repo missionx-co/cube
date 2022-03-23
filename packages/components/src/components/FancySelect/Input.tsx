@@ -5,8 +5,9 @@ import { styled } from "../../stitches.config";
 import { StyledComponentType } from "@stitches/core/types/styled-component";
 
 import ForwardedComponent from "../../SharedType/ForwardedComponent";
+import { sharedProps } from "./IFancySelect";
 
-interface IInput extends HTMLProps<HTMLButtonElement> {
+interface IInput extends sharedProps, HTMLProps<HTMLButtonElement> {
   className?: string;
   error?: boolean;
 }

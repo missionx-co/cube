@@ -21,6 +21,7 @@ const useSelectValue = ({
     }
 
     updateInternalSelectValue(key);
+    onChange && onChange(key);
   };
 
   return {
