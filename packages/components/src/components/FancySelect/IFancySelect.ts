@@ -13,7 +13,7 @@ export default interface IFancySelect extends sharedProps {
   options: FancySelectOption[];
   value?: Key;
   defaultValue?: Key;
-  onChange?: (option: Key) => any;
+  onChange?: (option?: Key) => any;
   inputRenderer?: (
     props: sharedProps & { selected?: FancySelectOption; ref: LegacyRef<any> }
   ) => ReactNode;

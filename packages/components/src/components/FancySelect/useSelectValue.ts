@@ -7,15 +7,15 @@ const useSelectValue = ({
 }: {
   value?: Key;
   defaultValue?: Key;
-  onChange?: (value: Key) => any;
+  onChange?: (value?: Key) => any;
 }) => {
-  const [internalSelectValue, updateInternalSelectValue] = useState<Key | null>(
-    defaultValue ?? null
-  );
+  const [internalSelectValue, updateInternalSelectValue] = useState<
+    Key | undefined
+  >(defaultValue ?? undefined);
 
-  const handleChange = (key: Key) => {
+  const handleChange = (key?: Key) => {
     // if controlled
-    if (value) {
+    if (value !== undefined) {
       onChange && onChange(key);
       return;
     }

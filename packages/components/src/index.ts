@@ -8,3 +8,4 @@ export { default as FormControl } from "./components/FormControl";
 export { default as Input } from "./components/Input";
 export { default as Select } from "./components/Select";
 export { default as FancySelect } from "./components/FancySelect";
+export { default as ComboBox } from "./components/ComboBox";

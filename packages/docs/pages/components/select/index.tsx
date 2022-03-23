@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 
-import { Select, FancySelect } from "@cube/components";
+import { Select, FancySelect, ComboBox } from "@cube/components";
 
 import Keyword from "@components/Keyword";
 import Example from "@components/Example";
@@ -224,11 +224,16 @@ const SelectPage: FC = () => {
             <Section.Title>Customization</Section.Title>
             <p>
               Use <Keyword>inputRenderer</Keyword> &{" "}
-              <Keyword>optionRenderer</Keyword> to customize the lock of the
+              <Keyword>optionRenderer</Keyword> to customize the look of the
               custom select
             </p>
             <Example
-              code={`const people = [
+              code={`
+//1. first import the FancySelect component
+import { FancySelect } from '@cube/components';
+
+//2. get your data ready
+const people = [
   {
     id: 1,
     avatar:
@@ -239,6 +244,7 @@ const SelectPage: FC = () => {
   ...
 ];
 
+//3. build the customization
 const CustomizedOption: FC<{ item: any }> = ({ item }) => (
   <>
     <span className="w-14 h-14 flex flex-shrink-0 overflow-hidden rounded-full">
@@ -251,6 +257,7 @@ const CustomizedOption: FC<{ item: any }> = ({ item }) => (
   </>
 );
 
+//4. use \`inputRenderer\` and \`optionRenderer\`
 <FancySelect
   placeholder="Please select a user account"
   options={people}
@@ -324,7 +331,86 @@ const CustomizedOption: FC<{ item: any }> = ({ item }) => (
                     selected={selected}
                     active={active}
                     disabled={disabled}
-                    className="justify-start border border-gray-200 border-dotted"
+                    className="justify-start space-x-3 border border-gray-200 border-dotted"
+                  >
+                    <CustomizedOption item={option} />
+                  </FancySelect.Option>
+                )}
+              />
+            </Example>
+          </Section>
+
+          <Section title="ComboBox (Autocomplete)">
+            <Example
+              code={`import { ComboBox } from '@cube/components'
+
+<ComboBox options={people} placeholder="Please select an option" />
+<ComboBox options={people} placeholder="Please select an option" disabled />
+<ComboBox options={people} placeholder="Please select an option" error />`}
+            >
+              <ComboBox
+                options={people}
+                placeholder="Please select an option"
+              />
+              <ComboBox
+                options={people}
+                placeholder="Please select an option"
+                disabled
+              />
+              <ComboBox
+                options={people}
+                placeholder="Please select an option"
+                error
+              />
+            </Example>
+
+            <Section.Title>Customization</Section.Title>
+            <p>
+              Use <Keyword>displayValue</Keyword> to customize the input value
+              of the selected element, and
+              <Keyword>optionRenderer</Keyword> to customize the look of the
+              custom select
+            </p>
+
+            <Example
+              code={`<ComboBox
+  options={people}
+  placeholder="Please select your user"
+  displayValue={(selected) => {
+    if (!selected) {
+      return "";
+    }
+    const item = selected as any;
+    return \`\${item.text} (\${item.username})\`;
+  }}
+  optionRenderer={({ selected, active, disabled, option }) => (
+    <FancySelect.Option
+      selected={selected}
+      active={active}
+      disabled={disabled}
+      className="justify-start space-x-3 border border-gray-200 border-dotted"
+    >
+      <CustomizedOption item={option} />
+    </FancySelect.Option>
+  )}
+/>`}
+            >
+              <ComboBox
+                options={people}
+                placeholder="Please select your user"
+                displayValue={(selected) => {
+                  if (!selected) {
+                    return "";
+                  }
+                  const item = selected as any;
+                  return `${item.text} (${item.username})`;
+                }}
+                optionRenderer={({ selected, active, disabled, option }) => (
+                  <FancySelect.Option
+                    selected={selected}
+                    active={active}
+                    disabled={disabled}
+                    className="justify-start space-x-3 border border-gray-200 border-dotted"
                   >
                     <CustomizedOption item={option} />
                   </FancySelect.Option>
