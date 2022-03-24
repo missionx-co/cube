@@ -10,3 +10,4 @@ export { default as Select } from "./components/Select";
 export { default as FancySelect } from "./components/FancySelect";
 export { default as ComboBox } from "./components/ComboBox";
 export { default as Dropdown } from "./components/Dropdown";
+export { default as Modal } from "./components/Modal";
