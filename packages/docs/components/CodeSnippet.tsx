@@ -1,13 +1,17 @@
 import { FC } from "react";
-import Highlight from "react-highlight";
-import "highlight.js/styles/stackoverflow-dark.css";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark as dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 interface ICodeSnippet {}
 
 const CodeSnippet: FC<ICodeSnippet> = ({ children }) => (
-  <Highlight className="p-6 font-mono rounded-lg language-javascript">
+  <SyntaxHighlighter
+    language="jsx"
+    className="p-6 font-mono rounded-lg"
+    style={dark}
+  >
     {children}
-  </Highlight>
+  </SyntaxHighlighter>
 );
 
 export default CodeSnippet;

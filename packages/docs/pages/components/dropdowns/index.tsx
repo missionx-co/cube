@@ -59,37 +59,35 @@ const TextAreaPage: FC = () => {
             <Example
               code={`<Dropdown
   buttonRenderer={({ ref }) => (
-    <Dropdown.Button
-      ref={ref}
-      as={Button}
-      color="primary"
-      className="flex flex-row items-center pr-3 space-x-1"
-    >
+    <Dropdown.Button ref={ref} as={Button} color="primary" className="flex flex-row items-center pr-3 space-x-1">
       <span>More</span>
       <span className="flex items-center justify-center w-5 h-5">
         <ChevronDownIcon />
       </span>
     </Dropdown.Button>
-  )}
-  >
+  )}>
+
   <Dropdown.Item className="flex flex-row space-x-3">
     <span className="w-5 h-5">
       <PencilAltIcon />
     </span>
     <span>Edit</span>
   </Dropdown.Item>
+
   <Dropdown.Item className="flex flex-row space-x-3">
     <span className="w-5 h-5">
       <DuplicateIcon />
     </span>
     <span>Duplicate</span>
   </Dropdown.Item>
+
   <Dropdown.Item className="flex flex-row space-x-3" disabled>
     <span className="w-5 h-5">
       <TrashIcon />
     </span>
     <span>Trash</span>
   </Dropdown.Item>
+
 </Dropdown>`}
             >
               <Dropdown
