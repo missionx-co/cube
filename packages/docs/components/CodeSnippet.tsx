@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark as dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { nord as dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 interface ICodeSnippet {}
 

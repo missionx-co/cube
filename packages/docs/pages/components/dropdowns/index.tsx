@@ -30,7 +30,7 @@ const TextAreaPage: FC = () => {
       <Head>
         <title>Dropdowns - Cube - React Components Library</title>
       </Head>
-      <Page title="Textarea">
+      <Page title="Dropdowns">
         <div className="space-y-16">
           <Section title="Import">
             <CodeSnippet>
