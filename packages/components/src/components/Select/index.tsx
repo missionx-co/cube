@@ -1,10 +1,5 @@
 import { StyledComponentProps } from "@stitches/core/types/styled-component";
-import React, {
-  FC,
-  PropsWithChildren,
-  ReactComponentElement,
-  ReactElement,
-} from "react";
+import React, { FC } from "react";
 import tw from "twin.macro";
 import { styled } from "../../stitches.config";
 

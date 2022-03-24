@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  forwardRef,
-  ReactComponentElement,
-  ReactElement,
-} from "react";
+import React, { FC, forwardRef } from "react";
 import tw from "twin.macro";
 import { styled } from "../../stitches.config";
 import { StyledComponentType } from "@stitches/core/types/styled-component";
@@ -15,7 +10,7 @@ import IInput from "./IInput";
 import ITextarea from "./Textarea/ITextarea";
 
 type IInputType = ForwardedComponent<IInput, HTMLInputElement> & {
-  Textarea?: FC<ITextarea>;
+  Textarea: FC<ITextarea>;
 };
 
 const StyledInput: StyledComponentType<any> = styled("input", {
@@ -32,10 +27,11 @@ const StyledInput: StyledComponentType<any> = styled("input", {
   },
 });
 
-const Input: IInputType = forwardRef((props, ref) => (
+const Input: any = forwardRef((props, ref) => (
   <StyledInput ref={ref} {...props} />
 ));
-
 Input.Textarea = Textarea;
 
-export default Input;
+const InputComponent = Input as IInputType;
+
+export default InputComponent;
