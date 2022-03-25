@@ -1,5 +1,5 @@
 import tw from "twin.macro";
-import { getClassName } from "../utils";
+import { getClassName } from "../../../utils";
 import { ITransition } from "../IModal";
 
 const opacity0 = getClassName(tw`scale-95 opacity-0`);
