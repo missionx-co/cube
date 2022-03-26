@@ -105,11 +105,6 @@ export const docs = [
         href: "/components/checkboxes",
       },
       {
-        id: "checkbox-groups",
-        text: "Checkbox groups",
-        href: "/components/checkbox-groups",
-      },
-      {
         id: "dropdowns",
         text: "Dropdowns",
         href: "/components/dropdowns",
