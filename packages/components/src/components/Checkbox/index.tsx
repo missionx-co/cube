@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import tw from "twin.macro";
 import { useCheckbox } from "@react-aria/checkbox";
 import { useToggleState } from "@react-stately/toggle";
@@ -6,17 +6,9 @@ import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useFocusRing } from "@react-aria/focus";
 import { CheckIcon } from "@heroicons/react/solid";
 
-import { AriaCheckboxProps } from "@react-types/checkbox";
 import { styled } from "../../stitches.config";
 import { StyledComponentType } from "@stitches/core/types/styled-component";
-
-interface ICheckbox extends AriaCheckboxProps {
-  area?: "sm" | "base";
-  variant?: "outline" | "filled";
-  containerClassName?: string;
-  className?: string;
-  icon?: () => ReactNode;
-}
+import ICheckbox from "./ICheckbox";
 
 const ContainerLabel = styled("label", tw`flex items-center`);
 
@@ -63,11 +55,24 @@ const Checkbox: CheckboxType = ({
   containerClassName,
   className,
   icon,
+  disabled,
+  required,
+  defaultChecked,
+  checked,
+  readonly,
   ...props
 }) => {
-  let state = useToggleState(props);
+  const reactAriaProps = {
+    ...props,
+    isDisabled: disabled,
+    isRequired: required,
+    defaultSelected: defaultChecked,
+    selected: defaultChecked,
+    isReadOnly: readonly,
+  };
+  let state = useToggleState(reactAriaProps);
   let ref = React.useRef<HTMLInputElement>(null);
-  let { inputProps } = useCheckbox(props, state, ref);
+  let { inputProps } = useCheckbox(reactAriaProps, state, ref);
   let { isFocusVisible, focusProps } = useFocusRing();
 
   return (
