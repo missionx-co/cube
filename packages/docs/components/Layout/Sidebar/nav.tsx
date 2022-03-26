@@ -1,22 +1,3 @@
-import FigmaIcon from "@icons/figma";
-import BarChartAlt from "@icons/bar-chart-alt";
-import AirplayIcon from "@icons/airplay";
-
-export const bookmarks = [
-  {
-    id: "application-ui-kit",
-    href: "/application",
-    icon: <BarChartAlt />,
-    text: "Application UI Kit",
-  },
-  {
-    id: "marketing-ui-kit",
-    href: "/marketing",
-    icon: <AirplayIcon />,
-    text: "Marketing UI Kit",
-  },
-];
-
 export const docs = [
   {
     id: "getting-started",
@@ -51,13 +32,23 @@ export const docs = [
     ],
   },
   {
-    id: "components",
-    text: "Components",
+    id: "ui-atoms",
+    text: "UI atoms",
     children: [
+      {
+        id: "alerts",
+        text: "Alerts",
+        href: "/components/alerts",
+      },
       {
         id: "avatars",
         text: "Avatars",
         href: "/components/avatars",
+      },
+      {
+        id: "badges",
+        text: "Badges",
+        href: "/components/badges",
       },
       {
         id: "buttons",
@@ -70,14 +61,50 @@ export const docs = [
         href: "/components/button-groups",
       },
       {
-        id: "badges",
-        text: "Badges",
-        href: "/components/badges",
+        id: "dropdowns",
+        text: "Dropdowns",
+        href: "/components/dropdowns",
       },
+      {
+        id: "modals",
+        text: "Modals",
+        href: "/components/modals",
+      },
+      {
+        id: "pagination",
+        text: "Pagination",
+        href: "/components/pagination",
+      },
+      {
+        id: "progress-indicators",
+        text: "Progress indicators",
+        href: "/components/progress-indicators",
+      },
+      {
+        id: "tables",
+        text: "Tables",
+        href: "/components/tables",
+      },
+      {
+        id: "tooltips",
+        text: "Tooltips",
+        href: "/components/tooltips",
+      },
+    ],
+  },
+  {
+    id: "forms",
+    text: "Form components",
+    children: [
       {
         id: "form-control",
         text: "Form control",
         href: "/components/form-control",
+      },
+      {
+        id: "checkboxes",
+        text: "Checkboxes",
+        href: "/components/checkboxes",
       },
       {
         id: "inputs",
@@ -90,59 +117,24 @@ export const docs = [
         href: "/components/textarea",
       },
       {
-        id: "select",
-        text: "Select",
-        href: "/components/select",
-      },
-      {
         id: "toggles",
         text: "Toggles",
         href: "/components/toggles",
       },
       {
-        id: "checkboxes",
-        text: "Checkboxes",
-        href: "/components/checkboxes",
+        id: "radio",
+        text: "Radio",
+        href: "/components/radio",
       },
       {
-        id: "dropdowns",
-        text: "Dropdowns",
-        href: "/components/dropdowns",
-      },
-      {
-        id: "tooltips",
-        text: "Tooltips",
-        href: "/components/tooltips",
-      },
-      {
-        id: "progress-indicators",
-        text: "Progress indicators",
-        href: "/components/progress-indicators",
+        id: "select",
+        text: "Select",
+        href: "/components/select",
       },
       {
         id: "sliders",
         text: "Sliders",
         href: "/components/sliders",
-      },
-      {
-        id: "modals",
-        text: "Modals",
-        href: "/components/modals",
-      },
-      {
-        id: "charts",
-        text: "Charts",
-        href: "/components/charts",
-      },
-      {
-        id: "pagination",
-        text: "Pagination",
-        href: "/components/pagination",
-      },
-      {
-        id: "tables",
-        text: "Tables",
-        href: "/components/tables",
       },
     ],
   },

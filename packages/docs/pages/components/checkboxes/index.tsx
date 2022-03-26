@@ -119,7 +119,7 @@ const CheckboxesPage: FC = () => {
               code={`<Checkbox
   containerClassName="border-2 border-gray-100 p-4 rounded-lg shadow"
   className="items-center w-10 h-10 p-1 rounded-full"
-  icon={() => <span className="bg-primary-600 block w-6 h-6 rounded-full" />}
+  icon={() => <span className="bg-primary-600 block w-4 h-4 rounded-full" />}
 >
   <Checkbox.Label className="flex flex-col ml-4">
     <span>Remember me</span>
@@ -133,7 +133,7 @@ const CheckboxesPage: FC = () => {
                 containerClassName="border-2 border-gray-200 p-4 rounded-lg shadow"
                 className="items-center w-10 h-10 p-1 rounded-full"
                 icon={() => (
-                  <span className="bg-primary-600 block w-6 h-6 rounded-full shadow-lg" />
+                  <span className="bg-primary-600 block w-4 h-4 rounded-full shadow-lg" />
                 )}
               >
                 <Checkbox.Label className="flex flex-col ml-4">

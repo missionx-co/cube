@@ -2,8 +2,9 @@ import { FC } from "react";
 import clsx from "classnames";
 import Link from "next/link";
 import Logo from "@components/logo";
+import { CollectionIcon as AdminPanelIcon } from "@heroicons/react/outline";
 
-import { bookmarks, docs } from "./nav";
+import { docs } from "./nav";
 import { useSidebarContext } from "../SidebarContext";
 
 interface ISidebar {}
@@ -12,34 +13,36 @@ const Sidebar: FC<ISidebar> = () => {
   const { activePage } = useSidebarContext();
 
   return (
-    <aside className="fixed top-0 left-0 flex flex-col h-screen px-6 pt-8 space-y-6 text-gray-900 w-72">
+    <aside className="w-72 fixed top-0 left-0 flex flex-col h-screen px-6 pt-8 space-y-6 text-gray-900">
       <header className="flex items-center space-x-3">
-        <span className="fill-current w-14 h-14">
+        <span className="w-14 h-14 fill-current">
           <Logo />
         </span>
-        <span className="font-medium text-transparent text-display-sm bg-clip-text bg-gradient-to-r from-primary-900 to-primary-700">
+        <span className="text-display-sm bg-clip-text bg-gradient-to-r from-primary-900 to-primary-700 font-medium text-transparent">
           Cube
         </span>
       </header>
-      <div className="w-full h-full space-y-12 overflow-x-hidden overflow-y-scroll bg">
-        <nav className="space-y-2">
-          {bookmarks.map((nav) => (
-            <Link key={nav.id} href={nav.href}>
-              <a
-                className={clsx(
-                  "flex h-10 px-3 py-2.5 rounded-md hover:bg-gray-300 transition-colors duration-300 space-x-3 items-center font-medium",
-                  {
-                    "bg-gray-300": activePage === nav.id,
-                    "bg-gray-200": activePage !== nav.id,
-                  }
-                )}
-              >
-                <span className="flex w-6 h-6 fill-none">{nav.icon}</span>
-                <span>{nav.text}</span>
-              </a>
-            </Link>
-          ))}
-        </nav>
+      <nav className="space-y-2">
+        <Link href="/admin-panel">
+          <a
+            className={clsx(
+              "flex px-3 py-2.5 rounded-md transition-colors duration-300 space-x-3 items-start font-medium text-primary-500 hover:text-primary-600"
+            )}
+          >
+            <span className="fill-none flex w-6 h-6">
+              <AdminPanelIcon />
+            </span>
+            <span className="flex flex-col">
+              <span>Admin Panel</span>
+              <span className="text-sm font-normal text-gray-500">
+                Super charge your next project with a powerful and beautiful
+                admin panel.
+              </span>
+            </span>
+          </a>
+        </Link>
+      </nav>
+      <div className="bg w-full h-full pb-12 space-y-12 overflow-x-hidden overflow-y-scroll">
         <nav className="space-y-4">
           <ul className="px-3 space-y-12">
             {docs.map((section) => (
