@@ -1,18 +1,18 @@
-import React, { FC } from "react";
-import tw from "twin.macro";
-import { useCheckbox } from "@react-aria/checkbox";
-import { useToggleState } from "@react-stately/toggle";
-import { VisuallyHidden } from "@react-aria/visually-hidden";
-import { useFocusRing } from "@react-aria/focus";
-import { CheckIcon } from "@heroicons/react/solid";
+import { CheckIcon } from '@heroicons/react/solid';
+import { useCheckbox } from '@react-aria/checkbox';
+import { useFocusRing } from '@react-aria/focus';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
+import { useToggleState } from '@react-stately/toggle';
+import { StyledComponentType } from '@stitches/core/types/styled-component';
+import React, { FC } from 'react';
+import tw from 'twin.macro';
 
-import { styled } from "../../stitches.config";
-import { StyledComponentType } from "@stitches/core/types/styled-component";
-import ICheckbox from "./ICheckbox";
+import { styled } from '../../stitches.config';
+import ICheckbox from './ICheckbox';
 
-const ContainerLabel = styled("label", tw`flex items-center`);
+export const ContainerLabel = styled('label', tw`flex items-center`);
 
-const VirtualCheckbox = styled("div", {
+export const VirtualCheckbox = styled('div', {
   ...tw`flex items-center justify-center border-2 rounded`,
   variants: {
     variant: {
@@ -36,14 +36,14 @@ const VirtualCheckbox = styled("div", {
   },
   compoundVariants: [
     {
-      variant: "filled",
+      variant: 'filled',
       selected: true,
       css: tw`bg-primary-600 hover:bg-primary-600 text-white`,
     },
   ],
 });
 
-const Label = styled("span", tw`ml-2 text-sm font-medium text-gray-700`);
+export const Label = styled('span', tw`ml-2 text-sm font-medium text-gray-700`);
 
 type CheckboxType = FC<ICheckbox> & {
   Label: StyledComponentType<any>;
@@ -97,8 +97,8 @@ const Checkbox: CheckboxType = ({
 };
 
 Checkbox.defaultProps = {
-  area: "base",
-  variant: "outline",
+  area: 'base',
+  variant: 'outline',
 };
 
 Checkbox.Label = Label;

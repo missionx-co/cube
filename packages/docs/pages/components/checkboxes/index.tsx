@@ -1,21 +1,20 @@
-import { FC, useEffect } from "react";
-import Head from "next/head";
+import Head from 'next/head';
+import { FC, useEffect } from 'react';
 
-import { Checkbox } from "@cube/components";
+import { Checkbox } from '@cube/components';
 
-import Keyword from "@components/Keyword";
-import Example from "@components/Example";
-import Section from "@components/Section";
-import Page from "@components/Layout/Page";
-import CodeSnippet from "@components/CodeSnippet";
-
-import { useSidebarContext } from "@components/Layout/SidebarContext";
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import Keyword from '@components/Keyword';
+import Page from '@components/Layout/Page';
+import { useSidebarContext } from '@components/Layout/SidebarContext';
+import Section from '@components/Section';
 
 const CheckboxesPage: FC = () => {
   const { setActivePage } = useSidebarContext();
 
   useEffect(() => {
-    setActivePage("checkboxes");
+    setActivePage('checkboxes');
     /* eslint-disable */
   }, []);
 
@@ -35,16 +34,12 @@ const CheckboxesPage: FC = () => {
           <Section title="Usage">
             <div className="space-y-3">
               <p>
-                <Keyword>Checkbox</Keyword> component can have the protperties
-                that a regular HTML checkbox/radio might have.
-              </p>
-              <p>
-                You can change the <Keyword>Checkbox</Keyword> size with the{" "}
-                <Keyword>area</Keyword> property. It accepts one of{" "}
+                You can change the <Keyword>Checkbox</Keyword> size with the{' '}
+                <Keyword>area</Keyword> property. It accepts one of{' '}
                 <Keyword>base</Keyword>. <Keyword>sm.</Keyword>
               </p>
               <p>
-                The <Keyword>Checkbox</Keyword> component has two variants:{" "}
+                The <Keyword>Checkbox</Keyword> component has two variants:{' '}
                 <Keyword>filled</Keyword> and <Keyword>outline</Keyword>
               </p>
             </div>
@@ -104,11 +99,11 @@ const CheckboxesPage: FC = () => {
           <Section title="Customization">
             <div className="space-y-3">
               <p>
-                Use <Keyword>containerClassName</Keyword> to customize the{" "}
+                Use <Keyword>containerClassName</Keyword> to customize the{' '}
                 container style.
               </p>
               <p>
-                Use <Keyword>className</Keyword> to customize the{" "}
+                Use <Keyword>className</Keyword> to customize the{' '}
                 <Keyword>Checkbox</Keyword> component style.
               </p>
               <p>
