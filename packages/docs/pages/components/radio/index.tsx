@@ -116,49 +116,43 @@ const RadiosPage: FC = () => {
             </div>
             <Example
               code={`<Radio.Group name="custom" className="space-y-10">
-  <Radio
-    value="custom"
-    className="items-center w-10 h-10 p-1"
-  >
-    <Radio.Label className="flex flex-col ml-4">
-      <span>Remember me</span>
-      <span className="font-normal text-gray-500">
-        Save my login details for next time.
-      </span>
-    </Radio.Label>
-  </Radio>
-
-  <Radio
-    value="custom-2"
-    className="items-center w-10 h-10 p-1"
-  >
-    <Radio.Label className="flex flex-col ml-4">
-      <span>Remember me</span>
-      <span className="font-normal text-gray-500">
-        Save my login details for next time.
-      </span>
-    </Radio.Label>
-  </Radio>
+  {['custom', 'custom-2'].map((name) => (
+    <Radio
+      key={name}
+      value={name}
+      className="items-center w-10 h-10 p-1"
+      icon={() => (
+        <span className="bg-primary-600 block w-4 h-4 rounded-full" />
+      )}
+    >
+      <Radio.Label className="flex flex-col ml-4">
+        <span>Remember me</span>
+        <span className="font-normal text-gray-500">
+          Save my login details for next time.
+        </span>
+      </Radio.Label>
+    </Radio>
+  ))}
 </Radio.Group>`}
             >
               <Radio.Group name="custom" className="space-y-10">
-                <Radio value="custom" className="items-center w-10 h-10 p-1">
-                  <Radio.Label className="flex flex-col ml-4">
-                    <span>Remember me</span>
-                    <span className="font-normal text-gray-500">
-                      Save my login details for next time.
-                    </span>
-                  </Radio.Label>
-                </Radio>
-
-                <Radio value="custom-2" className="items-center w-10 h-10 p-1">
-                  <Radio.Label className="flex flex-col ml-4">
-                    <span>Remember me</span>
-                    <span className="font-normal text-gray-500">
-                      Save my login details for next time.
-                    </span>
-                  </Radio.Label>
-                </Radio>
+                {['custom', 'custom-2'].map((name) => (
+                  <Radio
+                    key={name}
+                    value={name}
+                    className="items-center w-10 h-10 p-1"
+                    icon={() => (
+                      <span className="bg-primary-600 block w-4 h-4 rounded-full" />
+                    )}
+                  >
+                    <Radio.Label className="flex flex-col ml-4">
+                      <span>Remember me</span>
+                      <span className="font-normal text-gray-500">
+                        Save my login details for next time.
+                      </span>
+                    </Radio.Label>
+                  </Radio>
+                ))}
               </Radio.Group>
             </Example>
           </Section>
