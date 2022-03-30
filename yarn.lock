@@ -1793,6 +1793,16 @@
     "@react-stately/toggle" "^3.2.6"
     "@react-types/switch" "^3.1.5"
 
+"@react-aria/switch@^3.1.7":
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/@react-aria/switch/-/switch-3.1.7.tgz#6672b8094d2fd9b315802bf04319c8dd0cd43dc0"
+  integrity sha512-0E2zFSaxPvgVBuM7Ipz0kSXCp9Q6r0H/3qdxNgn/btdJtRANQza4YxLSSkSC/wSs035bcTk/3FoDH8v83NZIwg==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/toggle" "^3.2.3"
+    "@react-stately/toggle" "^3.2.6"
+    "@react-types/switch" "^3.1.5"
+
 "@react-aria/table@^3.2.4":
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/@react-aria/table/-/table-3.2.4.tgz#6d11265983f5a553b0c0b1a849bf6c26161d19d8"

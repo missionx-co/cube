@@ -117,11 +117,6 @@ export const docs = [
         href: '/components/textarea',
       },
       {
-        id: 'switch',
-        text: 'Switch',
-        href: '/components/switch',
-      },
-      {
         id: 'radio',
         text: 'Radio',
         href: '/components/radio',
@@ -130,6 +125,11 @@ export const docs = [
         id: 'select',
         text: 'Select',
         href: '/components/select',
+      },
+      {
+        id: 'switch',
+        text: 'Switch',
+        href: '/components/switch',
       },
       {
         id: 'sliders',
