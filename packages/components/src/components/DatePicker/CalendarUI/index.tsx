@@ -49,17 +49,19 @@ const CalendarUI: FC<ICalendarUI> = ({
   );
 
   function goToNextMonth() {
-    if (!calendar.canMoveToNextMonth(activeMonth)) {
-      return;
-    }
     setActiveMonth((activeMonth) => calendar.nextMonth(activeMonth));
   }
 
-  function goToPreviosMonth() {
-    if (!calendar.canMoveToPreviousMonth(activeMonth)) {
-      return;
-    }
+  function goToNextYear() {
+    setActiveMonth((activeMonth) => calendar.nextYear(activeMonth));
+  }
+
+  function goToPreviousMonth() {
     setActiveMonth((activeMonth) => calendar.previousMonth(activeMonth));
+  }
+
+  function goToPreviousYear() {
+    setActiveMonth((activeMonth) => calendar.previousYear(activeMonth));
   }
 
   return (
@@ -67,7 +69,9 @@ const CalendarUI: FC<ICalendarUI> = ({
       <Header
         month={activeMonth}
         onNextMonthClick={goToNextMonth}
-        onPreviosMonthClick={goToPreviosMonth}
+        onPreviousMonthClick={goToPreviousMonth}
+        onNextYearClick={goToNextYear}
+        onPreviousYearClick={goToPreviousYear}
       />
       <DaysContainer>
         {days.slice(0, 7).map((day) => {

@@ -1,12 +1,14 @@
 import {
   addDays,
   addMonths,
+  addYears,
   eachDayOfInterval,
   endOfMonth,
   getDay,
   startOfMonth,
   subDays,
   subMonths,
+  subYears,
 } from 'date-fns';
 
 import DatePickerValueHelper from '../DatePickerValueHelper';
@@ -121,6 +123,14 @@ export default class Calendar {
 
   previousMonth(date: Date) {
     return subMonths(date, 1);
+  }
+
+  nextYear(date: Date) {
+    return addYears(date, 1);
+  }
+
+  previousYear(date: Date) {
+    return subYears(date, 1);
   }
 
   /**

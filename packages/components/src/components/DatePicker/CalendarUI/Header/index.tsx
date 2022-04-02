@@ -27,25 +27,27 @@ const Header: FC<IHeader> = ({
   className,
   month,
   onNextMonthClick,
-  onPreviosMonthClick,
+  onNextYearClick,
+  onPreviousMonthClick,
+  onPreviousYearClick,
   ...props
 }) => {
   return (
     <HeaderContainer {...props}>
-      <ArrowContainer>
+      <ArrowContainer onClick={onPreviousYearClick}>
         <ChevronDoubleLeftIcon />
       </ArrowContainer>
-      <ArrowContainer>
+      <ArrowContainer onClick={onPreviousMonthClick}>
         <ChevronLeftIcon />
       </ArrowContainer>
       <MonthContainer>
-        <span>{format(month, 'MMMM')}</span>
+        <span>{format(month, 'MMM')}</span>
         <span>{format(month, 'Y')}</span>
       </MonthContainer>
-      <ArrowContainer>
+      <ArrowContainer onClick={onNextMonthClick}>
         <ChevronRightIcon />
       </ArrowContainer>
-      <ArrowContainer>
+      <ArrowContainer onClick={onNextYearClick}>
         <ChevronDoubleRightIcon />
       </ArrowContainer>
     </HeaderContainer>
