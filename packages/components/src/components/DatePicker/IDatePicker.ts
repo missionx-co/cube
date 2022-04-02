@@ -8,12 +8,15 @@ export type RangeDatePickerValue = {
 
 export type IDatePickerValue = Date | Date[] | RangeDatePickerValue;
 
+export type DisplayValueFormatter = (value: IDatePickerValue | null) => string;
+
 export interface CalendarOptions {
   firstDayOfWeek?: DayOfTheWeek;
   disabledDates?: Date[];
   minDate?: Date;
   maxDate?: Date;
   monthsShown?: number;
+  displayValue?: DisplayValueFormatter;
 }
 
 export default interface IDatePicker extends CalendarOptions {

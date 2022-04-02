@@ -1,4 +1,11 @@
-import { IDatePickerValue, Mode, RangeDatePickerValue } from './IDatePicker';
+import { format } from 'date-fns';
+
+import {
+  DisplayValueFormatter,
+  IDatePickerValue,
+  Mode,
+  RangeDatePickerValue,
+} from './IDatePicker';
 import { isAfter, isBefore, isEqual, isInRange } from './utils';
 
 export default class DatePickerValue {
@@ -260,5 +267,43 @@ export default class DatePickerValue {
 
   getValue() {
     return this.value;
+  }
+
+  formatValue(selected: IDatePickerValue | null) {
+    if (!selected) {
+      return '';
+    }
+
+    if (this.isRange) {
+      return this.formatRange(selected);
+    }
+
+    if (this.isMultiple) {
+      return this.formatMultiple(selected);
+    }
+
+    return format(selected as Date, 'Y-MM-dd');
+  }
+
+  formatRange(selected: IDatePickerValue | null) {
+    const value = selected as RangeDatePickerValue;
+    if (!value.startDate || !value.endDate) {
+      return '';
+    }
+
+    return `${format(value.startDate, 'Y-MM-dd')} ~ ${format(
+      value.endDate,
+      'Y-MM-dd',
+    )}`;
+  }
+
+  formatMultiple(selected: IDatePickerValue | null) {
+    const value = selected as Date[];
+
+    if (value.length <= 2) {
+      return value.map((date) => format(date, 'Y-MM-dd')).join(' and ');
+    }
+
+    return `${format(value[0], 'Y-MM-dd')} and ${value.length - 1} others`;
   }
 }

@@ -3,10 +3,15 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import Calendar from './CalendarUI/Calendar';
 import DatePickerValueHelper from './DatePickerValueHelper';
-import IDatePicker, { IDatePickerValue, Mode } from './IDatePicker';
+import IDatePicker, {
+  DisplayValueFormatter,
+  IDatePickerValue,
+  Mode,
+} from './IDatePicker';
 
 export interface DatePickerContext {
   open: boolean;
+  inputValue: string;
   activeMonth: Date;
   calendar: Calendar;
   hoveredDate?: Date;
@@ -28,6 +33,7 @@ export interface DatePickerContext {
 
 export const DatePickerContext = createContext<DatePickerContext>({
   open: false,
+  inputValue: '',
   activeMonth: new Date(),
   calendar: null as unknown as Calendar,
   hoveredDate: new Date(),
@@ -47,6 +53,22 @@ export const DatePickerContext = createContext<DatePickerContext>({
   handleKeyDown: () => {},
 });
 
+function formatValue(
+  selected: IDatePickerValue | null | undefined,
+  datePickerValueHelper: DatePickerValueHelper,
+  formatter?: DisplayValueFormatter,
+): string {
+  if (!selected) {
+    return '';
+  }
+
+  if (formatter) {
+    return formatter(selected);
+  }
+
+  return datePickerValueHelper.formatValue(selected);
+}
+
 export function useDatePicker(props: IDatePicker): DatePickerContext {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<IDatePickerValue | null>(
@@ -58,6 +80,10 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
   const datePickerValue = useMemo(
     () => new DatePickerValueHelper(props.mode as Mode, selected),
     [props.mode, selected],
+  );
+
+  const [inputValue, setInputValue] = useState(
+    formatValue(props.value, datePickerValue, props.displayValue),
   );
 
   const calendar = new Calendar({
@@ -75,13 +101,19 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
     setSelected(datePickerValue.updateValue(date).getValue());
   }
 
+  function close() {
+    setOpen(false);
+    setHoveredDate(undefined);
+  }
+
   function onApply() {
+    setInputValue(formatValue(selected, datePickerValue, props.displayValue));
     props.onChange && props.onChange(selected);
+    close();
   }
 
   function onDiscard() {
-    setSelected(null);
-    props.onChange && props.onChange(null);
+    close();
   }
 
   function goToNextMonth() {
@@ -153,7 +185,7 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
 
   function handleKeyDown(e: any, context?: 'dialog' | 'input' | 'day') {
     if (e.keyCode === 27) {
-      setOpen(false);
+      close();
       return;
     }
 
@@ -173,6 +205,7 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
     open,
     setOpen,
     calendar,
+    inputValue,
     datePickerValue,
     selected,
     setSelected,

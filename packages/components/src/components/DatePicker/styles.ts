@@ -34,3 +34,8 @@ export const PopoverContainer = styled(
 );
 
 export const CalendarContainer = styled('div', tw`flex space-x-8`);
+
+export const FooterContainer = styled(
+  'footer',
+  tw`flex items-center justify-end pt-2 space-x-3 border-t border-gray-200 border-dotted`,
+);

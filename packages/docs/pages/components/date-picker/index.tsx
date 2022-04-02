@@ -45,7 +45,7 @@ const DatePickerPage: FC = () => {
 <Input.Textarea placeholder="Value goes here" disabled />
 <Input.Textarea placeholder="Value goes here" error />`}
             >
-              <DatePicker mode="range" />
+              <DatePicker mode="multiple" />
             </Example>
           </Section>
         </div>

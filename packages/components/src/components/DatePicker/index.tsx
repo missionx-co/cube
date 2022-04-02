@@ -1,8 +1,9 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 import { addMonths } from 'date-fns';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import Button from '../Button';
 import CalendarUI from './CalendarUI';
 import IDatePicker from './IDatePicker';
 import {
@@ -10,6 +11,7 @@ import {
   CalendarIcon,
   DatePickerContainer,
   DatePickerInput,
+  FooterContainer,
   IconContainer,
   PopoverContainer,
 } from './styles';
@@ -21,6 +23,7 @@ const DatePicker: FC<IDatePicker> = ({
   disabled,
   error,
   monthsShown,
+  displayValue,
   ...props
 }) => {
   const datePicker = useDatePicker(props);
@@ -55,6 +58,7 @@ const DatePicker: FC<IDatePicker> = ({
           onKeyDown={datePicker.handleKeyDown}
           readOnly
           ref={reference}
+          value={datePicker.inputValue}
         />
         <IconContainer focus={isFocused} disabled={disabled} error={error}>
           <CalendarIcon />
@@ -80,6 +84,19 @@ const DatePicker: FC<IDatePicker> = ({
                 />
               ))}
             </CalendarContainer>
+            <FooterContainer>
+              <Button
+                area="sm"
+                variant="outline"
+                color="error"
+                onClick={datePicker.onDiscard}
+              >
+                Discard
+              </Button>
+              <Button area="sm" onClick={datePicker.onApply}>
+                Apply
+              </Button>
+            </FooterContainer>
           </PopoverContainer>
         )}
       </DatePickerContainer>
