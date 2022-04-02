@@ -11,6 +11,7 @@ import tw from 'twin.macro';
 
 import { styled } from '../../../../stitches.config';
 import Tooltip from '../../../Tooltip';
+import { useDatePickerContext } from '../../useDataPicker';
 import IHeader from './IHeader';
 
 const HeaderContainer: StyledComponentType<any> = styled(
@@ -24,30 +25,18 @@ const ArrowContainer = styled(
 
 const MonthContainer = styled('h4', tw`w-full space-x-8`);
 
-const Header: FC<IHeader> = ({
-  className,
-  month,
-  onNextMonthClick,
-  onNextYearClick,
-  onPreviousMonthClick,
-  onPreviousYearClick,
-  ...props
-}) => {
+const Header: FC<IHeader> = ({ className, month, ...props }) => {
+  const { goToNextMonth, goToNextYear, goToPreviousMonth, goToPreviousYear } =
+    useDatePickerContext();
   return (
     <HeaderContainer {...props}>
       <Tooltip content="Go to previous year">
-        <ArrowContainer
-          onClick={onPreviousYearClick}
-          aria-label="previous year"
-        >
+        <ArrowContainer onClick={goToPreviousYear} aria-label="previous year">
           <ChevronDoubleLeftIcon />
         </ArrowContainer>
       </Tooltip>
       <Tooltip content="Go to previous month">
-        <ArrowContainer
-          onClick={onPreviousMonthClick}
-          aria-label="previous month"
-        >
+        <ArrowContainer onClick={goToPreviousMonth} aria-label="previous month">
           <ChevronLeftIcon />
         </ArrowContainer>
       </Tooltip>
@@ -56,12 +45,12 @@ const Header: FC<IHeader> = ({
         <span>{format(month, 'Y')}</span>
       </MonthContainer>
       <Tooltip content="Go to next month">
-        <ArrowContainer onClick={onNextMonthClick} aria-label="next month">
+        <ArrowContainer onClick={goToNextMonth} aria-label="next month">
           <ChevronRightIcon />
         </ArrowContainer>
       </Tooltip>
       <Tooltip content="Go to next year">
-        <ArrowContainer onClick={onNextYearClick} aria-label="next year">
+        <ArrowContainer onClick={goToNextYear} aria-label="next year">
           <ChevronDoubleRightIcon />
         </ArrowContainer>
       </Tooltip>

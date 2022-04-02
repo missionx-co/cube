@@ -1,9 +1,5 @@
 import { HTMLProps } from 'react';
 
-import { MonthNavigation } from '../ICalendarUI';
-
-export default interface IHeader
-  extends HTMLProps<HTMLElement>,
-    MonthNavigation {
+export default interface IHeader extends HTMLProps<HTMLElement> {
   month: Date;
 }

@@ -4,6 +4,7 @@ import React, { FC, useMemo } from 'react';
 import tw from 'twin.macro';
 
 import { styled } from '../../../stitches.config';
+import { useDatePickerContext } from '../useDataPicker';
 import Cell from './Cell';
 import Header from './Header';
 import ICalendarUI from './ICalendarUI';
@@ -14,30 +15,14 @@ const WeekDayContainer: StyledComponentType<any> = styled(
   tw`flex items-center justify-center w-10 h-10 mb-3 text-sm text-gray-400 border-b border-gray-300 border-dotted`,
 );
 
-const CalendarUI: FC<ICalendarUI> = ({
-  hoveredDate,
-  datePickerValue,
-  onHover,
-  onSelect,
-  onNextMonthClick,
-  onNextYearClick,
-  onPreviousMonthClick,
-  onPreviousYearClick,
-  onMouseLeave,
-  month,
-  calendar,
-}) => {
+const CalendarUI: FC<ICalendarUI> = ({ month }) => {
+  const { calendar, hoveredDate, onSelect, setHoveredDate, datePickerValue } =
+    useDatePickerContext();
   const days = useMemo(() => calendar.days(month), [calendar, month]);
 
   return (
     <div>
-      <Header
-        month={month}
-        onNextMonthClick={onNextMonthClick}
-        onPreviousMonthClick={onPreviousMonthClick}
-        onNextYearClick={onNextYearClick}
-        onPreviousYearClick={onPreviousYearClick}
-      />
+      <Header month={month} />
       <DaysContainer>
         {days.slice(0, 7).map((day) => {
           const key = format(day, 'E');
@@ -50,7 +35,7 @@ const CalendarUI: FC<ICalendarUI> = ({
           );
         })}
       </DaysContainer>
-      <DaysContainer onMouseLeave={onMouseLeave}>
+      <DaysContainer onMouseLeave={() => setHoveredDate(undefined)}>
         {days.map((day) => (
           <Cell
             date={day}
@@ -61,8 +46,8 @@ const CalendarUI: FC<ICalendarUI> = ({
             hovered={datePickerValue.isDateHovered(day, hoveredDate)}
             blocked={calendar.isDateDisabled(day)}
             outOfRange={!calendar.isDateOfMonth(day, month)}
-            onHover={onHover}
             onSelect={onSelect}
+            onHover={setHoveredDate}
           >
             {format(day, 'd')}
           </Cell>

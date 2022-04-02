@@ -1,4 +1,5 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { FC, useEffect, useRef } from 'react';
 import tw from 'twin.macro';
 
 import { styled } from '../../../../stitches.config';
@@ -41,8 +42,7 @@ const CellContainer = styled('div', {
   ],
 });
 
-const Cell: React.FC<ICell> = ({
-  className,
+const Cell: FC<ICell> = ({
   children,
   date,
   isFirstOfRange,
@@ -54,22 +54,35 @@ const Cell: React.FC<ICell> = ({
   onSelect,
   onHover,
 }) => {
-  function handleKeyDown(e: any) {
-    // onHover && !blocked && onHover(date);
-  }
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleFocus() {
     onHover && !blocked && onHover(date);
   }
 
-  function setHovered() {
+  function handleHovered() {
     onHover && !blocked && onHover(date);
+  }
+
+  useEffect(() => {
+    if (!ref.current || !hovered) {
+      return;
+    }
+
+    ref.current.focus();
+  }, [ref, hovered]);
+
+  if (outOfRange) {
+    return <div></div>;
   }
 
   return (
     <CellContainer
+      ref={ref}
       role="button"
       aria-selected={selected}
+      data-date={format(date as Date, 'Y-MM-dd')}
+      data-cell-type="day"
       tabIndex={
         selected ||
         hovered ||
@@ -84,8 +97,7 @@ const Cell: React.FC<ICell> = ({
       hovered={hovered}
       blocked={blocked}
       onClick={() => onSelect && !blocked && onSelect(date as Date)}
-      onMouseOver={setHovered}
-      onKeyDown={handleKeyDown}
+      onMouseOver={handleHovered}
       onFocus={handleFocus}
     >
       {children}
