@@ -66,6 +66,11 @@ export const docs = [
         href: '/components/dropdowns',
       },
       {
+        id: 'date-picker',
+        text: 'Date & Time Picker',
+        href: '/components/date-picker',
+      },
+      {
         id: 'modals',
         text: 'Modals',
         href: '/components/modals',

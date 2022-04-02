@@ -5,6 +5,7 @@ export { default as cubeStyles } from './globalStyles';
 export { default as Alert } from './components/Alert';
 export { default as Badge } from './components/Badge';
 export { default as Button } from './components/Button';
+export { default as DatePicker } from './components/DatePicker';
 export { default as Dropdown } from './components/Dropdown';
 export { default as Modal } from './components/Modal';
 export { default as Tooltip } from './components/Tooltip';
