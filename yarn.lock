@@ -1150,12 +1150,36 @@
   dependencies:
     "@floating-ui/core" "^0.6.1"
 
+"@floating-ui/dom@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-0.4.2.tgz#5c34a19f23a0d72af564e45e5af8000b45318e60"
+  integrity sha512-2/4vOhMAujkMmGqGX1Gut84phe5MNfk1kGeM+RSTJCpeR0SWR2/RR+/f1r1msOvTQa28wn7HEhxGe71CjYY/vw==
+  dependencies:
+    "@floating-ui/core" "^0.6.1"
+
+"@floating-ui/react-dom-interactions@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@floating-ui/react-dom-interactions/-/react-dom-interactions-0.0.15.tgz#014943c2e0ac37ff412e2afb545b71308035b371"
+  integrity sha512-e7BKrsNsxf8PREIuROf2I1aJPMI7BJuDA30p84++H5u98vY5+DrI4GfFMROYqpOOtNFZVeA72y0zJdCod3QLhQ==
+  dependencies:
+    "@floating-ui/react-dom" "^0.6.1"
+    point-in-polygon "^1.1.0"
+    use-isomorphic-layout-effect "^1.1.1"
+
 "@floating-ui/react-dom@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@floating-ui/react-dom/-/react-dom-0.6.0.tgz#e58abf75bec1eac01f0adfff1454106bf9d3dd50"
   integrity sha512-/dF+jpAUtoonjs2lO0F+miqEQlzA9XJGOxWBiJsq/COhK2kz7XzryyJdxfaNEH+RN63vRs9osDolOJXlst50hg==
   dependencies:
     "@floating-ui/dom" "^0.4.0"
+    use-isomorphic-layout-effect "^1.1.1"
+
+"@floating-ui/react-dom@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@floating-ui/react-dom/-/react-dom-0.6.1.tgz#ca3d3d05ef00f50e3d0b64c18703e692a48b5c31"
+  integrity sha512-XQbdgj1uWAViEua9PkfzgqOWjYP3dZy21pYpUYB7i5WOf1ZBAqTgCkyipjpJdxP8qGftjnhrTROLGs+DNGYnJg==
+  dependencies:
+    "@floating-ui/dom" "^0.4.2"
     use-isomorphic-layout-effect "^1.1.1"
 
 "@formatjs/ecma402-abstract@1.11.3":
@@ -4258,6 +4282,11 @@ pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
+
+point-in-polygon@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-1.1.0.tgz#b0af2616c01bdee341cbf2894df643387ca03357"
+  integrity sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==
 
 postcss-js@^3.0.3:
   version "3.0.3"

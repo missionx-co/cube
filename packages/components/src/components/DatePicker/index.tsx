@@ -1,7 +1,9 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
+import { Transition } from '@headlessui/react';
 import { addMonths } from 'date-fns';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import CalendarUI from './CalendarUI';
 import Calendar from './CalendarUI/Calendar';
 import DatePickerValueHelper from './DatePickerValueHelper';
@@ -28,6 +30,8 @@ const DatePicker: FC<IDatePicker> = ({
   error,
   monthsShown,
 }) => {
+  const [open, setOpen] = useState(false);
+
   const [selected, setSelected] = useState<IDatePickerValue | null>(
     value ?? null,
   );
@@ -50,17 +54,31 @@ const DatePicker: FC<IDatePicker> = ({
     calendar.getInitialMonth(datePickerValue),
   );
 
-  const { x, y, floating, reference } = useFloating({
+  const { x, y, refs, floating, reference } = useFloating({
     placement: 'bottom-start',
     middleware: [shift(), flip(), offset(5)],
   });
 
+  useOnClickOutside(refs.floating, () => setOpen(false));
+
   function handleInputFocus() {
     setFocused(true);
+    setOpen(true);
   }
 
   function handleInputBlur() {
     setFocused(false);
+  }
+
+  function handleKeyDown(e: any) {
+    if (e.keyCode === 27) {
+      setOpen(false);
+      return;
+    }
+  }
+
+  function handleMouseLeave(e: any) {
+    setHoveredDate(undefined);
   }
 
   function onSelect(date: Date) {
@@ -92,39 +110,58 @@ const DatePicker: FC<IDatePicker> = ({
     setActiveMonth((activeMonth) => calendar.previousYear(activeMonth));
   }
 
+  //on closed
+  useEffect(() => {
+    if (!open) {
+      setHoveredDate(undefined);
+    }
+  }, [open]);
+
   return (
     <DatePickerContainer>
       <DatePickerInput
         placeholder={placeholder ?? 'Click to select a date'}
         disabled={error}
         error={error}
+        onClick={handleInputFocus}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        onKeyDown={handleKeyDown}
         readOnly
         ref={reference}
       />
       <IconContainer focus={isFocused} disabled={disabled} error={error}>
         <CalendarIcon />
       </IconContainer>
-      <PopoverContainer ref={floating} style={{ top: y ?? '', left: x ?? '' }}>
-        <CalendarContainer>
-          {[...Array(monthsShown).keys()].map((month) => (
-            <CalendarUI
-              key={month}
-              month={month === 0 ? activeMonth : addMonths(activeMonth, 1)}
-              calendar={calendar}
-              onNextMonthClick={goToNextMonth}
-              onNextYearClick={goToNextYear}
-              onPreviousMonthClick={goToPreviousMonth}
-              onPreviousYearClick={goToPreviousYear}
-              datePickerValue={datePickerValue}
-              hoveredDate={hoveredDate}
-              onHover={setHoveredDate}
-              onSelect={onSelect}
-            />
-          ))}
-        </CalendarContainer>
-      </PopoverContainer>
+      {open && (
+        <PopoverContainer
+          ref={floating}
+          style={{ top: y ?? '', left: x ?? '' }}
+          onKeyDown={handleKeyDown}
+          role="dialog"
+          aria-modal={true}
+          aria-label={placeholder ?? 'Choose Date'}
+        >
+          <CalendarContainer>
+            {[...Array(monthsShown).keys()].map((month) => (
+              <CalendarUI
+                key={month}
+                month={month === 0 ? activeMonth : addMonths(activeMonth, 1)}
+                calendar={calendar}
+                onNextMonthClick={goToNextMonth}
+                onNextYearClick={goToNextYear}
+                onPreviousMonthClick={goToPreviousMonth}
+                onPreviousYearClick={goToPreviousYear}
+                datePickerValue={datePickerValue}
+                hoveredDate={hoveredDate}
+                onHover={setHoveredDate}
+                onSelect={onSelect}
+                onMouseLeave={handleMouseLeave}
+              />
+            ))}
+          </CalendarContainer>
+        </PopoverContainer>
+      )}
     </DatePickerContainer>
   );
 };

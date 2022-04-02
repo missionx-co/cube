@@ -15,4 +15,5 @@ export default interface ICalendarUI extends MonthNavigation {
   datePickerValue: DatePickerValue;
   onHover: (date?: Date) => any;
   onSelect: (date: Date) => any;
+  onMouseLeave: (e: any) => any;
 }

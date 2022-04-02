@@ -152,7 +152,15 @@ export default class DatePickerValue {
   }
 
   isDateHovered(date: Date, hoveredDate?: Date) {
-    if (!this.isRange || !hoveredDate) {
+    if (!hoveredDate) {
+      return false;
+    }
+
+    if (isEqual(date, hoveredDate)) {
+      return true;
+    }
+
+    if (!this.isRange) {
       return false;
     }
 

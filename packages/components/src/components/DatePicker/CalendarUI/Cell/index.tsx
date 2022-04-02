@@ -5,14 +5,13 @@ import { styled } from '../../../../stitches.config';
 import ICell from './ICell';
 
 const CellContainer = styled('div', {
-  ...tw`focus:ring-2 focus:ring-primary-300 flex items-center justify-center w-10 h-10 text-sm text-gray-500 rounded-none`,
+  ...tw`flex items-center justify-center w-10 h-10 text-sm text-gray-500 rounded-none`,
   variants: {
     hovered: {
       true: {},
     },
     selected: {
       true: {},
-      false: tw`hover:bg-primary-50`,
     },
     isFirstOfRange: {
       true: tw`bg-primary-600 text-white rounded-l-full`,
@@ -55,9 +54,29 @@ const Cell: React.FC<ICell> = ({
   onSelect,
   onHover,
 }) => {
+  function handleKeyDown(e: any) {
+    // onHover && !blocked && onHover(date);
+  }
+
+  function handleFocus() {
+    onHover && !blocked && onHover(date);
+  }
+
+  function setHovered() {
+    onHover && !blocked && onHover(date);
+  }
+
   return (
     <CellContainer
       role="button"
+      aria-selected={selected}
+      tabIndex={
+        selected ||
+        hovered ||
+        (date?.getDate() === 1 && !blocked && !outOfRange)
+          ? 0
+          : -1
+      }
       selected={selected}
       isFirstOfRange={isFirstOfRange}
       isLastOfRange={isLastOfRange}
@@ -65,7 +84,9 @@ const Cell: React.FC<ICell> = ({
       hovered={hovered}
       blocked={blocked}
       onClick={() => onSelect && !blocked && onSelect(date as Date)}
-      onMouseOver={() => onHover && !blocked && onHover(date)}
+      onMouseOver={setHovered}
+      onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
     >
       {children}
     </CellContainer>
