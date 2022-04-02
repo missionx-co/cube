@@ -1,7 +1,9 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
+import { addMonths } from 'date-fns';
 import React, { FC, useMemo, useState } from 'react';
 
-import Calendar from './CalendarUI';
+import CalendarUI from './CalendarUI';
+import Calendar from './CalendarUI/Calendar';
 import DatePickerValueHelper from './DatePickerValueHelper';
 import IDatePicker, { IDatePickerValue, Mode } from './IDatePicker';
 import {
@@ -10,6 +12,7 @@ import {
   DatePickerContainer,
   DatePickerInput,
   IconContainer,
+  PopoverContainer,
 } from './styles';
 
 const DatePicker: FC<IDatePicker> = ({
@@ -23,6 +26,7 @@ const DatePicker: FC<IDatePicker> = ({
   placeholder,
   disabled,
   error,
+  monthsShown,
 }) => {
   const [selected, setSelected] = useState<IDatePickerValue | null>(
     value ?? null,
@@ -33,6 +37,17 @@ const DatePicker: FC<IDatePicker> = ({
   const datePickerValue = useMemo(
     () => new DatePickerValueHelper(mode as Mode, selected),
     [mode, selected],
+  );
+
+  const calendar = new Calendar({
+    firstDayOfTheWeek: firstDayOfWeek,
+    disabledDates,
+    minDate,
+    maxDate,
+  });
+
+  const [activeMonth, setActiveMonth] = useState(
+    calendar.getInitialMonth(datePickerValue),
   );
 
   const { x, y, floating, reference } = useFloating({
@@ -61,6 +76,22 @@ const DatePicker: FC<IDatePicker> = ({
     onChange && onChange(null);
   }
 
+  function goToNextMonth() {
+    setActiveMonth((activeMonth) => calendar.nextMonth(activeMonth));
+  }
+
+  function goToNextYear() {
+    setActiveMonth((activeMonth) => calendar.nextYear(activeMonth));
+  }
+
+  function goToPreviousMonth() {
+    setActiveMonth((activeMonth) => calendar.previousMonth(activeMonth));
+  }
+
+  function goToPreviousYear() {
+    setActiveMonth((activeMonth) => calendar.previousYear(activeMonth));
+  }
+
   return (
     <DatePickerContainer>
       <DatePickerInput
@@ -75,18 +106,25 @@ const DatePicker: FC<IDatePicker> = ({
       <IconContainer focus={isFocused} disabled={disabled} error={error}>
         <CalendarIcon />
       </IconContainer>
-      <CalendarContainer ref={floating} style={{ top: y ?? '', left: x ?? '' }}>
-        <Calendar
-          minDate={minDate}
-          maxDate={maxDate}
-          firstDayOfWeek={firstDayOfWeek}
-          disabledDates={disabledDates}
-          datePickerValue={datePickerValue}
-          hoveredDate={hoveredDate}
-          onHover={setHoveredDate}
-          onSelect={onSelect}
-        />
-      </CalendarContainer>
+      <PopoverContainer ref={floating} style={{ top: y ?? '', left: x ?? '' }}>
+        <CalendarContainer>
+          {[...Array(monthsShown).keys()].map((month) => (
+            <CalendarUI
+              key={month}
+              month={month === 0 ? activeMonth : addMonths(activeMonth, 1)}
+              calendar={calendar}
+              onNextMonthClick={goToNextMonth}
+              onNextYearClick={goToNextYear}
+              onPreviousMonthClick={goToPreviousMonth}
+              onPreviousYearClick={goToPreviousYear}
+              datePickerValue={datePickerValue}
+              hoveredDate={hoveredDate}
+              onHover={setHoveredDate}
+              onSelect={onSelect}
+            />
+          ))}
+        </CalendarContainer>
+      </PopoverContainer>
     </DatePickerContainer>
   );
 };
@@ -97,6 +135,7 @@ DatePicker.defaultProps = {
   mode: 'single',
   firstDayOfWeek: 1,
   disabledDates: [],
+  monthsShown: 1,
 };
 
 export default DatePicker;

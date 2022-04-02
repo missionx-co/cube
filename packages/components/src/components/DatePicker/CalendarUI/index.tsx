@@ -3,18 +3,10 @@ import React, { FC, useMemo, useState } from 'react';
 import tw from 'twin.macro';
 
 import { styled } from '../../../stitches.config';
-import DatePickerValue from '../DatePickerValueHelper';
-import { CalendarOptions } from '../IDatePicker';
 import Calendar from './Calendar';
 import Cell from './Cell';
 import Header from './Header';
-
-interface ICalendarUI extends CalendarOptions {
-  datePickerValue: DatePickerValue;
-  hoveredDate?: Date;
-  onHover: (date?: Date) => any;
-  onSelect: (date: Date) => any;
-}
+import ICalendarUI from './ICalendarUI';
 
 const DaysContainer = styled('div', tw`grid grid-cols-7`);
 const WeekDayContainer = styled(
@@ -23,55 +15,27 @@ const WeekDayContainer = styled(
 );
 
 const CalendarUI: FC<ICalendarUI> = ({
-  firstDayOfWeek,
-  disabledDates,
-  minDate,
-  maxDate,
   hoveredDate,
   datePickerValue,
   onHover,
   onSelect,
+  onNextMonthClick,
+  onNextYearClick,
+  onPreviousMonthClick,
+  onPreviousYearClick,
+  month,
+  calendar,
 }) => {
-  const calendar = new Calendar({
-    firstDayOfTheWeek: firstDayOfWeek,
-    disabledDates,
-    minDate,
-    maxDate,
-  });
-
-  const [activeMonth, setActiveMonth] = useState(
-    calendar.getInitialMonth(datePickerValue),
-  );
-
-  const days = useMemo(
-    () => calendar.days(activeMonth),
-    [firstDayOfWeek, activeMonth],
-  );
-
-  function goToNextMonth() {
-    setActiveMonth((activeMonth) => calendar.nextMonth(activeMonth));
-  }
-
-  function goToNextYear() {
-    setActiveMonth((activeMonth) => calendar.nextYear(activeMonth));
-  }
-
-  function goToPreviousMonth() {
-    setActiveMonth((activeMonth) => calendar.previousMonth(activeMonth));
-  }
-
-  function goToPreviousYear() {
-    setActiveMonth((activeMonth) => calendar.previousYear(activeMonth));
-  }
+  const days = useMemo(() => calendar.days(month), [calendar, month]);
 
   return (
     <div>
       <Header
-        month={activeMonth}
-        onNextMonthClick={goToNextMonth}
-        onPreviousMonthClick={goToPreviousMonth}
-        onNextYearClick={goToNextYear}
-        onPreviousYearClick={goToPreviousYear}
+        month={month}
+        onNextMonthClick={onNextMonthClick}
+        onPreviousMonthClick={onPreviousMonthClick}
+        onNextYearClick={onNextYearClick}
+        onPreviousYearClick={onPreviousYearClick}
       />
       <DaysContainer>
         {days.slice(0, 7).map((day) => {
@@ -88,7 +52,7 @@ const CalendarUI: FC<ICalendarUI> = ({
             selected={datePickerValue.isDateSelected(day)}
             hovered={datePickerValue.isDateHovered(day, hoveredDate)}
             blocked={calendar.isDateDisabled(day)}
-            outOfRange={!calendar.isDateOfMonth(day, activeMonth)}
+            outOfRange={!calendar.isDateOfMonth(day, month)}
             onHover={onHover}
             onSelect={onSelect}
           >

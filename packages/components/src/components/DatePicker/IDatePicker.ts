@@ -13,6 +13,7 @@ export interface CalendarOptions {
   disabledDates?: Date[];
   minDate?: Date;
   maxDate?: Date;
+  monthsShown?: number;
 }
 
 export default interface IDatePicker extends CalendarOptions {

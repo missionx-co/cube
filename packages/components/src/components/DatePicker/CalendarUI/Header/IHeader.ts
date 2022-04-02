@@ -1,9 +1,9 @@
 import { HTMLProps } from 'react';
 
-export default interface IHeader extends HTMLProps<HTMLElement> {
+import { MonthNavigation } from '../ICalendarUI';
+
+export default interface IHeader
+  extends HTMLProps<HTMLElement>,
+    MonthNavigation {
   month: Date;
-  onNextMonthClick: () => any;
-  onNextYearClick: () => any;
-  onPreviousMonthClick: () => any;
-  onPreviousYearClick: () => any;
 }

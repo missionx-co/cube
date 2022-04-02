@@ -28,7 +28,9 @@ export const CalendarIcon = styled(
   tw`block w-6 h-6 text-gray-400`,
 );
 
-export const CalendarContainer = styled(
+export const PopoverContainer = styled(
   'div',
   tw`absolute p-2 bg-white border border-gray-300 rounded-lg`,
 );
+
+export const CalendarContainer = styled('div', tw`flex space-x-8`);
