@@ -1,0 +1,125 @@
+import { Button } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import VariantsExamples from '@components/Examples/Buttons/VariantsExample';
+import { propsList } from '@components/Examples/Buttons/props';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+## Import
+
+<CodeSnippet>{`import { Button } from '@cube/components'`}</CodeSnippet>
+
+## Usage
+
+### Basic Usage
+
+<Example code={`<Button>Default</Button>`}>
+  <Button>Default</Button>
+</Example>
+
+### Colors
+
+Colors can be added to a button with the `color` prop.
+
+Cube supports only two colors: `primary` and `error`
+
+<Example
+  code={`<Button color="primary">Default</Button>
+<Button color="error"></Button>`}
+>
+  <Button color="primary">Primary</Button>
+  <Button color="error">Error</Button>
+</Example>
+
+### Variants
+
+Variants can be added to a button with the `variant` prop.
+
+Cube supports four variants for the `Button` component: `fill`, `light`, `outline` and `link`
+
+<VariantsExamples />
+
+### Size
+
+Button size can be defined with the `area` prop.
+
+Cube supports five sizes for the `Button` component: `sm`, `base`, `lg`, `xl`, `2xl`
+
+<Example
+  code={`<Button area="sm">Button CTA</Button>
+<Button>Button CTA</Button>
+<Button area="lg">Button CTA</Button>
+<Button area="xl">Button CTA</Button>
+<Button area="2xl">Button CTA</Button>`}
+>
+  <Button area="sm">Button CTA</Button>
+  <Button>Button CTA</Button>
+  <Button area="lg">Button CTA</Button>
+  <Button area="xl">Button CTA</Button>
+  <Button area="2xl">Button CTA</Button>
+</Example>
+
+### Customization
+
+Use `className` property to pass Tailwind CSS classes to customize the button however you want.
+
+<Example
+    code={`
+// customize color
+<Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
+  <span>Button CTA</span>
+</Button>
+
+// add icon to the left
+
+<Button className="flex items-center space-x-2">
+  <span className="w-5 h-5 border-2 border-white rounded-full" />
+  <span>Button CTA</span>
+</Button>
+
+// add icon to the right
+
+<Button className="flex items-center space-x-2">
+  <span>Button CTA</span>
+  <span className="w-5 h-5 border-2 border-white rounded-full" />
+</Button>
+
+// icon only
+
+<Button className="p-2.5">
+  <span className="block w-5 h-5 border-2 border-white rounded-full" />
+</Button>
+`}>
+<Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
+  <span>Button CTA</span>
+</Button>
+
+  <Button className="flex items-center space-x-2">
+    <span className="w-5 h-5 border-2 border-white rounded-full" />
+    <span>Button CTA</span>
+  </Button>
+  <Button className="flex items-center space-x-2">
+    <span>Button CTA</span>
+    <span className="w-5 h-5 border-2 border-white rounded-full" />
+  </Button>
+  <Button className="p-2.5">
+    <span className="block w-5 h-5 border-2 border-white rounded-full" />
+  </Button>
+</Example>
+
+### Props
+
+The `Button` component accepts any props that a normal button can have plus the following props
+
+<PropsList props={propsList} />
+
+export default ({ children }) => (
+  <MDXPage
+    title="Buttons"
+    description="Buttons allow users to take actions, and make choices, with a single tap"
+  >
+    {children}
+  </MDXPage>
+);
