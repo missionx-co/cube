@@ -1,10 +1,9 @@
 import { Color } from '@cube/foundation';
-import { ReactNode } from 'react';
+import { HTMLProps } from 'react';
 
 export type AlertVariant = 'light' | 'filled';
 
-export default interface IAlert {
+export default interface IAlert extends HTMLProps<HTMLDivElement> {
   color?: Extract<Color, 'primary' | 'error' | 'warning' | 'success'>;
   variant?: AlertVariant;
-  icon?: boolean | (() => ReactNode);
 }

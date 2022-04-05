@@ -1,0 +1,143 @@
+import Head from 'next/head';
+
+import { Alert } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import VariantsExamples from '@components/Examples/Buttons/VariantsExample';
+import { propsList } from '@components/Examples/Buttons/props';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Alert - Cube</title>
+  <meta
+    name="description"
+    content="An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
+  />
+</Head>
+
+## Import
+
+<CodeSnippet>{`import { Alert } from '@cube/components'`}</CodeSnippet>
+
+## Usage
+
+<Example code={`<Alert>Default alert message</Alert>`}>
+  <Alert>Default alert message</Alert>
+</Example>
+
+## Colors
+
+Colors can be added to the `Alert` component with the `color` prop.
+
+Cube supports four colors for the `Alert` component: `primary`, `error`, `success` and `warning`
+
+<Example
+  code={`<Alert>Change a few things up and try submitting again.</Alert>
+<Alert color="success">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert color="error">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert color="warning">
+  Change a few things up and try submitting again.
+</Alert>`}
+>
+  <div className="flex flex-col space-y-3 w-full">
+    <Alert>Change a few things up and try submitting again.</Alert>
+    <Alert color="success">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+    <Alert color="error">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+    <Alert color="warning">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+  </div>
+</Example>
+
+## Variants
+
+Variants can be added to the `Alert` with the `variant` prop.
+
+Cube supports two variants for the `Alert` component: `filled` and `light`. The example above has the light version
+
+<Example
+  code={`<Alert variant="filled">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="success">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="error">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="warning">
+  Change a few things up and try submitting again.
+</Alert>`}
+>
+  <div className="flex flex-col space-y-3 w-full">
+    <Alert variant="filled">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+    <Alert variant="filled" color="success">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+    <Alert variant="filled" color="error">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+    <Alert variant="filled" color="warning">
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+  </div>
+</Example>
+
+## Alert.Title
+
+Alert provide a subcomponent `Alert.Title` that has a specific styling that you can use as an Alert title.
+
+<Example
+  code={`<Alert>
+  <Alert.Title>Info alert!</Alert.Title>
+  <span>Change a few things up and try submitting again.</span>
+</Alert>`}
+>
+  <div className="not-prose">
+    <Alert>
+      <Alert.Title>Info alert!</Alert.Title>
+      <span>Change a few things up and try submitting again.</span>
+    </Alert>
+  </div>
+</Example>
+
+## Props
+
+The `Alert` component accepts any props that a normal `div` can have plus the following props
+
+<PropsList
+  props={[
+    {
+      name: 'color',
+      type: litteral(['primary', 'success', 'error', 'warning']),
+      default: 'primary',
+    },
+    {
+      name: 'variant',
+      type: litteral(['filled', 'light']),
+      default: 'light',
+    },
+  ]}
+/>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Alert"
+    description="An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task."
+  >
+    {children}
+  </MDXPage>
+);
