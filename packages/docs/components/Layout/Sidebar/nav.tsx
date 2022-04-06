@@ -56,11 +56,6 @@ export const docs = [
         href: '/components/buttons',
       },
       {
-        id: 'button-groups',
-        text: 'Button groups',
-        href: '/components/button-groups',
-      },
-      {
         id: 'dropdowns',
         text: 'Dropdowns',
         href: '/components/dropdowns',
