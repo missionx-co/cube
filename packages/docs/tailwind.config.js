@@ -5,7 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+    },
   },
   plugins: [
     require('@cube/foundation/dist/plugin'),

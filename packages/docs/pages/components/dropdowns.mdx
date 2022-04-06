@@ -1,0 +1,186 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import { propsList } from '@components/Examples/Buttons/props';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Dropdown - Cube</title>
+  <meta
+    name="description"
+    content="A menu displays a list of choices on a temporary surface. It appears when the user interacts with a button, or other control."
+  />
+</Head>
+
+## Import
+
+<CodeSnippet>{`import { Dropdown } from '@cube/components'`}</CodeSnippet>
+
+## Usage
+
+The `buttonRenderer` prop of the `Dropdown` component is required, and you strictly need to use `Dropdown.Button` because It's used to detect click and keyboard events that are related to accessibility features. you can use `as` property to specify the
+component that you want to use and you may pass any props to `Dropdown.Button` which eventually will be passed to the `as` component.
+
+`Dropdown` component must have children as well. You can use whatever you like but we recommend to make use of `Dropdown.Item` to benifit from its accessibility features.
+
+`Dropdown.Item` accepts any react node as a chilren or a function of type `({active, selected}) => {}`. The function will help you in case you want to provide your own styling for `active` and `selected` states.
+
+<Example
+  code={`import { Button, Dropdown } from '@cube/components';
+
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+
+<Dropdown
+  buttonRenderer={({ ref }) => (
+    <Dropdown.Button ref={ref} as={Button} color="primary" className="flex flex-row items-center pr-3 space-x-1">
+      <span>More</span>
+      <span className="flex items-center justify-center w-5 h-5">
+        <ChevronDownIcon />
+      </span>
+    </Dropdown.Button>
+  )}>
+
+<Dropdown.Item className="flex flex-row space-x-3">
+  <span className="w-5 h-5">
+    <PencilAltIcon />
+  </span>
+  <span>Edit</span>
+</Dropdown.Item>
+
+<Dropdown.Item className="flex flex-row space-x-3">
+  <span className="w-5 h-5">
+    <DuplicateIcon />
+  </span>
+  <span>Duplicate</span>
+</Dropdown.Item>
+
+<Dropdown.Item className="flex flex-row space-x-3" disabled>
+  <span className="w-5 h-5">
+    <TrashIcon />
+  </span>
+  <span>Trash</span>
+</Dropdown.Item>
+
+</Dropdown>`}
+>
+  <Dropdown
+    buttonRenderer={({ ref }) => (
+      <Dropdown.Button
+        ref={ref}
+        as={Button}
+        color="primary"
+        className="flex flex-row items-center pr-3 space-x-1"
+      >
+        <span>More</span>
+        <span className="flex items-center justify-center w-5 h-5">
+          <ChevronDownIcon />
+        </span>
+      </Dropdown.Button>
+    )}
+  >
+    <Dropdown.Item className="flex flex-row space-x-3">
+      <span className="w-5 h-5">
+        <PencilAltIcon />
+      </span>
+      <span>Edit</span>
+    </Dropdown.Item>
+    <Dropdown.Item className="flex flex-row space-x-3">
+      <span className="w-5 h-5">
+        <DuplicateIcon />
+      </span>
+      <span>Duplicate</span>
+    </Dropdown.Item>
+    <Dropdown.Item className="flex flex-row space-x-3" disabled>
+      <span className="w-5 h-5">
+        <TrashIcon />
+      </span>
+      <span>Trash</span>
+    </Dropdown.Item>
+  </Dropdown>
+</Example>
+
+## Props
+
+### `Dropdown` props
+
+<PropsList
+  props={[
+    {
+      name: 'className',
+      type: 'string',
+      description:
+        'To be passed to the floating panel of the dropdown in case you want to customize its styling.',
+    },
+    {
+      name: 'buttonRenderer',
+      type: '(props: { ref: LegacyRef<HTMLElement> }) => ReactNode',
+      description: 'Renderer function for the dropdown button.',
+      default: 'none',
+    },
+  ]}
+/>
+
+### `Dropdown.Button` props
+
+<PropsList
+  props={[
+    {
+      name: 'as',
+      type: litteral(['string', 'Component']),
+      description:
+        'The element or component the `Dropdown.Button` should render as.',
+      default: 'button',
+    },
+    {
+      name: 'children',
+      type: 'ReactNode | (props: { open: boolean }) => ReactNode',
+      description:
+        'The children of the button can be any react elements or a function with `open` params to indicates if the dropdown is open or not.',
+    },
+  ]}
+/>
+
+### `Dropdown.Item` props
+
+<PropsList
+  props={[
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: false,
+    },
+    {
+      name: 'children',
+      type: litteral([
+        'ReactNode',
+        'ReactNode[]',
+        '((props: { active: boolean; disabled: boolean }) => ReactNode)])',
+      ]),
+    },
+  ]}
+/>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Dropdown"
+    description="A menu displays a list of choices on a temporary surface. It appears when the user interacts with a button, or other control."
+  >
+    {children}
+  </MDXPage>
+);
