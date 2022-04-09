@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Button, Modal, Badge } from "@cube/components";
+import React, { useState } from 'react';
 
-import Example from "@components/Example";
+import { Badge, Button, Modal } from '@cube/components';
 
-const BasicUsage: React.FC = () => {
+import Example from '@components/Example';
+
+const BeautifulModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
@@ -94,4 +95,4 @@ const handleCloseModal = () => setOpen(false);
   );
 };
 
-export default BasicUsage;
+export default BeautifulModal;

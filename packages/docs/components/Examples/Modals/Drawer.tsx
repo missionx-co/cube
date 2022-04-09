@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Button, Modal, Badge } from "@cube/components";
+import React, { useState } from 'react';
 
-import Example from "@components/Example";
+import { Button, Modal } from '@cube/components';
+
+import Example from '@components/Example';
 
 const Drawer: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const Drawer: React.FC = () => {
 const handleOpenModal = () => setOpen(true);
 const handleCloseModal = () => setOpen(false);
 
-<Button onClick={handleOpenModal}>Open Modal</Button>
+<Button onClick={handleOpenModal}>Open Drawer</Button>
 <Modal open={open} onClose={handleCloseModal}>
   <Modal.Dialog
     transition={{
@@ -37,19 +38,19 @@ const handleCloseModal = () => setOpen(false);
   </Modal.Dialog>
 </Modal>`}
     >
-      <Button onClick={handleOpenModal}>Open Modal</Button>
+      <Button onClick={handleOpenModal}>Open Drawer</Button>
       <Modal open={open} onClose={handleCloseModal}>
         <Modal.Dialog
           transition={{
-            enter: "ease-out duration-300",
-            enterFrom: "translate-x-full",
-            enterTo: "translate-x-0",
-            leave: "ease-in duration-200",
-            leaveFrom: "translate-x-0",
-            leaveTo: "translate-x-full",
+            enter: 'ease-out duration-300',
+            enterFrom: 'translate-x-full',
+            enterTo: 'translate-x-0',
+            leave: 'ease-in duration-200',
+            leaveFrom: 'translate-x-0',
+            leaveTo: 'translate-x-full',
           }}
           className="w-80 fixed top-0 right-0 left-auto h-full translate-x-full rounded-none"
-          style={{ transform: "translateX(0)" }}
+          style={{ transform: 'translateX(0)' }}
         >
           <Modal.Title onClose={handleCloseModal}>Notifications</Modal.Title>
           <div className="max-h-full p-3 space-y-6">

@@ -1,11 +1,12 @@
-import { FC } from "react";
-import clsx from "classnames";
-import Link from "next/link";
-import Logo from "@components/logo";
-import { CollectionIcon as AdminPanelIcon } from "@heroicons/react/outline";
+import { CollectionIcon as AdminPanelIcon } from '@heroicons/react/outline';
+import clsx from 'classnames';
+import Link from 'next/link';
+import { FC } from 'react';
 
-import { docs } from "./nav";
-import { useSidebarContext } from "../SidebarContext";
+import Logo from '@components/logo';
+
+import { useSidebarContext } from '../SidebarContext';
+import { docs } from './nav';
 
 interface ISidebar {}
 
@@ -26,7 +27,7 @@ const Sidebar: FC<ISidebar> = () => {
         <Link href="/admin-panel">
           <a
             className={clsx(
-              "flex px-3 py-2.5 rounded-md transition-colors duration-300 space-x-3 items-start font-medium text-primary-500 hover:text-primary-600"
+              'flex px-3 py-2.5 rounded-md transition-colors duration-300 space-x-3 items-start font-medium text-primary-500 hover:text-primary-600',
             )}
           >
             <span className="fill-none flex w-6 h-6">
@@ -35,7 +36,7 @@ const Sidebar: FC<ISidebar> = () => {
             <span className="flex flex-col">
               <span>Admin Panel</span>
               <span className="text-sm font-normal text-gray-500">
-                Super charge your next project with a powerful and beautiful
+                Supercharge your next project with a powerful and beautiful
                 admin panel.
               </span>
             </span>
@@ -53,13 +54,13 @@ const Sidebar: FC<ISidebar> = () => {
                     <li
                       key={link.id}
                       className={clsx(
-                        "flex items-center h-8 pl-6 -ml-px  border-l hover:border-gray-900 hover:text-gray-900",
+                        'flex items-center h-8 pl-6 -ml-px  border-l hover:border-gray-900 hover:text-gray-900',
                         {
-                          "border-gray-900 text-gray-900":
+                          'border-gray-900 text-gray-900':
                             link.id === activePage,
-                          "text-gray-400 border-gray-300":
+                          'text-gray-400 border-gray-300':
                             link.id !== activePage,
-                        }
+                        },
                       )}
                     >
                       <Link href={link.href}>

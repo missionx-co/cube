@@ -1,0 +1,130 @@
+import Head from 'next/head';
+
+import { Modal } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import { propsList } from '@components/Examples/Buttons/props';
+import BasicUsage from '@components/Examples/Modals/BasicUsage';
+import BeautifulModal from '@components/Examples/Modals/BeautifulModal';
+import Drawer from '@components/Examples/Modals/Drawer';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Modal - Cube</title>
+  <meta
+    name="description"
+    content="The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else."
+  />
+</Head>
+
+## Import
+
+<CodeSnippet>{`import { Modal } from '@cube/components'`}</CodeSnippet>
+
+## Usage
+
+The `Modal` component is basically a group of other sub components which are `Modal.Dialog`, `Modal.Title` and `Modal.Footer`
+
+It's mandatory to use `Modal.Dialog` to make use of the accessibility features. but it's optional to use other components like `Modal.Title` and `Modal.Footer`
+
+<BasicUsage />
+
+## Customization:
+
+You can use the `Modal.Title` and `Modal.Footer` however you want. The following example shows you how to make use of the `Modal.Footer` to create a beautiful `Modal`
+
+<BeautifulModal />
+
+`Modal.Dialog` transition animation can also be customized. The component accepts a prop called `transition` that has the shape of
+
+<CodeSnippet>{`interface ITransition {
+  enter: string;
+  enterFrom: string;
+  enterTo: string;
+  leave: string;
+  leaveFrom: string;
+  leaveTo: string;
+}`}</CodeSnippet>
+
+For more details on how to use, please refer to [Tailwind Headless UI Transition component](https://headlessui.dev/react/transition).
+
+The default values of `Modal.Dialog` transition prop is
+
+<CodeSnippet>{`transition: {
+  enter: 'ease-out duration-300',
+  enterFrom: 'opacity-0 scale-95',
+  enterTo: 'opacity-100 scale-100',
+  leave: 'ease-in duration-200',
+  leaveFrom: 'opacity-100 scale-100',
+  leaveTo: 'opacity-0 scale-95',
+}`}</CodeSnippet>
+
+## Drawer component
+
+Combining `Modal` different components with the `transition` property of the `Modal.Dialog` we can easily build a drawer.
+
+<Drawer />
+
+## Props
+
+### `Modal` Props
+
+<PropsList
+  props={[
+    {
+      name: 'open',
+      type: 'boolean',
+      description: '(Required). If true, the component is shown.',
+    },
+    {
+      name: 'onClose',
+      type: '() => any',
+      description:
+        '(Required). Callback fired when the component requests to be closed. The reason parameter can optionally be used to control the response to onClose.',
+    },
+  ]}
+/>
+
+### `Modal.Dialog` props
+
+The `Modal.Dialog` subscompoentns accepts any props that a simple div can have plus the `transition` property
+
+<PropsList
+  props={[
+    {
+      name: 'transition',
+      type: 'ITransition',
+    },
+  ]}
+/>
+
+### `Modal.Title` props
+
+The `Modal.Title` subscompoentns accepts any props that a html `header` can have plus the `onClose` property.
+
+<PropsList
+  props={[
+    {
+      name: 'onClose',
+      type: '() => any',
+      description:
+        '(Required). Callback fired when the close button is clicked.',
+    },
+  ]}
+/>
+
+### `Modal.Footer` props
+
+The `Modal.Footer` subscompoentns accepts any props that a html `footer` can have.
+
+export default ({ children }) => (
+  <MDXPage
+    title="Modal"
+    description="The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else."
+  >
+    {children}
+  </MDXPage>
+);
