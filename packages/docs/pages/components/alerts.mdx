@@ -20,13 +20,18 @@ import PropsList from '@components/PropsList';
 
 ## Import
 
-<CodeSnippet>{`import { Alert } from '@cube/components'`}</CodeSnippet>
+```jsx
+import { Alert } from '@cube/components';
+```
 
 ## Usage
 
-<Example code={`<Alert>Default alert message</Alert>`}>
+<Example>
   <Alert>Default alert message</Alert>
 </Example>
+```jsx
+<Alert>Default alert message</Alert>
+```
 
 ## Colors
 
@@ -34,18 +39,7 @@ Colors can be added to the `Alert` component with the `color` prop.
 
 Cube supports four colors for the `Alert` component: `primary`, `error`, `success` and `warning`
 
-<Example
-  code={`<Alert>Change a few things up and try submitting again.</Alert>
-<Alert color="success">
-  Change a few things up and try submitting again.
-</Alert>
-<Alert color="error">
-  Change a few things up and try submitting again.
-</Alert>
-<Alert color="warning">
-  Change a few things up and try submitting again.
-</Alert>`}
->
+<Example>
   <div className="flex flex-col space-y-3 w-full">
     <Alert>Change a few things up and try submitting again.</Alert>
     <Alert color="success">
@@ -60,26 +54,20 @@ Cube supports four colors for the `Alert` component: `primary`, `error`, `succes
   </div>
 </Example>
 
+```js
+<Alert>Change a few things up and try submitting again.</Alert>
+<Alert color="success">Change a few things up and try submitting again.</Alert>
+<Alert color="error">Change a few things up and try submitting again.</Alert>
+<Alert color="warning">Change a few things up and try submitting again.</Alert>
+```
+
 ## Variants
 
 Variants can be added to the `Alert` with the `variant` prop.
 
 Cube supports two variants for the `Alert` component: `filled` and `light`. The example above has the light version
 
-<Example
-  code={`<Alert variant="filled">
-  Change a few things up and try submitting again.
-</Alert>
-<Alert variant="filled" color="success">
-  Change a few things up and try submitting again.
-</Alert>
-<Alert variant="filled" color="error">
-  Change a few things up and try submitting again.
-</Alert>
-<Alert variant="filled" color="warning">
-  Change a few things up and try submitting again.
-</Alert>`}
->
+<Example>
   <div className="flex flex-col space-y-3 w-full">
     <Alert variant="filled">
       <span>Change a few things up and try submitting again.</span>
@@ -96,23 +84,38 @@ Cube supports two variants for the `Alert` component: `filled` and `light`. The 
   </div>
 </Example>
 
+```jsx
+<Alert variant="filled">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="success">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="error">
+  Change a few things up and try submitting again.
+</Alert>
+<Alert variant="filled" color="warning">
+  Change a few things up and try submitting again.
+</Alert>
+```
+
 ## Alert.Title
 
 Alert provide a subcomponent `Alert.Title` that has a specific styling that you can use as an Alert title.
 
-<Example
-  code={`<Alert>
+<Example>
+  <Alert>
+    <Alert.Title>Info alert!</Alert.Title>
+    <span>Change a few things up and try submitting again.</span>
+  </Alert>
+</Example>
+
+```jsx
+<Alert>
   <Alert.Title>Info alert!</Alert.Title>
   <span>Change a few things up and try submitting again.</span>
-</Alert>`}
->
-  <div className="not-prose">
-    <Alert>
-      <Alert.Title>Info alert!</Alert.Title>
-      <span>Change a few things up and try submitting again.</span>
-    </Alert>
-  </div>
-</Example>
+</Alert>
+```
 
 ## Props
 

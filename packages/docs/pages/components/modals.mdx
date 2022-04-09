@@ -22,7 +22,9 @@ import PropsList from '@components/PropsList';
 
 ## Import
 
-<CodeSnippet>{`import { Modal } from '@cube/components'`}</CodeSnippet>
+```js
+import { Modal } from '@cube/components';
+```
 
 ## Usage
 
@@ -32,41 +34,130 @@ It's mandatory to use `Modal.Dialog` to make use of the accessibility features. 
 
 <BasicUsage />
 
+```js
+const [open, toggleOpen] = useState(false);
+
+<Button onClick={() => toggleOpen(true)}>Open Modal</Button>
+<Modal open={open} onClose={() => toggleOpen(false)}>
+  <Modal.Dialog>Content here</Modal.Dialog>
+</Modal>
+```
+
 ## Customization:
 
 You can use the `Modal.Title` and `Modal.Footer` however you want. The following example shows you how to make use of the `Modal.Footer` to create a beautiful `Modal`
 
 <BeautifulModal />
 
+```jsx
+const [open, setOpen] = useState(false); const handleOpenModal = () => setOpen(true);
+const handleCloseModal = () => setOpen(false);
+
+<Button onClick={handleOpenModal}>Open Modal</Button>
+<Modal open={open} onClose={handleCloseModal}>
+  <Modal.Dialog className="max-w-xl">
+    <Modal.Title className="text-xl text-gray-900">
+      Blog released
+    </Modal.Title>
+
+    <div className="p-3 space-y-5">
+      <Badge
+        className="flex items-center space-x-1.5 pl-1 max-w-xl"
+        area="lg"
+        color="success"
+      >
+        <Badge className="bg-success-700 text-white" color="success">
+          New feature
+        </Badge>
+        <span>
+          We just released this new feature, make sure to check it out
+        </span>
+      </Badge>
+      <p className="text-sm text-gray-500">
+        Blog is released. This blog post has been published. Team members
+        will be able to edit this post and republish changes.
+      </p>
+    </div>
+
+    <Modal.Footer className="flex flex-row space-x-3">
+      <Button
+        className="w-full"
+        variant="outline"
+        color="error"
+        onClick={handleCloseModal}
+      >
+        Dismiss
+      </Button>
+      <Button className="w-full">Check it out</Button>
+    </Modal.Footer>
+
+  </Modal.Dialog>
+</Modal>
+```
+
 `Modal.Dialog` transition animation can also be customized. The component accepts a prop called `transition` that has the shape of
 
-<CodeSnippet>{`interface ITransition {
+```ts
+interface ITransition {
   enter: string;
   enterFrom: string;
   enterTo: string;
   leave: string;
   leaveFrom: string;
   leaveTo: string;
-}`}</CodeSnippet>
+}
+```
 
 For more details on how to use, please refer to [Tailwind Headless UI Transition component](https://headlessui.dev/react/transition).
 
 The default values of `Modal.Dialog` transition prop is
 
-<CodeSnippet>{`transition: {
+```js
+transition: {
   enter: 'ease-out duration-300',
   enterFrom: 'opacity-0 scale-95',
   enterTo: 'opacity-100 scale-100',
   leave: 'ease-in duration-200',
   leaveFrom: 'opacity-100 scale-100',
   leaveTo: 'opacity-0 scale-95',
-}`}</CodeSnippet>
+}
+```
 
 ## Drawer component
 
 Combining `Modal` different components with the `transition` property of the `Modal.Dialog` we can easily build a drawer.
 
 <Drawer />
+
+```jsx
+const [open, setOpen] = useState(false);
+const handleOpenModal = () => setOpen(true);
+const handleCloseModal = () => setOpen(false);
+
+<Button onClick={handleOpenModal}>Open Drawer</Button>
+<Modal open={open} onClose={handleCloseModal}>
+  <Modal.Dialog
+    transition={{
+      enter: "ease-out duration-300",
+      enterFrom: "translate-x-full",
+      enterTo: "translate-x-0",
+      leave: "ease-in duration-200",
+      leaveFrom: "translate-x-0",
+      leaveTo: "translate-x-full",
+    }}
+    className="w-80 fixed top-0 right-0 left-auto h-full translate-x-full rounded-none"
+    {/* dialog has -translate-x-1/2 tailwind class by default and this property would prevent any conflict between the default styling and the transition styling */}
+    style={{ transform: "translateX(0)" }}
+  >
+    <Modal.Title onClose={handleCloseModal}>Notifications</Modal.Title>
+    <div className="max-h-full p-3 space-y-6">
+      <p className="text-center text-gray-400">
+        You're all set. There's no new notifications for you.
+      </p>
+    </div>
+  </Modal.Dialog>
+</Modal>
+```
 
 ## Props
 

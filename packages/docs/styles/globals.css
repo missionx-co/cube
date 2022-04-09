@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.prose pre {
+  @apply my-2
+}
+
+.word {
+  @apply bg-gray-700 p-px
+}

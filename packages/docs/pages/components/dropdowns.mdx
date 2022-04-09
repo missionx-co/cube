@@ -25,7 +25,9 @@ import PropsList from '@components/PropsList';
 
 ## Import
 
-<CodeSnippet>{`import { Dropdown } from '@cube/components'`}</CodeSnippet>
+```jsx
+import { Dropdown } from '@cube/components';
+```
 
 ## Usage
 
@@ -36,49 +38,7 @@ component that you want to use and you may pass any props to `Dropdown.Button` w
 
 `Dropdown.Item` accepts any react node as a chilren or a function of type `({active, selected}) => {}`. The function will help you in case you want to provide your own styling for `active` and `selected` states.
 
-<Example
-  code={`import { Button, Dropdown } from '@cube/components';
-
-import {
-  ChevronDownIcon,
-  DuplicateIcon,
-  PencilAltIcon,
-  TrashIcon,
-} from '@heroicons/react/outline';
-
-<Dropdown
-  buttonRenderer={({ ref }) => (
-    <Dropdown.Button ref={ref} as={Button} color="primary" className="flex flex-row items-center pr-3 space-x-1">
-      <span>More</span>
-      <span className="flex items-center justify-center w-5 h-5">
-        <ChevronDownIcon />
-      </span>
-    </Dropdown.Button>
-  )}>
-
-<Dropdown.Item className="flex flex-row space-x-3">
-  <span className="w-5 h-5">
-    <PencilAltIcon />
-  </span>
-  <span>Edit</span>
-</Dropdown.Item>
-
-<Dropdown.Item className="flex flex-row space-x-3">
-  <span className="w-5 h-5">
-    <DuplicateIcon />
-  </span>
-  <span>Duplicate</span>
-</Dropdown.Item>
-
-<Dropdown.Item className="flex flex-row space-x-3" disabled>
-  <span className="w-5 h-5">
-    <TrashIcon />
-  </span>
-  <span>Trash</span>
-</Dropdown.Item>
-
-</Dropdown>`}
->
+<Example>
   <Dropdown
     buttonRenderer={({ ref }) => (
       <Dropdown.Button
@@ -114,6 +74,54 @@ import {
     </Dropdown.Item>
   </Dropdown>
 </Example>
+
+```jsx
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+
+import { Button, Dropdown } from '@cube/components';
+
+<Dropdown
+  buttonRenderer={({ ref }) => (
+    <Dropdown.Button
+      ref={ref}
+      as={Button}
+      color="primary"
+      className="flex flex-row items-center pr-3 space-x-1"
+    >
+      <span>More</span>
+      <span className="flex items-center justify-center w-5 h-5">
+        <ChevronDownIcon />
+      </span>
+    </Dropdown.Button>
+  )}
+>
+  <Dropdown.Item className="flex flex-row space-x-3">
+    <span className="w-5 h-5">
+      <PencilAltIcon />
+    </span>
+    <span>Edit</span>
+  </Dropdown.Item>
+
+  <Dropdown.Item className="flex flex-row space-x-3">
+    <span className="w-5 h-5">
+      <DuplicateIcon />
+    </span>
+    <span>Duplicate</span>
+  </Dropdown.Item>
+
+  <Dropdown.Item className="flex flex-row space-x-3" disabled>
+    <span className="w-5 h-5">
+      <TrashIcon />
+    </span>
+    <span>Trash</span>
+  </Dropdown.Item>
+</Dropdown>;
+```
 
 ## Props
 

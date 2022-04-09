@@ -20,14 +20,23 @@ import PropsList from '@components/PropsList';
 
 ## Import
 
-<CodeSnippet>{`import { Tooltip } from '@cube/components'`}</CodeSnippet>
+```js
+import { Tooltip } from '@cube/components';
+```
 
 ## Usage
 
 `Tooltip` implementation is totally based on `@tippy/react` component. Visit [their documentation](https://github.com/atomiks/tippyjs-react) for more details on props and customiation
 
-<Example
-  code={`const [visible, setVisible] = useState(false);
+<Example><Tooltip content="This is a tooltip">
+  <Button>Hover for a tooltip</Button>
+</Tooltip>
+
+  <DeleteConfirmation />
+</Example>
+
+```jsx
+const [visible, setVisible] = useState(false);
 const show = () => setVisible(true);
 const hide = () => setVisible(false);
 
@@ -72,12 +81,7 @@ const hide = () => setVisible(false);
     Delete Blog post
   </Button>
 </Tooltip>
-`} ><Tooltip content="This is a tooltip">
-  <Button>Hover for a tooltip</Button>
-</Tooltip>
-
-  <DeleteConfirmation />
-</Example>
+```
 
 export default ({ children }) => (
   <MDXPage

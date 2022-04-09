@@ -8,14 +8,7 @@ const BasicUsage: FC = ({}) => {
   const [open, toggleOpen] = useState(false);
 
   return (
-    <Example
-      code={`const [open, toggleOpen] = useState(false);
-
-<Button onClick={() => toggleOpen(true)}>Open Modal</Button>
-<Modal open={open} onClose={() => toggleOpen(false)}>
-  <Modal.Dialog>Content here</Modal.Dialog>
-</Modal>`}
-    >
+    <Example>
       <Button onClick={() => toggleOpen(true)}>Open Modal</Button>
       <Modal open={open} onClose={() => toggleOpen(false)}>
         <Modal.Dialog>Content here</Modal.Dialog>

@@ -20,15 +20,21 @@ import PropsList from '@components/PropsList';
 
 ## Import
 
-<CodeSnippet>{`import { Button } from '@cube/components'`}</CodeSnippet>
+```js
+import { Button } from '@cube/components';
+```
 
 ## Usage
 
 ### Basic Usage
 
-<Example code={`<Button>Default</Button>`}>
+<Example>
   <Button>Default</Button>
 </Example>
+
+```js
+<Button>Default</Button>
+```
 
 ### Colors
 
@@ -36,13 +42,15 @@ Colors can be added to a button with the `color` prop.
 
 Cube supports only two colors: `primary` and `error`
 
-<Example
-  code={`<Button color="primary">Default</Button>
-<Button color="error"></Button>`}
->
+<Example>
   <Button color="primary">Primary</Button>
   <Button color="error">Error</Button>
 </Example>
+
+```js
+<Button color="primary">Default</Button>
+<Button color="error"></Button>
+```
 
 ### Variants
 
@@ -52,61 +60,64 @@ Cube supports four variants for the `Button` component: `fill`, `light`, `outlin
 
 <VariantsExamples />
 
+```jsx
+//fill buttons
+<Button variant="fill">Primary</Button>
+<Button variant="fill" color="error">
+  Error
+</Button>
+
+//light buttons
+<Button variant="light">Primary</Button>
+<Button variant="light" color="error">
+  Error
+</Button>
+
+//outline buttons
+<Button variant="outline">Primary</Button>
+<Button variant="outline" color="error">
+  Error
+</Button>
+
+//link buttons
+<Button variant="link">Primary</Button>
+<Button variant="link" color="error">
+  Error
+</Button>
+```
+
 ### Size
 
 Button size can be defined with the `area` prop.
 
 Cube supports five sizes for the `Button` component: `sm`, `base`, `lg`, `xl`, `2xl`
 
-<Example
-  code={`<Button area="sm">Button CTA</Button>
+<Example>
+  <div className="flex flex-wrap items-start gap-4">
+    <Button area="sm">Button CTA</Button>
+    <Button>Button CTA</Button>
+    <Button area="lg">Button CTA</Button>
+    <Button area="xl">Button CTA</Button>
+    <Button area="2xl">Button CTA</Button>
+  </div>
+</Example>
+
+```jsx
+<Button area="sm">Button CTA</Button>
 <Button>Button CTA</Button>
 <Button area="lg">Button CTA</Button>
 <Button area="xl">Button CTA</Button>
-<Button area="2xl">Button CTA</Button>`}
->
-  <Button area="sm">Button CTA</Button>
-  <Button>Button CTA</Button>
-  <Button area="lg">Button CTA</Button>
-  <Button area="xl">Button CTA</Button>
-  <Button area="2xl">Button CTA</Button>
-</Example>
+<Button area="2xl">Button CTA</Button>
+```
 
 ### Customization
 
 Use `className` property to pass Tailwind CSS classes to customize the button however you want.
 
-<Example
-    code={`
-// customize color
-<Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
-  <span>Button CTA</span>
-</Button>
-
-// add icon to the left
-
-<Button className="flex items-center space-x-2">
-  <span className="w-5 h-5 border-2 border-white rounded-full" />
-  <span>Button CTA</span>
-</Button>
-
-// add icon to the right
-
-<Button className="flex items-center space-x-2">
-  <span>Button CTA</span>
-  <span className="w-5 h-5 border-2 border-white rounded-full" />
-</Button>
-
-// icon only
-
-<Button className="p-2.5">
-  <span className="block w-5 h-5 border-2 border-white rounded-full" />
-</Button>
-`}>
-<Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
-  <span>Button CTA</span>
-</Button>
-
+<Example>
+  <Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
+    <span>Button CTA</span>
+  </Button>
   <Button className="flex items-center space-x-2">
     <span className="w-5 h-5 border-2 border-white rounded-full" />
     <span>Button CTA</span>
@@ -120,11 +131,67 @@ Use `className` property to pass Tailwind CSS classes to customize the button ho
   </Button>
 </Example>
 
+```jsx
+// customize color
+<Button className="bg-gray-400 hover:bg-gray-500 focus:ring-gray-100 border-gray-400 hover:border-gray-500">
+  <span>Button CTA</span>
+</Button>
+
+// add icon to the left
+<Button className="flex items-center space-x-2">
+  <span className="w-5 h-5 border-2 border-white rounded-full" />
+  <span>Button CTA</span>
+</Button>
+
+// add icon to the right
+<Button className="flex items-center space-x-2">
+  <span>Button CTA</span>
+  <span className="w-5 h-5 border-2 border-white rounded-full" />
+</Button>
+
+// icon only
+<Button className="p-2.5">
+  <span className="block w-5 h-5 border-2 border-white rounded-full" />
+</Button>
+```
+
 ## Button Groups
 
 Button groups combine sets of buttons into toolbars or split buttons for more complex components.
 
 <ButtonGroups />
+
+```jsx
+//three buttons
+<Button.Group>
+  <Button variant="outline">Leading</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Trailing</Button>
+</Button.Group>
+
+//multiple buttons
+<Button.Group>
+  <Button variant="outline">Leading</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Trailing</Button>
+</Button.Group>
+
+//with an icon and customization
+<Button.Group>
+  <Button className="p-2.5">
+    <span className="border-primary-500 flex w-5 h-5 border rounded-full" />
+  </Button>
+  <Button className="p-2.5">
+    <span className="border-primary-500 flex w-5 h-5 border rounded-full" />
+  </Button>
+  <Button className="p-2.5">
+    <span className="border-primary-500 flex w-5 h-5 border rounded-full" />
+  </Button>
+</Button.Group>
+```
 
 ### Props
 
