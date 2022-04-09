@@ -1,0 +1,82 @@
+import Head from 'next/head';
+
+import { Switch } from '@cube/components';
+
+import Example from '@components/Example';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Switch - Cube</title>
+  <meta
+    name="description"
+    content="Switches toggle the state of a single setting on or off."
+  />
+</Head>
+
+## Import
+
+```js
+import { Switch } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+  <Switch>
+    <Switch.Label>Receive email notifications</Switch.Label>
+  </Switch>
+
+  <Switch disabled>
+    <Switch.Label>Forget my information</Switch.Label>
+  </Switch>
+</Example>
+
+```jsx
+<Switch>
+  <Switch.Label>Receive email notifications</Switch.Label>
+</Switch>
+
+<Switch disabled>
+  <Switch.Label>Forget my information</Switch.Label>
+</Switch>
+```
+
+## Size
+
+You can change the `Switch` size with the area prop. It accepts one of: `base` or `sm`.
+
+<Example>
+  <Switch area="base">
+    <Switch.Label>Remember me</Switch.Label>
+  </Switch>
+
+  <Switch area="sm">
+    <Switch.Label>Remember me (small)</Switch.Label>
+  </Switch>
+</Example>
+
+```jsx
+<Switch area="base">
+  <Switch.Label>Remember me</Switch.Label>
+</Switch>
+
+<Switch area="sm">
+  <Switch.Label>Remember me (small)</Switch.Label>
+</Switch>
+```
+
+## Props
+
+The `Switch` accepts the same props as the `Checkbox` component
+
+export default ({ children }) => (
+  <MDXPage
+    title="Switch"
+    page="switch"
+    description="Switches toggle the state of a single setting on or off."
+  >
+    {children}
+  </MDXPage>
+);
