@@ -1,0 +1,89 @@
+import Head from 'next/head';
+
+import { Input } from '@cube/components';
+
+import Example from '@components/Example';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Input - Cube</title>
+  <meta
+    name="description"
+    content="Input fields allow users to enter text into a UI. They typically appear in forms and dialogs. Input fields on mobiles should be at least 16px text size to avoid auto zoom on mobile browsers."
+  />
+</Head>
+
+## Import
+
+```js
+import { Input } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+   <Input placeholder="jhon.doe@example.com" />
+
+   <Input placeholder="jhon.doe@example.com" disabled />
+</Example>
+
+```jsx
+<Input placeholder="jhon.doe@example.com" />
+
+<Input placeholder="jhon.doe@example.com" disabled />
+```
+
+## Customization
+
+use `className` property to pass css classes to customize the `Input` component however you want.
+
+<Example>
+  <div className="flex w-96">
+    <span className="px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-l-lg">
+      https://
+    </span>
+    <Input
+      placeholder="mohammedmanssour.me"
+      className="border-l-0 rounded-l-none"
+    />
+  </div>
+</Example>
+
+```jsx
+<div className="flex w-96">
+  <span className="px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-l-lg">
+    https://
+  </span>
+  <Input
+    placeholder="mohammedmanssour.me"
+    className="border-l-0 rounded-l-none"
+  />
+</div>
+```
+
+## Props
+
+The `Input` accepts any prop that a normal html `input` can have. Plus the `error` prop.
+
+<PropsList
+  props={[
+    {
+      name: 'error',
+      type: 'boolean',
+      description: 'Indicates if input field has an invalid state.',
+      default: 'false',
+    },
+  ]}
+/>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Input"
+    page="inputs"
+    description="Input fields allow users to enter text into a UI. They typically appear in forms and dialogs. Input fields on mobiles should be at least 16px text size to avoid auto zoom on mobile browsers."
+  >
+    {children}
+  </MDXPage>
+);
