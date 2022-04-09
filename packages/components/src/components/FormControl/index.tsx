@@ -1,32 +1,32 @@
-import React, { FC } from "react";
-import tw from "twin.macro";
-import { styled } from "../../stitches.config";
+import { InformationCircleIcon } from '@heroicons/react/outline';
+import { StyledComponentType } from '@stitches/core/types/styled-component';
+import React, { FC } from 'react';
+import tw from 'twin.macro';
 
-import IFormControl from "./IFormControl";
-import InfoCircleIcon from "../../Icons/InfoCircleIcons";
-import { StyledComponentType } from "@stitches/core/types/styled-component";
+import { styled } from '../../stitches.config';
+import IFormControl from './IFormControl';
 
-const Container: StyledComponentType<any> = styled("div", {
+const Container: StyledComponentType<any> = styled('div', {
   ...tw`space-y-1.5 block w-full`,
 });
 
-const Label: StyledComponentType<any> = styled("label", {
+const Label: StyledComponentType<any> = styled('label', {
   ...tw`text-sm font-medium text-gray-700`,
 });
 
-const ErrorIconContainer: StyledComponentType<any> = styled("span", {
-  ...tw`absolute flex w-4 h-4 transform -translate-y-1/2 top-1/2 right-2 text-error-500`,
+const ErrorIconContainer: StyledComponentType<any> = styled('span', {
+  ...tw`top-1/2 right-2 text-error-500 absolute flex w-4 h-4 transform -translate-y-1/2`,
 });
 
-const ContentContainer: StyledComponentType<any> = styled("div", {
+const ContentContainer: StyledComponentType<any> = styled('div', {
   ...tw`relative block w-full`,
 });
 
-const ErrorContainer: StyledComponentType<any> = styled("span", {
+const ErrorContainer: StyledComponentType<any> = styled('span', {
   ...tw`block text-sm text-red-500`,
 });
 
-const HintContainer: StyledComponentType<any> = styled("span", {
+const HintContainer: StyledComponentType<any> = styled('span', {
   ...tw`block text-sm text-gray-500`,
 });
 
@@ -53,7 +53,7 @@ const FormControl: FC<IFormControl> = ({
         {children}
         {hasError && (
           <ErrorIconContainer>
-            <InfoCircleIcon />
+            <InformationCircleIcon />
           </ErrorIconContainer>
         )}
       </ContentContainer>

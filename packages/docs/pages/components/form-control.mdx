@@ -1,0 +1,142 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { FormControl, Input } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import { propsList } from '@components/Examples/Buttons/props';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>FormControl - Cube</title>
+  <meta
+    name="description"
+    content="`FormControl` component consists of label, hint and can accept any React element as a children. Ideally, form inputs."
+  />
+</Head>
+
+## Import
+
+```jsx
+import { FormControl } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+  <FormControl
+    id="email-1"
+    fieldLabel="Email"
+    hint="Enter your email."
+  >
+    <Input
+      id="email-1"
+      name="email-1"
+      placeholder="jhon.doe@example.com"
+    />
+  </FormControl>
+
+  <FormControl
+    id="email-2"
+    fieldLabel="Email"
+    hint="Enter your email."
+    error="Email is invalid"
+  >
+    <Input
+      id="email-2"
+      name="email-2"
+      placeholder="jhon.doe@example.com"
+      error
+    />
+  </FormControl>
+</Example>
+
+```jsx
+<FormControl
+  id="email-1"
+  fieldLabel="Email"
+  hint="Enter your email."
+>
+  <Input
+    id="email-1"
+    name="email-1"
+    placeholder="jhon.doe@example.com"
+  />
+</FormControl>
+
+<FormControl
+  id="email-2"
+  fieldLabel="Email"
+  hint="Enter your email."
+  error="Email is invalid"
+>
+  <Input
+    id="email-2"
+    name="email-2"
+    placeholder="jhon.doe@example.com"
+    error
+  />
+</FormControl>
+```
+
+## Props
+
+`FormControl` accepts any props that a normal html `div` can have. Plus, the following props
+
+<PropsList
+  props={[
+    {
+      name: 'id',
+      type: 'string',
+      description:
+        '(Required). The id of the input that will be used as a form control child. this id will be passed to the label `htmlFor` property',
+    },
+    {
+      name: 'fieldLabel',
+      type: 'ReactNode',
+      description: 'Form control label',
+    },
+    {
+      name: 'hint',
+      type: 'ReactNode',
+      description: 'Form control hint text.',
+    },
+    {
+      name: 'error',
+      type: 'ReactNode',
+      description:
+        'Form control error message. When error property is set. The error message will appear instead of the hint text.',
+    },
+    {
+      name: 'atoms',
+      type: `AtomsProps`,
+      description:
+        'Properties to be passed to the Form control label, hint text or error message.',
+    },
+  ]}
+/>
+
+```ts
+interface AtomsProps {
+  label?: Omit<HTMLProps<HTMLLabelElement>, 'children'>;
+  hint?: Omit<HTMLProps<HTMLSpanElement>, 'children'>;
+  error?: Omit<HTMLProps<HTMLSpanElement>, 'children'>;
+}
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="FormControl"
+    description="`FormControl` component consists of text and an error message. and can accept any React element as a children. Ideally, form inputs."
+  >
+    {children}
+  </MDXPage>
+);
