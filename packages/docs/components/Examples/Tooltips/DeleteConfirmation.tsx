@@ -3,15 +3,9 @@ import { FC, useState } from 'react';
 import { Button, Tooltip } from '@cube/components';
 
 const DeleteConfirmation: FC = () => {
-  const [visible, setVisible] = useState(false);
-  const show = () => setVisible(true);
-  const hide = () => setVisible(false);
-
   return (
     <Tooltip
-      interactive
-      visible={visible}
-      content={
+      content={(close) => (
         <div className="block space-y-5">
           <p className="text-sm text-gray-700">
             Are you sure you want to delete the blog post?
@@ -21,7 +15,7 @@ const DeleteConfirmation: FC = () => {
               color="error"
               area="sm"
               variant="light"
-              onClick={hide}
+              onClick={close}
               className="w-full"
             >
               Confirm deletion
@@ -30,20 +24,18 @@ const DeleteConfirmation: FC = () => {
               area="sm"
               color="error"
               variant="light"
-              onClick={hide}
+              onClick={close}
               className="hover:bg-gray-100 bg-gray-50 w-full text-gray-700"
             >
               cancel
             </Button>
           </div>
         </div>
-      }
+      )}
       className="p-4 text-gray-900 bg-white border border-gray-200 rounded-lg"
-      onClickOutside={hide}
+      showOn="click"
     >
-      <Button color="error" onClick={show}>
-        Delete Blog post
-      </Button>
+      <Button color="error">Click to delete Blog post</Button>
     </Tooltip>
   );
 };

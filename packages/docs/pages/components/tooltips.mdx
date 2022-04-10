@@ -26,28 +26,39 @@ import { Tooltip } from '@cube/components';
 
 ## Usage
 
-`Tooltip` implementation is totally based on `@tippy/react` component. Visit [their documentation](https://github.com/atomiks/tippyjs-react) for more details on props and customiation
+Pass the component that you want to give the tooltip to as a child of the `Tooltip` component. `Tooltip` content can be set using the `content` prop.
 
-<Example><Tooltip content="This is a tooltip">
+<Example>
+  <Tooltip content="This is a tooltip">
+    <Button>Hover for a tooltip</Button>
+  </Tooltip>
+</Example>
+
+```jsx /content/
+<Tooltip content="This is a tooltip">
   <Button>Hover for a tooltip</Button>
 </Tooltip>
+```
 
+## Event
+
+Use `showOn` prop to customize the tooltip to show on `hover` or `click`.
+
+<Example>
+  <Tooltip showOn="hover" content="This is a tooltip">
+    <Button>Hover for a tooltip</Button>
+  </Tooltip>
   <DeleteConfirmation />
 </Example>
 
-```jsx
-const [visible, setVisible] = useState(false);
-const show = () => setVisible(true);
-const hide = () => setVisible(false);
-
-<Tooltip content="This is a tooltip">
+```jsx /showOn/
+<Tooltip showOn="hover" content="This is a tooltip">
   <Button>Hover for a tooltip</Button>
 </Tooltip>
 
 <Tooltip
-  interactive
-  visible={visible}
-  content={
+  showOn="click"
+  content={(close) => (
     <div className="block space-y-5">
       <p className="text-sm text-gray-700">
         Are you sure you want to delete the blog post?
@@ -57,7 +68,7 @@ const hide = () => setVisible(false);
           color="error"
           area="sm"
           variant="light"
-          onClick={hide}
+          onClick={close}
           className="w-full"
         >
           Confirm deletion
@@ -66,21 +77,106 @@ const hide = () => setVisible(false);
           area="sm"
           color="error"
           variant="light"
-          onClick={hide}
+          onClick={close}
           className="hover:bg-gray-100 bg-gray-50 w-full text-gray-700"
         >
           cancel
         </Button>
       </div>
     </div>
-  }
+  )}
   className="p-4 text-gray-900 bg-white border border-gray-200 rounded-lg"
-  onClickOutside={hide}
 >
-  <Button color="error" onClick={show}>
-    Delete Blog post
-  </Button>
+  <Button color="error">Click to delete Blog post</Button>
 </Tooltip>
+```
+
+## Transition
+
+Use `transition` property to customize the transition property of the `Tooltip`. Ensure the `duration` of the `transition` property matches the css transition duration.
+
+<Example>
+  <Tooltip
+    content="This is a tooltip with customized transition"
+    className="duration-200 transform"
+    transition={{
+      duration: 200,
+      enter: 'translate-x-0 opacity-100',
+      exit: 'translate-x-10 opacity-0',
+    }}
+  >
+    <Button>Hover for a tooltip</Button>
+  </Tooltip>
+</Example>
+
+```jsx
+<Tooltip
+  content="This is a tooltip with customized transition"
+  className="duration-200 transform"
+  transition={{
+    duration: 200,
+    enter: 'translate-x-0 opacity-100',
+    exit: 'translate-x-10 opacity-0',
+  }}
+>
+  <Button>Hover for a tooltip</Button>
+</Tooltip>
+```
+
+## Props
+
+<PropsList
+  props={[
+    {
+      name: 'content',
+      type: litteral(['ReactNode', '(close: () => void) => ReactNode']),
+      description:
+        'Tooltip content. It can be a React node or a function that returns a react node. use the function when you need to control the tooltip close behavior from inside the Tooltip.',
+    },
+    {
+      name: 'placement',
+      type: litteral([
+        'top',
+        'right',
+        'bottom',
+        'left',
+        'top-start',
+        'top-end',
+        'right-start',
+        'right-end',
+        'bottom-start',
+        'bottom-end',
+        'left-start',
+        'left-end',
+      ]),
+      description: 'Tooltip placement.',
+      default: 'top',
+    },
+    {
+      name: 'showOn',
+      type: litteral(['hover', 'click']),
+      description: 'Show the tooltip when the event is emitted',
+      default: 'hover',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description:
+        'Css classes to be passed to the tooltip container for style customization.',
+    },
+    {
+      name: 'transition',
+      type: 'ITransition',
+      description: 'Customize the transition of the tooltip.',
+    }
+  ]}
+/>
+```ts
+interface ITransition {
+  duration?: number
+  enter?: string
+  exit?: string
+}
 ```
 
 export default ({ children }) => (
