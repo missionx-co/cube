@@ -11,6 +11,7 @@ const BasicUsage: FC = ({}) => {
     <Example>
       <Button onClick={() => toggleOpen(true)}>Open Modal</Button>
       <Modal open={open} onClose={() => toggleOpen(false)}>
+        <Modal.Overlay />
         <Modal.Dialog>Content here</Modal.Dialog>
       </Modal>
     </Example>

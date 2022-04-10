@@ -2,13 +2,10 @@ import Head from 'next/head';
 
 import { Modal } from '@cube/components';
 
-import CodeSnippet from '@components/CodeSnippet';
 import Example from '@components/Example';
-import { propsList } from '@components/Examples/Buttons/props';
 import BasicUsage from '@components/Examples/Modals/BasicUsage';
 import BeautifulModal from '@components/Examples/Modals/BeautifulModal';
 import Drawer from '@components/Examples/Modals/Drawer';
-import { litteral } from '@components/Examples/utils';
 import MDXPage from '@components/Layout/MDXPage';
 import PropsList from '@components/PropsList';
 
@@ -28,7 +25,7 @@ import { Modal } from '@cube/components';
 
 ## Usage
 
-The `Modal` component is basically a group of other sub components which are `Modal.Dialog`, `Modal.Title` and `Modal.Footer`
+The `Modal` component is basically a group of other sub components which are `Modal.Overlay`, `Modal.Dialog`, `Modal.Title` and `Modal.Footer`
 
 It's mandatory to use `Modal.Dialog` to make use of the accessibility features. but it's optional to use other components like `Modal.Title` and `Modal.Footer`
 
@@ -39,6 +36,7 @@ const [open, toggleOpen] = useState(false);
 
 <Button onClick={() => toggleOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => toggleOpen(false)}>
+  <Modal.Overlay />
   <Modal.Dialog>Content here</Modal.Dialog>
 </Modal>
 ```
@@ -99,27 +97,19 @@ const handleCloseModal = () => setOpen(false);
 
 ```ts
 interface ITransition {
-  enter: string;
-  enterFrom: string;
-  enterTo: string;
-  leave: string;
-  leaveFrom: string;
-  leaveTo: string;
+  duration?: number;
+  enter?: string;
+  exit?: string;
 }
 ```
-
-For more details on how to use, please refer to [Tailwind Headless UI Transition component](https://headlessui.dev/react/transition).
 
 The default values of `Modal.Dialog` transition prop is
 
 ```js
 transition: {
-  enter: 'ease-out duration-300',
-  enterFrom: 'opacity-0 scale-95',
-  enterTo: 'opacity-100 scale-100',
-  leave: 'ease-in duration-200',
-  leaveFrom: 'opacity-100 scale-100',
-  leaveTo: 'opacity-0 scale-95',
+  duration: 150,
+  enter: 'opacity-100',
+  exit: 'opacity-0'
 }
 ```
 
@@ -136,23 +126,19 @@ const handleCloseModal = () => setOpen(false);
 
 <Button onClick={handleOpenModal}>Open Drawer</Button>
 <Modal open={open} onClose={handleCloseModal}>
+  <Modal.Overlay />
   <Modal.Dialog
     transition={{
-      enter: "ease-out duration-300",
-      enterFrom: "translate-x-full",
-      enterTo: "translate-x-0",
-      leave: "ease-in duration-200",
-      leaveFrom: "translate-x-0",
-      leaveTo: "translate-x-full",
+      duration: 300,
+      enter: 'translate-x-0',
+      exit: 'translate-x-full',
     }}
-    className="w-80 fixed top-0 right-0 left-auto h-full translate-x-full rounded-none"
-    {/* dialog has -translate-x-1/2 tailwind class by default and this property would prevent any conflict between the default styling and the transition styling */}
-    style={{ transform: "translateX(0)" }}
+    className="w-80 fixed top-0 right-0 left-auto h-screen duration-300 translate-x-0 translate-y-0 rounded-none"
   >
     <Modal.Title onClose={handleCloseModal}>Notifications</Modal.Title>
     <div className="max-h-full p-3 space-y-6">
       <p className="text-center text-gray-400">
-        You're all set. There's no new notifications for you.
+        You{"'"}re all set. There{"'"}s no new notifications for you.
       </p>
     </div>
   </Modal.Dialog>
@@ -175,6 +161,28 @@ const handleCloseModal = () => setOpen(false);
       type: '() => any',
       description:
         '(Required). Callback fired when the component requests to be closed. The reason parameter can optionally be used to control the response to onClose.',
+    },
+  ]}
+/>
+
+### `Modal.Overlay` Props
+
+<PropsList
+  props={[
+    {
+      name: 'className',
+      type: 'string',
+    },
+    {
+      name: 'lockScroll',
+      type: 'boolean',
+      description:
+        'Whether the <body> is prevented from scrolling while the overlay is rendered. Uses a robust technique that works on iOS and handles horizontal scrolling.',
+      default: 'false',
+    },
+    {
+      name: 'transition',
+      type: 'ITransition',
     },
   ]}
 />

@@ -1,19 +1,18 @@
-import React from "react";
-import tw from "twin.macro";
-import { Dialog } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
+import { Dialog } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
+import { StyledComponentProps } from '@stitches/core/types/styled-component';
+import React from 'react';
+import tw from 'twin.macro';
 
-import Button from "../../Button";
-import { styled } from "../../../stitches.config";
+import { styled } from '../../../stitches.config';
+import Button from '../../Button';
+import ITitle from './ITitle';
 
-import ITitle from "./ITitle";
-import { StyledComponentProps } from "@stitches/core/types/styled-component";
-
-const TitleContainer: StyledComponentProps<any> = styled("header", {
+const TitleContainer: StyledComponentProps<any> = styled('header', {
   ...tw`flex items-center justify-center px-4 pt-4 pb-0 text-lg font-medium text-gray-900`,
 });
 
-const DialogTitle = styled("div", {
+const DialogTitle = styled('div', {
   ...tw`flex-1 w-full`,
 });
 
@@ -26,9 +25,7 @@ export type TitleType = React.FC<ITitle>;
 const Title: TitleType = ({ onClose, children, ...props }) => {
   return (
     <TitleContainer {...props}>
-      <Dialog.Title as={DialogTitle} className="flex-1 w-full">
-        {children}
-      </Dialog.Title>
+      <DialogTitle>{children}</DialogTitle>
       {onClose && (
         <CloseButton variant="link" color="error" onClick={onClose}>
           <XIcon />

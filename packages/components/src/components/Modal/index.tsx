@@ -1,35 +1,28 @@
-import React from "react";
-import { Transition, Dialog } from "@headlessui/react";
+import { FloatingPortal } from '@floating-ui/react-dom-interactions';
+import React from 'react';
+import tw from 'twin.macro';
 
-import IModal from "./IModal";
-
-import Overlay from "./Overlay";
-import Content, { ContentType } from "./Content";
-import Title, { TitleType } from "./Title";
-import Footer, { FooterType } from "./Footer";
+import Content, { ContentType } from './Content';
+import { ModalContext } from './Context';
+import Footer, { FooterType } from './Footer';
+import IModal from './IModal';
+import Overlay, { OverlayType } from './Overlay';
+import Title, { TitleType } from './Title';
 
 const Modal: React.FC<IModal> & {
+  Overlay: OverlayType;
   Dialog: ContentType;
   Title: TitleType;
   Footer: FooterType;
-} = ({ open, onClose, children }) => (
-  <Transition show={open} as={React.Fragment}>
-    <Dialog static open={open} onClose={onClose}>
-      <Overlay />
-      {children}
-      {/* a workround focus-trap */}
-      <button
-        style={{
-          width: "1px",
-          height: "1px",
-          position: "fixed",
-          left: "-9999px",
-        }}
-      ></button>
-    </Dialog>
-  </Transition>
-);
+} = ({ open, onClose, children }) => {
+  return (
+    <ModalContext.Provider value={{ open, onClose }}>
+      <FloatingPortal>{children}</FloatingPortal>
+    </ModalContext.Provider>
+  );
+};
 
+Modal.Overlay = Overlay;
 Modal.Dialog = Content;
 Modal.Title = Title;
 Modal.Footer = Footer;

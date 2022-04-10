@@ -4,10 +4,7 @@ export default interface IModal {
 }
 
 export interface ITransition {
-  enter: string;
-  enterFrom: string;
-  enterTo: string;
-  leave: string;
-  leaveFrom: string;
-  leaveTo: string;
+  duration?: number;
+  enter?: string;
+  exit?: string;
 }

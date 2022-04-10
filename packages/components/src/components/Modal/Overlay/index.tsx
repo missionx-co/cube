@@ -1,32 +1,31 @@
-import React from "react";
-import tw from "twin.macro";
-import { Transition, Dialog } from "@headlessui/react";
-import { styled } from "../../../stitches.config";
-import { StyledComponentType } from "@stitches/core/types/styled-component";
+import { FloatingOverlay } from '@floating-ui/react-dom-interactions';
+import { StyledComponentType } from '@stitches/core/types/styled-component';
+import React from 'react';
+import tw from 'twin.macro';
 
-import IOverlay from "./IOverlay";
-import defaultProps from "./default-props";
+import { styled } from '../../../stitches.config';
+import Transition from '../../Transition';
+import { useModalContext } from '../Context';
+import IOverlay from './IOverlay';
 
-const StyledOverlay: StyledComponentType<any> = styled(Dialog.Overlay, {
-  ...tw`bg-opacity-30 fixed inset-0 z-40 flex w-full h-full bg-black`,
+const StyledOverlay: StyledComponentType<any> = styled(FloatingOverlay, {
+  ...tw`bg-opacity-30 fixed inset-0 z-40 flex w-full h-full transition duration-150 ease-in-out bg-black`,
 });
 
-const Overlay: React.FC<IOverlay> = ({ className, transition, children }) => {
+export type OverlayType = React.FC<IOverlay>;
+
+const Overlay: OverlayType = ({ className, lockScroll, transition }) => {
+  const { open } = useModalContext();
+
   return (
-    <Transition.Child
-      as={React.Fragment}
-      enter={transition?.enter}
-      enterFrom={transition?.enterFrom}
-      enterTo={transition?.enterTo}
-      leave={transition?.leave}
-      leaveFrom={transition?.leaveFrom}
-      leaveTo={transition?.leaveTo}
-    >
-      <StyledOverlay className={className}>{children}</StyledOverlay>
-    </Transition.Child>
+    <Transition
+      show={open}
+      as={StyledOverlay}
+      lockScroll={lockScroll}
+      className={className}
+      {...transition}
+    />
   );
 };
-
-Overlay.defaultProps = defaultProps;
 
 export default Overlay;

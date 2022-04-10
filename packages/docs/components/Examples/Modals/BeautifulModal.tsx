@@ -8,10 +8,12 @@ const BeautifulModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
+
   return (
     <Example>
       <Button onClick={handleOpenModal}>Open Modal</Button>
       <Modal open={open} onClose={handleCloseModal}>
+        <Modal.Overlay />
         <Modal.Dialog className="max-w-xl">
           <Modal.Title className="text-xl text-gray-900">
             Blog released
