@@ -97,9 +97,19 @@ export const docs = [
         href: '/components/form-control',
       },
       {
+        id: 'autocomplete',
+        text: 'Autocomplete',
+        href: '/components/autocomplete',
+      },
+      {
         id: 'checkboxes',
         text: 'Checkboxes',
         href: '/components/checkboxes',
+      },
+      {
+        id: 'fancy-select',
+        text: 'Fancy Select',
+        href: '/components/fancy-select',
       },
       {
         id: 'inputs',

@@ -1,0 +1,96 @@
+import Head from 'next/head';
+
+import { Select } from '@cube/components';
+
+import Example from '@components/Example';
+import BasicUsage from '@components/Examples/Select/BasicUsage';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Select - Cube</title>
+  <meta
+    name="description"
+    content="Select components are used for collecting user provided information from a list of options"
+  />
+</Head>
+
+## Import
+
+```js
+import { Select } from '@cube/components';
+```
+
+## Usage
+
+<BasicUsage />
+
+```jsx
+const options = [
+  ...
+  id: 'three',
+    text: 'Option three',
+    disabled: true,
+  },
+  {
+    id: 'group',
+    text: 'Options group',
+    children: [
+      {
+        id: 'group-one',
+        value: 'group-one',
+        text: 'Option group - option one',
+      },
+      {
+        id: 'group-two',
+        value: 'group-two',
+        text: 'Option group - option two',
+      },
+    ],
+  },
+  ...
+];
+
+<Select placeholder="Please select an option" options={options} />
+<Select placeholder="Please select an option" options={options} disabled />
+<Select placeholder="Please select an option" options={options} error />
+```
+
+## Props
+
+The `Select` accepts any prop that a normal html `select` can have. Plus the `error` prop.
+
+<PropsList
+  props={[
+    {
+      name: 'error',
+      type: 'boolean',
+      description: 'Indicates if input field has an invalid state.',
+      default: 'false',
+    },
+    {
+      name: 'options',
+      type: 'Option[]',
+    },
+  ]}
+/>
+
+```jsx
+export interface Option {
+  id: Key;
+  text: string;
+  disabled?: boolean;
+  children?: Option[];
+}
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="Select"
+    page="select"
+    description="Select components are used for collecting user provided information from a list of options."
+  >
+    {children}
+  </MDXPage>
+);
