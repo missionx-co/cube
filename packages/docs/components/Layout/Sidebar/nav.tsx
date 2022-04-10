@@ -76,11 +76,6 @@ export const docs = [
         href: '/components/pagination',
       },
       {
-        id: 'progress-indicators',
-        text: 'Progress indicators',
-        href: '/components/progress-indicators',
-      },
-      {
         id: 'tables',
         text: 'Tables',
         href: '/components/tables',
@@ -130,11 +125,6 @@ export const docs = [
         id: 'switch',
         text: 'Switch',
         href: '/components/switch',
-      },
-      {
-        id: 'sliders',
-        text: 'Sliders',
-        href: '/components/sliders',
       },
     ],
   },
