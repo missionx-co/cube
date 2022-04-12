@@ -1,0 +1,199 @@
+import Head from 'next/head';
+
+import { Avatar } from '@cube/components';
+
+import Example from '@components/Example';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Avatar - Cube</title>
+  <meta
+    name="description"
+    content="Avatars are found throughout material design with uses in everything from tables to dialog menus."
+  />
+</Head>
+
+## Import
+
+```js
+import { Avatar } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+  <Avatar
+    alt="Mohammed Manssour"
+    name="Mohammed Manssour"
+    subtext="hello@mohammedmanssour.me"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+
+  <Avatar
+    name="Mohammed Manssour"
+    subtext="hello@mohammedmanssour.me"
+    alternativeNode="MM"
+  />
+</Example>
+
+```jsx
+<Avatar
+  alt="Mohammed Manssour"
+  name="Mohammed Manssour"
+  subtext="hello@mohammedmanssour.me"
+  image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+/>
+
+<Avatar
+    name="Mohammed Manssour"
+    subtext="hello@mohammedmanssour.me"
+    alternativeNode="MM"
+  />
+```
+
+## Size
+
+Use the `area` prop to change the size of the `Avatar` component.
+
+<Example>
+  <Avatar
+    area="sm"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="base"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="lg"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="xl"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+</Example>
+
+```jsx /area/
+<Example>
+  <Avatar
+    area="sm"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="base"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="lg"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+  <Avatar
+    area="xl"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  />
+</Example>
+```
+
+## Customization
+
+use `classes` prop to pass css classes to the different elements of the `Avatar` component.
+
+<Example>
+  <Avatar
+    area="xl"
+    alt="Mohammed Manssour"
+    name="Mohammed Manssour"
+    subtext="hello@mohammedmanssour.me"
+    image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    classNames={{
+      containerClassName:
+        'border border-primary-200 p-2 rounded-lg hover:bg-primary-50 cursor-pointer',
+      avatarClassName: 'border-8 border-primary-200',
+      userNameClassName: 'text-primary-500',
+    }}
+  />
+</Example>
+
+```jsx /classNames/
+<Avatar
+  area="xl"
+  alt="Mohammed Manssour"
+  name="Mohammed Manssour"
+  subtext="hello@mohammedmanssour.me"
+  image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  classNames={{
+    containerClassName:
+      'border border-primary-200 p-2 rounded-lg hover:bg-primary-50 cursor-pointer',
+    avatarClassName: 'border-8 border-primary-200',
+    userNameClassName: 'text-primary-500',
+  }}
+/>
+```
+
+## Props
+
+The `Input` accepts any prop that a normal html `input` can have. Plus the `error` prop.
+
+<PropsList
+  props={[
+    {
+      name: 'area',
+      type: litteral(['sm', 'base', 'lg', 'xl', 'xl']),
+      description: '(Optional). The size of the avatar.',
+      default: 'base',
+    },
+    {
+      name: 'image',
+      type: 'string',
+      description: '(Optional). Image url.',
+    },
+    {
+      name: 'alt',
+      type: 'string',
+      description:
+        '(Optional). Used in combination with image prop to provide an alt attribute for the rendered img element.',
+    },
+    {
+      name: 'name',
+      type: 'ReactNode',
+    },
+    {
+      name: 'subtext',
+      type: 'ReactNode',
+    },
+    {
+      name: 'alternativeNode',
+      type: 'ReactNode',
+      description:
+        '(Optional). React node to be used in case image prop was not provided.',
+    },
+    {
+      name: 'classes',
+      type: 'AvatarClasses',
+      description:
+        '(Optional). Override or extend the styles applied to the different elements of the Avatar.',
+    },
+  ]}
+/>
+```ts
+interface AvatarClasses{
+    containerClassName?: string;
+    avatarClassName?: string;
+    userInfoClassName?: string;
+    userNameClassName?: string;
+    userSubtextClassName?: string;
+  }
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="Avatar"
+    page="avatars"
+    description="Avatars are found throughout material design with uses in everything from tables to dialog menus."
+  >
+    {children}
+  </MDXPage>
+);
