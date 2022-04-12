@@ -17,4 +17,5 @@ export { default as Input } from './components/Input';
 export { default as Radio } from './components/Radio';
 export { default as Select } from './components/Select';
 export { default as FancySelect } from './components/FancySelect';
+export { default as FancySelect2 } from './components/FancySelect2';
 export { default as Switch } from './components/Switch';

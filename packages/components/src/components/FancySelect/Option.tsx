@@ -1,8 +1,9 @@
-import React, { FC, forwardRef, HTMLProps } from "react";
-import tw from "twin.macro";
-import { styled } from "../../stitches.config";
-import ForwardedComponent from "../../SharedType/ForwardedComponent";
-import { StyledComponentType } from "@stitches/core/types/styled-component";
+import { StyledComponentType } from '@stitches/core/types/styled-component';
+import React, { FC, HTMLProps, forwardRef } from 'react';
+import tw from 'twin.macro';
+
+import ForwardedComponent from '../../SharedType/ForwardedComponent';
+import { styled } from '../../stitches.config';
 
 interface IOption extends HTMLProps<HTMLLIElement> {
   active: boolean;
@@ -12,7 +13,7 @@ interface IOption extends HTMLProps<HTMLLIElement> {
 
 export type OptionType = ForwardedComponent<IOption, HTMLLIElement>;
 
-const OptionLI: StyledComponentType<any> = styled("li", {
+const OptionLI: StyledComponentType<any> = styled('li', {
   ...tw`flex flex-row justify-between px-4 py-2`,
   variants: {
     active: {
@@ -47,7 +48,7 @@ const Option: OptionType = forwardRef(
     >
       {children}
     </OptionLI>
-  )
+  ),
 );
 
 export default Option;

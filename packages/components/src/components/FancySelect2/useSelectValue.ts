@@ -1,18 +1,19 @@
-import { Key, useState } from 'react';
+import { Key, useState } from "react";
 
-const useSelectValue = <T = Key>({
+const useSelectValue = ({
   value,
   defaultValue,
   onChange,
 }: {
-  value: T;
-  defaultValue: T;
-  onChange?: (value: T) => any;
+  value?: Key;
+  defaultValue?: Key;
+  onChange?: (value?: Key) => any;
 }) => {
-  const [internalSelectValue, updateInternalSelectValue] =
-    useState<T>(defaultValue);
+  const [internalSelectValue, updateInternalSelectValue] = useState<
+    Key | undefined
+  >(defaultValue ?? undefined);
 
-  const handleChange = (key: T) => {
+  const handleChange = (key?: Key) => {
     // if controlled
     if (value !== undefined) {
       onChange && onChange(key);
