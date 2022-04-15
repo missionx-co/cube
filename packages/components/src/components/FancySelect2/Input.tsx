@@ -5,14 +5,9 @@ import tw from 'twin.macro';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import { styled } from '../../stitches.config';
-import { sharedProps } from './IFancySelect';
+import { ISelectInput } from './IFancySelect';
 
-interface IInput extends sharedProps, HTMLProps<HTMLButtonElement> {
-  className?: string;
-  error?: boolean;
-}
-
-export type InputType = ForwardedComponent<IInput, HTMLButtonElement>;
+export type InputType = ForwardedComponent<ISelectInput, HTMLButtonElement>;
 
 const ListBoxButton: StyledComponentType<any> = styled('button', {
   ...tw`px-3.5 py-2.5 focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed flex flex-row items-center justify-between w-full text-gray-900 border rounded-lg`,

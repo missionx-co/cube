@@ -28,7 +28,7 @@ const AvatarContainer = styled('div', {
   },
 });
 
-const UserTextContainer = styled('div', tw`flex flex-col`);
+const UserTextContainer = styled('div', tw`flex flex-col items-start`);
 
 const NameContainer = styled('div', {
   ...tw`font-medium text-gray-700`,

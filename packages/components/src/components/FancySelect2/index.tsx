@@ -17,6 +17,7 @@ import { SelectorIcon } from '@heroicons/react/outline';
 import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, {
   FC,
+  Fragment,
   ReactNode,
   useEffect,
   useLayoutEffect,
@@ -27,18 +28,20 @@ import React, {
 import tw from 'twin.macro';
 
 import { styled } from '../../stitches.config';
-import { getClassName } from '../../utils';
 import useSelectValue from '../FancySelect/useSelectValue';
-import Transition from '../Transition';
-import IFancySelect, { Option as IOption } from './IFancySelect';
-import Input from './Input';
-import Option from './Option';
+import IFancySelect, {
+  Option as IOption,
+  OptionGroupRenderer,
+  OptionRenderer,
+} from './IFancySelect';
+import Input, { InputType } from './Input';
+import Option, { OptionLI } from './Option';
 import { SelectContext } from './SelectContext';
 import { usePrevious } from './hooks';
 import { flattenOptions } from './utils';
 
 const Container = styled(FloatingOverlay, {
-  ...tw`relative w-full transition duration-150 ease-in-out`,
+  ...tw`relative w-full`,
 });
 
 const SelectorIconContainer = styled('span', {
@@ -49,28 +52,38 @@ const OptionsList: StyledComponentType<any> = styled('div', {
   ...tw`max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm shadow-base absolute w-full overflow-auto bg-white border border-gray-300 rounded-md`,
 });
 
+const OptionsGroupTitle: StyledComponentType<any> = styled(
+  'span',
+  tw`px-4 py-2 text-sm text-gray-300`,
+);
+
 function renderOptions(
   options: IOption[],
   selectedIndex: number,
   activeIndex: number | null,
+  optionGroupRenderer?: OptionGroupRenderer,
+  optionRenderer?: OptionRenderer,
 ): ReactNode[] {
   let optionIndex = 0;
   const renderOptions: ReactNode[] = [];
   for (let option of options) {
     if (option.children && option.children.length) {
+      const groupOptionTitleProps = {
+        role: 'presentation',
+        id: `floating-ui-select-${option.id}`,
+        'aria-hidden': true,
+      };
+
       renderOptions.push(
-        <ul
-          key={option.id}
-          role="group"
-          aria-labelledby={`floating-ui-select-${option.id}`}
-        >
-          <li
-            role="presentation"
-            id={`floating-ui-select-${option.id}`}
-            aria-hidden="true"
-          >
-            {option.text ?? option.value}
-          </li>
+        <Fragment>
+          {optionGroupRenderer ? (
+            optionGroupRenderer(option, groupOptionTitleProps)
+          ) : (
+            <OptionsGroupTitle role="presentation" aria-hidden="true">
+              - {option.text ?? option.value}
+            </OptionsGroupTitle>
+          )}
+
           {option.children.map((optionChild) => {
             const index = optionIndex++;
             const renderedOption = (
@@ -78,10 +91,9 @@ function renderOptions(
                 key={optionChild.id}
                 active={activeIndex === index}
                 selected={selectedIndex === index}
-                disabled={Boolean(optionChild.disabled)}
                 index={index}
-                value={optionChild.value}
-                id={optionChild.id}
+                option={optionChild}
+                optionRenderer={optionRenderer}
               >
                 {optionChild.text ?? optionChild.value}
               </Option>
@@ -89,7 +101,7 @@ function renderOptions(
 
             return renderedOption;
           })}
-        </ul>,
+        </Fragment>,
       );
       continue;
     }
@@ -100,10 +112,9 @@ function renderOptions(
         key={option.id}
         active={activeIndex === index}
         selected={selectedIndex === index}
-        disabled={Boolean(option.disabled)}
         index={index}
-        value={option.value}
-        id={option.id}
+        option={option}
+        optionRenderer={optionRenderer}
       >
         {option.text ?? option.value}
       </Option>,
@@ -112,7 +123,11 @@ function renderOptions(
   return renderOptions;
 }
 
-const FancySelect: FC<IFancySelect> = ({
+const FancySelect: FC<IFancySelect> & {
+  Input: InputType;
+  OptionsGroupTitle: StyledComponentType<any>;
+  Option: StyledComponentType<any>;
+} = ({
   options,
   placeholder,
   value,
@@ -121,6 +136,7 @@ const FancySelect: FC<IFancySelect> = ({
   inputRenderer,
   disabled,
   error,
+  optionGroupRenderer,
   optionRenderer,
 }) => {
   const { value: selected, onChange: onSelectedChange } = useSelectValue<
@@ -205,6 +221,7 @@ const FancySelect: FC<IFancySelect> = ({
     }
   }, [refs.reference, refs.floating, open, update]);
 
+  //focus on the first non-disabled element in case no item is selected
   useEffect(() => {
     if (!open || selectedIndex !== -1) {
       return;
@@ -224,29 +241,34 @@ const FancySelect: FC<IFancySelect> = ({
   useLayoutEffect(() => {
     const floating = floatingRef.current;
 
-    if (open && controlledScrolling && floating) {
-      const item =
-        activeIndex != null
-          ? listItemsRef.current[activeIndex]
-          : selectedIndex != null
-          ? listItemsRef.current[selectedIndex]
-          : null;
+    if (!open || !controlledScrolling || !floating) {
+      return;
+    }
 
-      if (item && prevActiveIndex != null) {
-        const itemHeight =
-          listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
+    const item =
+      activeIndex != null
+        ? listItemsRef.current[activeIndex]
+        : selectedIndex != null
+        ? listItemsRef.current[selectedIndex]
+        : null;
 
-        const floatingHeight = floating.offsetHeight;
-        const top = item.offsetTop;
-        const bottom = top + itemHeight;
+    if (!item || prevActiveIndex == null) {
+      return;
+    }
 
-        if (top < floating.scrollTop) {
-          floating.scrollTop -= floating.scrollTop - top + 5;
-        } else if (bottom > floatingHeight + floating.scrollTop) {
-          floating.scrollTop +=
-            bottom - floatingHeight - floating.scrollTop + 5;
-        }
-      }
+    const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
+
+    const floatingHeight = floating.offsetHeight;
+    const top = item.offsetTop;
+    const bottom = top + itemHeight;
+
+    if (top < floating.scrollTop) {
+      floating.scrollTop -= floating.scrollTop - top + 5;
+      return;
+    }
+
+    if (bottom > floatingHeight + floating.scrollTop) {
+      floating.scrollTop += bottom - floatingHeight - floating.scrollTop + 5;
     }
   }, [open, controlledScrolling, prevActiveIndex, activeIndex]);
 
@@ -270,6 +292,14 @@ const FancySelect: FC<IFancySelect> = ({
     middlewareData,
   ]);
 
+  const selectInputProps = {
+    disabled,
+    error,
+    ...getReferenceProps({
+      ref: reference,
+    }),
+  };
+
   return (
     <SelectContext.Provider
       value={{
@@ -283,25 +313,28 @@ const FancySelect: FC<IFancySelect> = ({
         getItemProps,
       }}
     >
-      <Input
-        disabled={disabled}
-        error={error}
-        {...getReferenceProps({
-          ref: reference,
-        })}
-      >
-        <span>
-          {selectedIndex === -1
-            ? placeholder
-            : flattenedOptions[selectedIndex].text ??
-              flattenedOptions[selectedIndex].value}
-        </span>
-        <SelectorIconContainer>
-          <SelectorIcon />
-        </SelectorIconContainer>
-      </Input>
+      {inputRenderer ? (
+        inputRenderer({
+          ...selectInputProps,
+          option:
+            selectedIndex !== -1 ? flattenedOptions[selectedIndex] : undefined,
+        })
+      ) : (
+        <Input {...selectInputProps}>
+          <span>
+            {selectedIndex === -1
+              ? placeholder
+              : flattenedOptions[selectedIndex].text ??
+                flattenedOptions[selectedIndex].value}
+          </span>
+          <SelectorIconContainer>
+            <SelectorIcon />
+          </SelectorIconContainer>
+        </Input>
+      )}
+
       {open && (
-        <FloatingOverlay>
+        <Container lockScroll>
           <OptionsList
             {...getFloatingProps({
               ref: floating,
@@ -322,9 +355,15 @@ const FancySelect: FC<IFancySelect> = ({
               },
             })}
           >
-            {renderOptions(options, selectedIndex, activeIndex)}
+            {renderOptions(
+              options,
+              selectedIndex,
+              activeIndex,
+              optionGroupRenderer,
+              optionRenderer,
+            )}
           </OptionsList>
-        </FloatingOverlay>
+        </Container>
       )}
     </SelectContext.Provider>
   );
@@ -334,5 +373,9 @@ FancySelect.defaultProps = {
   placeholder: 'Please select....',
   onChange: (_: string | undefined) => {},
 };
+
+FancySelect.OptionsGroupTitle = OptionsGroupTitle;
+FancySelect.Option = OptionLI;
+FancySelect.Input = Input;
 
 export default FancySelect;

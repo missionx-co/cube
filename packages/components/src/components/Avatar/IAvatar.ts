@@ -4,7 +4,7 @@ export default interface IAvatar {
   image?: string;
   alt?: string;
   alternativeNode?: ReactNode;
-  area: 'sm' | 'base' | 'lg' | 'xl';
+  area?: 'sm' | 'base' | 'lg' | 'xl';
   name?: ReactNode;
   subtext?: ReactNode;
   classNames?: {

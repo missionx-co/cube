@@ -1,24 +1,25 @@
 import { CheckIcon } from '@heroicons/react/outline';
 import { StyledComponentType } from '@stitches/core/types/styled-component';
-import React, { FC, HTMLProps, Key, forwardRef } from 'react';
+import React, { FC, Fragment, HTMLProps, Key, forwardRef } from 'react';
 import tw from 'twin.macro';
 
 import { styled } from '../../stitches.config';
+import { Option as OptionModal, OptionRenderer } from './IFancySelect';
 import { useSelectContext } from './SelectContext';
 
 const CheckIconContainer = styled('span', tw`flex items-center w-5 h-5`);
 
 interface IOption extends HTMLProps<HTMLLIElement> {
-  value: string;
+  option: OptionModal;
   index: number;
   active: boolean;
   selected: boolean;
-  disabled: boolean;
+  optionRenderer?: OptionRenderer;
 }
 
 export type OptionType = FC<IOption>;
 
-const OptionLI: StyledComponentType<any> = styled('li', {
+export const OptionLI: StyledComponentType<any> = styled('li', {
   ...tw`flex flex-row justify-between px-4 py-2`,
   variants: {
     active: {
@@ -44,12 +45,11 @@ const OptionLI: StyledComponentType<any> = styled('li', {
 
 export const Option: FC<IOption> = ({
   children,
-  id,
   index,
   active,
   selected,
-  disabled,
-  value,
+  option,
+  optionRenderer,
   ...props
 }) => {
   const {
@@ -57,17 +57,16 @@ export const Option: FC<IOption> = ({
     listRef,
     setOpen,
     onChange,
-    activeIndex,
     setActiveIndex,
     getItemProps,
   } = useSelectContext();
 
   function handleSelect() {
-    if (disabled) {
+    if (option.disabled) {
       return;
     }
     setSelectedIndex(index);
-    onChange(value as string);
+    onChange(option.value as string);
     setOpen(false);
     setActiveIndex(null);
   }
@@ -82,25 +81,31 @@ export const Option: FC<IOption> = ({
     }
   }
 
+  const optionProps = {
+    disabled: option.disabled,
+    active,
+    selected,
+    role: 'option',
+    ref: (node: any) => {
+      listRef.current[index] = node;
+    },
+    tabIndex: active ? 0 : 1,
+    'aria-selected': active && selected,
+    'aria-disabled': option.disabled,
+    'data-selected': option.disabled,
+    ...getItemProps({
+      onClick: handleSelect,
+      onKeyDown: handleKeyDown,
+    }),
+    ...props,
+  };
+
+  if (optionRenderer) {
+    return <Fragment>{optionRenderer(option, optionProps)}</Fragment>;
+  }
+
   return (
-    <OptionLI
-      disabled={disabled}
-      active={active}
-      selected={selected}
-      role={'option'}
-      ref={(node: any) => {
-        listRef.current[index] = node;
-      }}
-      tabIndex={active ? 0 : 1}
-      aria-selected={active && selected}
-      aria-disabled={disabled}
-      data-selected={selected}
-      {...getItemProps({
-        onClick: handleSelect,
-        onKeyDown: handleKeyDown,
-      })}
-      {...props}
-    >
+    <OptionLI {...optionProps}>
       {children}
       {selected && (
         <CheckIconContainer>

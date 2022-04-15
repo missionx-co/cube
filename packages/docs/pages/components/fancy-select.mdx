@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { FancySelect2, Input } from '@cube/components';
 
 import Example from '@components/Example';
+import FancySelectCustomization from '@components/Examples/Select/FancySelectCustomization';
 import { litteral } from '@components/Examples/utils';
 import MDXPage from '@components/Layout/MDXPage';
 import PropsList from '@components/PropsList';
@@ -27,40 +28,40 @@ import { FancySelect2 } from '@cube/components';
   <FancySelect2
     options={[
       {
-        id: '1',
-        value: '1',
-        text: 'One',
+        id: 'asia',
+        value: 'asia',
+        text: 'Asia',
       },
       {
-        id: '2',
-        value: '2',
-        text: 'Two',
+        id: 'afria',
+        value: 'afria',
+        text: 'Africa',
       },
       {
-        id: '3',
-        value: '3',
-        text: 'Three',
+        id: 'europe',
+        value: 'europe',
+        text: 'Europe',
         disabled: true,
       },
       {
-        id: '4',
-        value: '4',
-        text: 'Four',
+        id: 'americas',
+        value: 'americas',
+        text: 'Americas',
         children: [
           {
-            id: '4-1',
-            value: '4-1',
-            text: 'One',
+            id: 'north-america',
+            value: 'north-america',
+            text: 'North America',
           },
           {
-            id: '4-2',
-            value: '4-2',
-            text: 'Two',
+            id: 'middle-america',
+            value: 'middle-america',
+            text: 'Middle America',
           },
           {
-            id: '4-3',
-            value: '4-3',
-            text: 'Three',
+            id: 'south-america',
+            value: 'south-america',
+            text: 'South America',
           },
         ],
       },
@@ -69,37 +70,114 @@ import { FancySelect2 } from '@cube/components';
 </Example>
 
 ```jsx
-<Input placeholder="jhon.doe@example.com" />
-
-<Input placeholder="jhon.doe@example.com" disabled />
+<FancySelect
+  options={[
+    {
+      id: 'asia',
+      value: 'asia',
+      text: 'Asia',
+    },
+    {
+      id: 'afria',
+      value: 'afria',
+      text: 'Africa',
+    },
+    {
+      id: 'europe',
+      value: 'europe',
+      text: 'Europe',
+      disabled: true,
+    },
+    {
+      id: 'americas',
+      value: 'americas',
+      text: 'Americas',
+      children: [
+        {
+          id: 'north-america',
+          value: 'north-america',
+          text: 'North America',
+        },
+        {
+          id: 'middle-america',
+          value: 'middle-america',
+          text: 'Middle America',
+        },
+        {
+          id: 'south-america',
+          value: 'south-america',
+          text: 'South America',
+        },
+      ],
+    },
+  ]}
+/>
 ```
 
 ## Customization
 
 use `className` property to pass css classes to customize the `Input` component however you want.
 
-<Example>
-  <div className="flex w-96">
-    <span className="px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-l-lg">
-      https://
-    </span>
-    <Input
-      placeholder="mohammedmanssour.me"
-      className="border-l-0 rounded-l-none"
-    />
-  </div>
-</Example>
+<FancySelectCustomization />
 
 ```jsx
-<div className="flex w-96">
-  <span className="px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-l-lg">
-    https://
-  </span>
-  <Input
-    placeholder="mohammedmanssour.me"
-    className="border-l-0 rounded-l-none"
-  />
-</div>
+const people = [
+  ...
+  {
+    id: '@redington',
+    value: '@redington',
+    avatar:
+      'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    text: 'Wade Redington',
+    username: '@redington',
+  },
+  ...
+];
+
+<FancySelect
+  placeholder="Please select a user account"
+  options={people}
+  inputRenderer={({ option, ref, ...props }) => {
+    const selected = option as any;
+    return (
+      <FancySelect.Input
+        ref={ref as any}
+        {...props}
+      >
+        {selected ? (
+          <Avatar
+            image={selected.avatar}
+            alt={selected.text}
+            name={selected.text}
+            subtext={selected.username}
+          />
+        ) : (
+          <Avatar
+            alt="Select a user"
+            name="Select a user"
+            subtext="Select a user from the available users list"
+          />
+        )}
+      </FancySelect.Input>
+    );
+  }}
+  optionRenderer={(option, props) => {
+    const person = option as any;
+    return (
+      <FancySelect.Option
+        {...props}
+        className="justify-start space-x-3 border border-gray-200 border-dotted"
+      >
+        <Avatar
+          image={person.avatar}
+          alt={person.text}
+          name={person.text}
+          subtext={person.username}
+        />
+      </FancySelect.Option>
+    );
+  }}
+/>
 ```
 
 ## Props

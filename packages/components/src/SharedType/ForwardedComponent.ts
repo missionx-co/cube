@@ -1,8 +1,9 @@
 import {
   ForwardRefExoticComponent,
+  LegacyRef,
   PropsWithoutRef,
   RefAttributes,
-} from "react";
+} from 'react';
 
 export default interface ForwardedComponent<Props, Ref>
   extends ForwardRefExoticComponent<
