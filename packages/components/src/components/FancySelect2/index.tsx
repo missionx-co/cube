@@ -58,7 +58,7 @@ const OptionsGroupTitle: StyledComponentType<any> = styled(
 );
 
 function renderOptions(
-  options: IOption[],
+  options: (IOption & { presentation?: boolean })[],
   selectedIndex: number,
   activeIndex: number | null,
   optionGroupRenderer?: OptionGroupRenderer,
@@ -67,42 +67,23 @@ function renderOptions(
   let optionIndex = 0;
   const renderOptions: ReactNode[] = [];
   for (let option of options) {
-    if (option.children && option.children.length) {
+    if (option.presentation) {
       const groupOptionTitleProps = {
+        key: option.id,
         role: 'presentation',
-        id: `floating-ui-select-${option.id}`,
         'aria-hidden': true,
       };
 
       renderOptions.push(
-        <Fragment>
-          {optionGroupRenderer ? (
-            optionGroupRenderer(option, groupOptionTitleProps)
-          ) : (
-            <OptionsGroupTitle role="presentation" aria-hidden="true">
-              - {option.text ?? option.value}
-            </OptionsGroupTitle>
-          )}
-
-          {option.children.map((optionChild) => {
-            const index = optionIndex++;
-            const renderedOption = (
-              <Option
-                key={optionChild.id}
-                active={activeIndex === index}
-                selected={selectedIndex === index}
-                index={index}
-                option={optionChild}
-                optionRenderer={optionRenderer}
-              >
-                {optionChild.text ?? optionChild.value}
-              </Option>
-            );
-
-            return renderedOption;
-          })}
-        </Fragment>,
+        optionGroupRenderer ? (
+          optionGroupRenderer(option, groupOptionTitleProps)
+        ) : (
+          <OptionsGroupTitle {...groupOptionTitleProps}>
+            - {option.text ?? option.value}
+          </OptionsGroupTitle>
+        ),
       );
+
       continue;
     }
 
@@ -356,7 +337,7 @@ const FancySelect: FC<IFancySelect> & {
             })}
           >
             {renderOptions(
-              options,
+              flattenedOptions,
               selectedIndex,
               activeIndex,
               optionGroupRenderer,

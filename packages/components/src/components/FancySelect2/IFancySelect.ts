@@ -40,8 +40,8 @@ export type OptionRenderer = (
 export type OptionGroupRenderer = (
   option: Option,
   props: {
+    key: string;
     role: string;
-    id: string;
     'aria-hidden': boolean;
   },
 ) => ReactNode;
