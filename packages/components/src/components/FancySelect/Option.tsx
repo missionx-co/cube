@@ -24,12 +24,12 @@ export const OptionLI: StyledComponentType<any> = styled('li', {
   variants: {
     active: {
       true: {
-        ...tw`bg-gray-50`,
+        ...tw`bg-gray-100`,
       },
     },
     selected: {
       true: {
-        ...tw`bg-gray-50`,
+        ...tw`bg-primary-100`,
       },
     },
     disabled: {

@@ -64,7 +64,7 @@ function renderOptions(
   return options.map((option) => {
     if (option.presentation) {
       const groupOptionTitleProps = {
-        key: option.id,
+        key: option.value,
         role: 'presentation',
         'aria-hidden': true,
       };
@@ -80,7 +80,7 @@ function renderOptions(
 
     return (
       <Option
-        key={option.id}
+        key={option.value}
         active={activeIndex === option.index}
         selected={selectedIndex === option.index}
         index={option.index as number}
@@ -121,13 +121,27 @@ const FancySelect: FC<IFancySelect> & {
     () => flattenOptionsAndAddIndex(options),
     [options],
   );
-  const indexIdParis = useMemo(
-    () => flattenedOptions.map((option) => option.id),
-    [options],
-  );
+
+  const pairs = useMemo(() => {
+    const pairs = {
+      optionIndexToValue: [] as string[],
+      optionIndexToIndex: [] as number[],
+    };
+
+    for (let index = 0; index < flattenedOptions.length; index++) {
+      const option = flattenedOptions[index];
+      if (option.presentation) {
+        continue;
+      }
+      pairs.optionIndexToValue[option.index as number] = option.value;
+      pairs.optionIndexToIndex[option.index as number] = index;
+    }
+
+    return pairs;
+  }, [flattenedOptions]);
 
   const listItemsRef = useRef<Array<HTMLLIElement | null>>([]);
-  const listContentRef = useRef(indexIdParis);
+  const listContentRef = useRef(pairs.optionIndexToValue);
 
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -290,15 +304,18 @@ const FancySelect: FC<IFancySelect> & {
         inputRenderer({
           ...selectInputProps,
           option:
-            selectedIndex !== -1 ? flattenedOptions[selectedIndex] : undefined,
+            selectedIndex !== -1
+              ? flattenedOptions[pairs.optionIndexToIndex[selectedIndex]]
+              : undefined,
         })
       ) : (
         <Input {...selectInputProps}>
           <span>
             {selectedIndex === -1
               ? placeholder
-              : flattenedOptions[selectedIndex].text ??
-                flattenedOptions[selectedIndex].value}
+              : flattenedOptions[pairs.optionIndexToIndex[selectedIndex]]
+                  .text ??
+                flattenedOptions[pairs.optionIndexToIndex[selectedIndex]].value}
           </span>
           <SelectorIconContainer>
             <SelectorIcon />

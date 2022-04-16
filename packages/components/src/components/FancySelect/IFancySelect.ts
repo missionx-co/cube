@@ -1,7 +1,6 @@
 import { HTMLProps, LegacyRef, ReactNode } from 'react';
 
 export interface Option {
-  id: string;
   value: string;
   text?: ReactNode;
   disabled?: boolean;
