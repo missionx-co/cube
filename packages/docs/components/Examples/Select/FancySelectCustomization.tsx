@@ -4,7 +4,7 @@ import { Avatar, FancySelect } from '@cube/components';
 
 import Example from '@components/Example';
 
-const people = [
+export const people = [
   {
     value: '@gilberto_miguel',
     avatar:

@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import CodeSnippet from './CodeSnippet';
-
 interface IExample {}
 
 const Example: FC<IExample> = ({ children }) => (
