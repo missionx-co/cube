@@ -61,8 +61,7 @@ function renderOptions(
   optionGroupRenderer?: OptionGroupRenderer,
   optionRenderer?: OptionRenderer,
 ): ReactNode[] {
-  const renderOptions: ReactNode[] = [];
-  for (let option of options) {
+  return options.map((option) => {
     if (option.presentation) {
       const groupOptionTitleProps = {
         key: option.id,
@@ -70,34 +69,28 @@ function renderOptions(
         'aria-hidden': true,
       };
 
-      renderOptions.push(
-        optionGroupRenderer ? (
-          optionGroupRenderer(option, groupOptionTitleProps)
-        ) : (
-          <OptionsGroupTitle {...groupOptionTitleProps}>
-            - {option.text ?? option.value}
-          </OptionsGroupTitle>
-        ),
+      return optionGroupRenderer ? (
+        optionGroupRenderer(option, groupOptionTitleProps)
+      ) : (
+        <OptionsGroupTitle {...groupOptionTitleProps}>
+          - {option.text ?? option.value}
+        </OptionsGroupTitle>
       );
-
-      continue;
     }
 
-    const index = option.index as number;
-    renderOptions.push(
+    return (
       <Option
         key={option.id}
-        active={activeIndex === index}
-        selected={selectedIndex === index}
-        index={index}
+        active={activeIndex === option.index}
+        selected={selectedIndex === option.index}
+        index={option.index as number}
         option={option}
         optionRenderer={optionRenderer}
       >
         {option.text ?? option.value}
-      </Option>,
+      </Option>
     );
-  }
-  return renderOptions;
+  });
 }
 
 const FancySelect: FC<IFancySelect> & {
