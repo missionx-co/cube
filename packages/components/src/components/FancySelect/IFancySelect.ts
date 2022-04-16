@@ -1,26 +1,62 @@
-import { Key, ReactNode, LegacyRef } from "react";
-import { Option } from "../Select/ISelect";
+import { HTMLProps, LegacyRef, ReactNode } from 'react';
 
-export type FancySelectOption = Omit<Option, "children">;
+export interface Option {
+  id: string;
+  value: string;
+  text?: ReactNode;
+  disabled?: boolean;
+  children?: Option[];
+}
 
-export interface sharedProps {
+export type ProcessedOption = Option & {
+  presentation?: boolean;
+  index?: number;
+};
+
+export interface SharedProps {
   placeholder?: string;
   disabled?: boolean;
   error?: boolean;
 }
 
-export default interface IFancySelect extends sharedProps {
-  options: FancySelectOption[];
-  value?: Key;
-  defaultValue?: Key;
-  onChange?: (option?: Key) => any;
-  inputRenderer?: (
-    props: sharedProps & { selected?: FancySelectOption; ref: LegacyRef<any> }
-  ) => ReactNode;
-  optionRenderer?: (props: {
+export interface ISelectInput
+  extends SharedProps,
+    HTMLProps<HTMLButtonElement> {
+  error?: boolean;
+}
+
+export type OptionRenderer = (
+  option: Option,
+  props: {
     active: boolean;
     disabled: boolean;
     selected: boolean;
-    option: FancySelectOption;
-  }) => ReactNode;
+    role: string;
+    ref: LegacyRef<any>;
+    tabIndex: number;
+    'aria-selected': boolean;
+    'aria-disabled': boolean;
+    'data-disabled': boolean;
+    onClick: () => any;
+    onKeyDown: () => any;
+  },
+) => ReactNode;
+
+export type OptionGroupRenderer = (
+  option: Option,
+  props: {
+    key: string;
+    role: string;
+    'aria-hidden': boolean;
+  },
+) => ReactNode;
+
+export default interface IFancySelect extends SharedProps {
+  options: Option[];
+  value?: string;
+  defaultValue?: string;
+  onChange?: (option?: string) => any;
+  inputRenderer?: (props: ISelectInput & { option?: Option }) => ReactNode;
+  optionGroupRenderer?: OptionGroupRenderer;
+  optionRenderer?: OptionRenderer;
 }
