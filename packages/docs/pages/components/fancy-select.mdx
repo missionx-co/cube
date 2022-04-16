@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { FancySelect2, Input } from '@cube/components';
+import { FancySelect, Input } from '@cube/components';
 
 import Example from '@components/Example';
 import FancySelectCustomization from '@components/Examples/Select/FancySelectCustomization';
@@ -12,20 +12,20 @@ import PropsList from '@components/PropsList';
   <title>Fancy Select - Cube</title>
   <meta
     name="description"
-    content="A custom select component that provides better design supported with react-virtualized to render large options lists."
+    content="A custom select component that provides better design."
   />
 </Head>
 
 ## Import
 
 ```js
-import { FancySelect2 } from '@cube/components';
+import { FancySelect } from '@cube/components';
 ```
 
 ## Usage
 
 <Example>
-  <FancySelect2
+  <FancySelect
     options={[
       {
         id: 'asia',
@@ -199,7 +199,7 @@ export default ({ children }) => (
   <MDXPage
     title="Fancy Select"
     page="fancy-select"
-    description="A custom select component that provides better design supported with react-virtualized to render large options lists."
+    description="A custom select component that provides better design."
   >
     {children}
   </MDXPage>

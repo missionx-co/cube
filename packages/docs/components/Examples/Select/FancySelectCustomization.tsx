@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Avatar, FancySelect2 } from '@cube/components';
+import { Avatar, FancySelect } from '@cube/components';
 
 import Example from '@components/Example';
 
@@ -57,13 +57,13 @@ const people = [
 
 const FancySelectCustomization: FC = () => (
   <Example>
-    <FancySelect2
+    <FancySelect
       placeholder="Please select a user account"
       options={people}
       inputRenderer={({ option, ref, ...props }) => {
         const selected = option as any;
         return (
-          <FancySelect2.Input ref={ref as any} {...props}>
+          <FancySelect.Input ref={ref as any} {...props}>
             {selected ? (
               <Avatar
                 image={selected.avatar}
@@ -78,13 +78,13 @@ const FancySelectCustomization: FC = () => (
                 subtext="Select a user from the available users list"
               />
             )}
-          </FancySelect2.Input>
+          </FancySelect.Input>
         );
       }}
       optionRenderer={(option, props) => {
         const person = option as any;
         return (
-          <FancySelect2.Option
+          <FancySelect.Option
             {...props}
             className="justify-start space-x-3 border border-gray-200 border-dotted"
           >
@@ -94,7 +94,7 @@ const FancySelectCustomization: FC = () => (
               name={person.text}
               subtext={person.username}
             />
-          </FancySelect2.Option>
+          </FancySelect.Option>
         );
       }}
     />
