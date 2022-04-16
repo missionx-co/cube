@@ -109,14 +109,6 @@ const FancySelect: FC<IFancySelect> & {
   optionGroupRenderer,
   optionRenderer,
 }) => {
-  const { value: selected, onChange: onSelectedChange } = useSelectValue<
-    string | undefined
-  >({
-    value,
-    defaultValue,
-    onChange,
-  });
-
   const flattenedOptions = useMemo(
     () => flattenOptionsAndAddIndex(options),
     [options],
@@ -146,8 +138,21 @@ const FancySelect: FC<IFancySelect> & {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(
-    listContentRef.current.indexOf(selected as string),
+    listContentRef.current.indexOf(
+      value !== undefined
+        ? value
+        : defaultValue !== undefined
+        ? defaultValue
+        : '',
+    ),
   );
+
+  function handleSelectedIndexChange(index: number) {
+    if (value !== undefined) {
+      return;
+    }
+    setSelectedIndex(index);
+  }
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
@@ -195,7 +200,7 @@ const FancySelect: FC<IFancySelect> & {
       }),
       useTypeahead(context, {
         listRef: listContentRef,
-        onMatch: open ? setActiveIndex : setSelectedIndex,
+        onMatch: open ? setActiveIndex : handleSelectedIndexChange,
         activeIndex,
         selectedIndex,
       }),
@@ -279,6 +284,18 @@ const FancySelect: FC<IFancySelect> & {
     middlewareData,
   ]);
 
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedIndex(listContentRef.current.indexOf(value));
+      return;
+    }
+
+    if (defaultValue !== undefined) {
+      setSelectedIndex(listContentRef.current.indexOf(defaultValue));
+      return;
+    }
+  }, [value, defaultValue]);
+
   const selectInputProps = {
     disabled,
     error,
@@ -291,12 +308,12 @@ const FancySelect: FC<IFancySelect> & {
     <SelectContext.Provider
       value={{
         selectedIndex,
-        setSelectedIndex,
+        setSelectedIndex: handleSelectedIndexChange,
         activeIndex,
         setActiveIndex,
         listRef: listItemsRef,
         setOpen,
-        onChange: onSelectedChange,
+        onChange: onChange as (value: string) => void,
         getItemProps,
       }}
     >
