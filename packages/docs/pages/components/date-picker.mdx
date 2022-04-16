@@ -1,0 +1,124 @@
+import Head from 'next/head';
+
+import { DatePicker } from '@cube/components';
+
+import Example from '@components/Example';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Date Picker - Cube</title>
+  <meta
+    name="description"
+    content="A custom select component that provides better design."
+  />
+</Head>
+
+## Import
+
+```js
+import { DatePicker } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+  <DatePicker value={new Date()} />
+</Example>
+
+```tsx
+<DatePicker />
+```
+
+## Props
+
+<PropsList
+  props={[
+    {
+      name: 'mode',
+      type: litteral(['single', 'multiple', 'range']),
+      description:
+        'DatePiker Selection mode. `single` only allows for one selected date at a time, `mutliple` allows for many dates to be selected at a time and `range` allows for date range selection.',
+      default: 'single',
+    },
+    {
+      name: 'defaultValue',
+      type: `defaultValue?: IDatePickerValue;`,
+      description: 'DatePicker default value.',
+    },
+    {
+      name: 'onChange',
+      type: '(date: IDatePickerValue | null) => void',
+      description: 'Handler that is called when a date is selected.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string',
+      description: 'TextInput placeholder to show when no date is selected.',
+    },
+    {
+      name: 'error',
+      type: 'boolean',
+      description: 'Indicates if the DatePicker has an invalid state.',
+      default: 'false',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'Indicates if the DatePicker is disabled.',
+      default: 'false',
+    },
+    {
+      name: 'firstDayOfWeek',
+      type: litteral(['0', '1', '2', '3', '4', '5', '6']),
+      description: '0 for Sunday and 6 for Saturday.',
+      default: '1',
+    },
+    {
+      name: 'disabledDates',
+      type: 'Date[]',
+      description: 'Disable specific dates.',
+    },
+    {
+      name: 'minDate',
+      type: 'Date',
+      description: 'Disable all the dates before the specified value.',
+    },
+    {
+      name: 'maxDate',
+      type: 'Date',
+      description: 'Disable all the dates after the specified value.',
+    },
+    {
+      name: 'monthsShown',
+      type: 'number',
+      description: 'Number of calendars.',
+      default: 1,
+    },
+    {
+      name: 'displayValue',
+      type: '(value: IDatePickerValue | null) => string',
+      description: 'Change the selected value format.',
+    },
+  ]}
+/>
+
+```ts
+type RangeDatePickerValue = {
+  startDate: Date | null;
+  endDate: Date | null;
+};
+
+type IDatePickerValue = Date | Date[] | RangeDatePickerValue;
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="Date picker"
+    page="date-picker"
+    description="A custom select component that provides better design."
+  >
+    {children}
+  </MDXPage>
+);

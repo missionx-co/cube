@@ -72,7 +72,7 @@ function formatValue(
 export function useDatePicker(props: IDatePicker): DatePickerContext {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<IDatePickerValue | null>(
-    props.value ?? null,
+    props.defaultValue !== undefined ? props.defaultValue : null,
   );
 
   const [hoveredDate, setHoveredDate] = useState<Date>();
@@ -83,7 +83,7 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
   );
 
   const [inputValue, setInputValue] = useState(
-    formatValue(props.value, datePickerValue, props.displayValue),
+    formatValue(props.defaultValue, datePickerValue, props.displayValue),
   );
 
   const calendar = new Calendar({

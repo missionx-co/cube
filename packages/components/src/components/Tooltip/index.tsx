@@ -13,7 +13,6 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, {
   Children,
   FC,
@@ -55,6 +54,7 @@ const Tooltip: FC<ITooltip> = ({
       open,
       onOpenChange: setOpen,
       middleware: [offset(5), flip(), shift()],
+      strategy: 'fixed',
     });
 
   let interactions = [

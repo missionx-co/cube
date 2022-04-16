@@ -62,7 +62,7 @@ export const docs = [
       },
       {
         id: 'date-picker',
-        text: 'Date & Time Picker',
+        text: 'Date picker',
         href: '/components/date-picker',
       },
       {

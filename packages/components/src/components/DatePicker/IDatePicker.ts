@@ -20,9 +20,8 @@ export interface CalendarOptions {
 }
 
 export default interface IDatePicker extends CalendarOptions {
-  containerClassName?: string;
   placeholder?: string;
-  value?: IDatePickerValue;
+  defaultValue?: IDatePickerValue;
   mode?: Mode;
   onChange?: (date: IDatePickerValue | null) => void;
   disabled?: boolean;
