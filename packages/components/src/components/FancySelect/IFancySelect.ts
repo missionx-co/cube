@@ -18,9 +18,7 @@ export interface SharedProps {
   error?: boolean;
 }
 
-export interface ISelectInput
-  extends SharedProps,
-    HTMLProps<HTMLButtonElement> {
+export interface ISelectInput extends HTMLProps<HTMLButtonElement> {
   error?: boolean;
 }
 

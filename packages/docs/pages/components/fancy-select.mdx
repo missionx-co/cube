@@ -58,42 +58,6 @@ import { FancySelect } from '@cube/components';
           },
         ],
       },
-      {
-        value: 'americas-2',
-        text: 'Americas',
-        children: [
-          {
-            value: 'north-america-2',
-            text: 'North America',
-          },
-          {
-            value: 'middle-america-2',
-            text: 'Middle America',
-          },
-          {
-            value: 'south-america-2',
-            text: 'South America',
-          },
-        ],
-      },
-      {
-        value: 'americas-3',
-        text: 'Americas',
-        children: [
-          {
-            value: 'north-america-3',
-            text: 'North America',
-          },
-          {
-            value: 'middle-america-3',
-            text: 'Middle America',
-          },
-          {
-            value: 'south-america-3',
-            text: 'South America',
-          },
-        ],
-      },
     ]}
   />
 </Example>
@@ -211,18 +175,108 @@ const people = [
 
 ## Props
 
-The `Input` accepts any prop that a normal html `input` can have. Plus the `error` prop.
-
 <PropsList
   props={[
     {
+      name: 'options',
+      type: `Option[]`,
+      description: 'FancySelect list of options.',
+    },
+    {
+      name: 'defaultValue',
+      type: 'string',
+      description:
+        'Select the option with this specified value by default. (uncontrolled).',
+    },
+    {
+      name: 'value',
+      type: 'string',
+      description: 'Select the option with this specified value. (controlled).',
+    },
+    {
+      name: 'onChange',
+      type: '(value: string | null) => void',
+      description: 'Handler that is called when an option is selected.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string',
+      description: 'Placeholder text to show in case no option is selected.',
+    },
+    {
       name: 'error',
       type: 'boolean',
-      description: 'Indicates if input field has an invalid state.',
+      description: 'Indicates if the FancySelect has an invalid state.',
       default: 'false',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'Indicates if the FancySelect is disabled.',
+      default: 'false',
+    },
+    {
+      name: 'inputRenderer',
+      type: '(props: ISelectInput & { option?: Option }) => ReactNode',
+      description: 'Customize the FancySelect main input element.',
+    },
+    {
+      name: 'optionGroupRenderer',
+      type: 'OptionGroupRenderer',
+      description: 'Customize the FancySelect options group title.',
+    },
+    {
+      name: 'optionRenderer',
+      type: 'OptionRenderer',
+      description: 'Customize the FancySelect individual option.',
     },
   ]}
 />
+
+```ts
+interface Option {
+  value: string;
+  text?: ReactNode;
+  disabled?: boolean;
+  children?: Option[];
+}
+```
+
+```ts
+interface ISelectInput extends HTMLProps<HTMLButtonElement> {
+  error?: boolean;
+}
+```
+
+```ts
+type OptionGroupRenderer = (
+  option: Option,
+  props: {
+    key: string;
+    role: string;
+    'aria-hidden': boolean;
+  },
+) => ReactNode;
+```
+
+```ts
+type OptionRenderer = (
+  option: Option,
+  props: {
+    active: boolean;
+    disabled: boolean;
+    selected: boolean;
+    role: string;
+    ref: LegacyRef<any>;
+    tabIndex: number;
+    'aria-selected': boolean;
+    'aria-disabled': boolean;
+    'data-disabled': boolean;
+    onClick: () => any;
+    onKeyDown: () => any;
+  },
+) => ReactNode;
+```
 
 export default ({ children }) => (
   <MDXPage
