@@ -1,0 +1,336 @@
+import clsx from 'classnames';
+import Head from 'next/head';
+
+import { Button, Pagination } from '@cube/components';
+
+import Example from '@components/Example';
+import ControlledExample from '@components/Examples/Pagination/Controlled';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Pagination - Cube</title>
+  <meta
+    name="description"
+    content="Use the pagination element to indicate a series of content across various pages."
+  />
+</Head>
+
+## Import
+
+```jsx
+import { Pagination } from '@cube/components';
+```
+
+## Usage
+
+<Example>
+  <Pagination totalItems={100} itemsPerPage={5} onPageChange={() => {}} />
+</Example>
+
+```jsx
+<Pagination totalItems={100} itemsPerPage={5} onPageChange={() => {}} />
+```
+
+## Next/Prev button renderer
+
+You can change Next and Prev buttons by using the two properties `nextButtonRenderer` & `prevButtonRenderer`.
+
+both functions takes `key` and `onClick` handler as arguments and must return a valid jsx.
+
+<Example>
+  <Pagination
+    totalItems={100}
+    itemsPerPage={5}
+    onPageChange={() => {}}
+    nextButtonRenderer={(key, onClick) => (
+      <Button color="primary" area="sm" key={key} onClick={onClick}>
+        Next
+      </Button>
+    )}
+    prevButtonRenderer={(key, onClick) => (
+      <Button color="error" area="sm" key={key} onClick={onClick}>
+        Prev
+      </Button>
+    )}
+  />
+</Example>
+
+```jsx
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  nextButtonRenderer={(key, onClick) => (
+    <Button color="primary" area="sm" key={key} onClick={onClick}>
+      Next
+    </Button>
+  )}
+  prevButtonRenderer={(key, onClick) => (
+    <Button color="error" area="sm" key={key} onClick={onClick}>
+      Prev
+    </Button>
+  )}
+/>
+```
+
+## Page button renderer
+
+You can change page buttons by using `pageButtonRenderer` property. It takes the `page`, `key`, `onClick` handler and `current` as an arguments and must return a valid jsx.
+
+<Example>
+  <Pagination
+    totalItems={100}
+    itemsPerPage={5}
+    onPageChange={() => {}}
+    pageButtonRenderer={(page, key, onClick, active) => (
+      <Button
+        key={key}
+        color="primary"
+        area="sm"
+        variant="outline"
+        onClick={() => onClick(page)}
+        className={clsx({
+          'bg-primary-600 text-white': active,
+        })}
+      >
+        {page}
+      </Button>
+    )}
+  />
+</Example>
+
+```jsx
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  pageButtonRenderer={(page, key, onClick, active) => (
+    <Button
+      key={key}
+      color="primary"
+      area="sm"
+      variant="outline"
+      onClick={() => onClick(page)}
+      className={clsx({
+        'bg-primary-600 text-white': active,
+      })}
+    >
+      {page}
+    </Button>
+  )}
+/>
+```
+
+## Page neighbours
+
+You can change the number of inactive page button that appears on the side of the active page button by using the `pageNeighbours`. the property takes one of `0 | 1 | 2` values.
+
+<Example>
+  <div className="flex flex-col space-y-4">
+    <Pagination
+      totalItems={100}
+      itemsPerPage={5}
+      onPageChange={() => {}}
+      pageNeighbours={2}
+      defaultPage={5}
+    />
+    <Pagination
+      totalItems={100}
+      itemsPerPage={5}
+      onPageChange={() => {}}
+      pageNeighbours={1}
+      defaultPage={5}
+    />
+    <Pagination
+      totalItems={100}
+      itemsPerPage={5}
+      onPageChange={() => {}}
+      pageNeighbours={0}
+      defaultPage={5}
+    />
+  </div>
+</Example>
+
+```jsx
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  pageNeighbours={2}
+  defaultPage={5}
+/>
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  pageNeighbours={1}
+  defaultPage={5}
+/>
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  pageNeighbours={0}
+  defaultPage={5}
+/>
+```
+
+## Controlled component
+
+The `pagination` component by default works as an uncontrolled component. and will handle state internally.
+But if you want to handle the state of the pagination on your own then you can use the `currentPage` property.
+
+<ControlledExample />
+
+```jsx
+const [currentPage, setCurrentPage] = useState<number | string>(1);
+
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  currentPage={currentPage as number}
+  onPageChange={setCurrentPage}
+/>
+```
+
+## The pagination button component
+
+The `Pagination.Button` component is the default button used to render the Pagination's pages buttons. you can use it along `pageButtonRenderer` if you seek a slight change of the styling.
+
+<Example>
+  <Pagination
+    totalItems={100}
+    itemsPerPage={5}
+    onPageChange={() => {}}
+    pageButtonRenderer={(page, key, onClick, current) => (
+      <Pagination.Button
+        page={page}
+        key={key}
+        onClick={onClick}
+        className="bg-error-500 text-white hover:bg-error-500 hover:text-white"
+      >
+        {page}
+      </Pagination.Button>
+    )}
+  />
+</Example>
+
+```jsx
+<Pagination
+  totalItems={100}
+  itemsPerPage={5}
+  onPageChange={() => {}}
+  pageButtonRenderer={(page, key, onClick, current) => (
+    <Pagination.Button
+      page={page}
+      key={key}
+      onClick={onClick}
+      className="bg-error-500 text-white hover:bg-error-500 hover:text-white"
+    >
+      {page}
+    </Pagination.Button>
+  )}
+/>
+```
+
+## Props
+
+### `Pagination` props
+
+<PropsList
+  props={[
+    {
+      name: 'totalItems',
+      type: 'number',
+      description: '(required). The total items count that need pagination.',
+    },
+    {
+      name: 'itemsPerPage',
+      type: 'number',
+      description: '(required). Items to show per page.',
+    },
+    {
+      name: 'onPageChange',
+      type: '(page: number) => any',
+      description:
+        '(required). Catch the page change event. the new page will be sent as the function parameter.',
+    },
+    {
+      name: 'pageNeighbours',
+      type: 'number',
+      description:
+        'Buttons count to show on the sides of the current active buttons.',
+    },
+    {
+      name: 'defaultPage',
+      type: 'number',
+      description: 'Set the page as active on first render.',
+    },
+    {
+      name: 'currentPage',
+      type: 'number',
+      description: 'set the page as active.',
+    },
+    {
+      name: 'nextButtonRenderer',
+      type: '(key: string, onClick: (page) => any) => ReactNode',
+      description: 'change the next button.',
+    },
+    {
+      name: 'prevButtonRenderer',
+      type: '(key: string, onClick: (page) => any) => ReactNode',
+      description: 'change the prev button.',
+    },
+    {
+      name: 'pageButtonRenderer',
+      type: '(page: number, key: string, onClick: (page) => any, active: boolean) => ReactNode',
+      description:
+        "change the pagination's page button. must return valid JSX.",
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'classname that can be used to style the component.',
+    },
+  ]}
+/>
+
+### `Pagination.Button` props
+
+<PropsList
+  props={[
+    {
+      name: 'page',
+      type: 'number',
+      description: '(required). The page of the button.',
+    },
+    {
+      name: 'onClick',
+      type: '(page: number) => any',
+      description: '(required). onClick handler for the pagination button.',
+    },
+    {
+      name: 'active',
+      type: 'boolean',
+      description:
+        'Indicates if the current pagination button is the active button.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'classname that can be used to style the component.',
+    },
+  ]}
+/>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Pagination"
+    page="pagination"
+    description="Use the pagination element to indicate a series of content across various pages."
+  >
+    {children}
+  </MDXPage>
+);
