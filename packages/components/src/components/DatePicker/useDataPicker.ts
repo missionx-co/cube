@@ -1,5 +1,13 @@
 import { addDays, subDays } from 'date-fns';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  ForwardedRef,
+  createContext,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react';
 
 import Calendar from './CalendarUI/Calendar';
 import DatePickerValueHelper from './DatePickerValueHelper';
@@ -69,7 +77,10 @@ function formatValue(
   return datePickerValueHelper.formatValue(selected);
 }
 
-export function useDatePicker(props: IDatePicker): DatePickerContext {
+export function useDatePicker(
+  props: IDatePicker,
+  ref: ForwardedRef<any>,
+): DatePickerContext {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<IDatePickerValue | null>(
     props.defaultValue !== undefined ? props.defaultValue : null,
@@ -205,6 +216,14 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
       setHoveredDate(undefined);
     }
   }, [open]);
+
+  useImperativeHandle(ref, () => ({
+    open: setOpen,
+    setValue: (value: IDatePickerValue) => {
+      setSelected(value);
+      setInputValue(formatValue(value, datePickerValue, props.displayValue));
+    },
+  }));
 
   return {
     open,

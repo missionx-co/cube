@@ -95,7 +95,6 @@ const Cell: FC<ICell> = ({
       onFocus={handleFocus}
       aria-disabled={blocked}
       data-disabled={blocked}
-      aria-active={selected || hovered}
     >
       {children}
     </CellContainer>

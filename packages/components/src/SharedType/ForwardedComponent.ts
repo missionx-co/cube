@@ -1,6 +1,5 @@
 import {
   ForwardRefExoticComponent,
-  LegacyRef,
   PropsWithoutRef,
   RefAttributes,
 } from 'react';

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Button, DatePicker } from '@cube/components';
 
 import Example from '@components/Example';
+import MethodsExample from '@components/Examples/DatePicker/MethodsExample';
 import { litteral } from '@components/Examples/utils';
 import MDXPage from '@components/Layout/MDXPage';
 import PropsList from '@components/PropsList';
@@ -24,7 +25,7 @@ import { DatePicker } from '@cube/components';
 ## Usage
 
 <Example>
-  <DatePicker minDate={new Date()} />
+  <DatePicker />
 </Example>
 
 ```tsx
@@ -47,12 +48,59 @@ Use `inputRenderer` to customize the DatePicker input element.
 
 ```jsx
 <DatePicker
-  inputRenderer={({ valueString, value, placeholder, ...props }) => (
+  inputRenderer={({ valueString, value, error, placeholder, ...props }) => (
     <Button {...props}>{valueString ? valueString : placeholder}</Button>
   )}
   monthsShown={2}
   mode="range"
 />
+```
+
+## Methods
+
+The `DatePicker` component exposes couple methods that can be used to manipulate the date picker state.
+
+Exposed methods are
+
+```ts
+interface Methods {
+  open: (open: boolean) => void;
+  setValue: (value: IDatePickerValue) => void;
+}
+```
+
+<MethodsExample />
+
+```jsx
+const ref = useRef < any > null;
+
+function handleOpenDatePicker() {
+  ref.current?.open(true);
+}
+
+function handleClearDatePicker() {
+  ref.current?.setValue(null);
+}
+
+function handleSelectToday() {
+  ref.current?.setValue(new Date());
+}
+
+<div className="flex flex-col space-y-5">
+  <Button.Group>
+    <Button onClick={handleOpenDatePicker} variant="outline">
+      Open Date picker
+    </Button>
+    <Button onClick={handleSelectToday} variant="outline">
+      Today
+    </Button>
+    <Button onClick={handleClearDatePicker} variant="outline">
+      Clear Date picker value
+    </Button>
+  </Button.Group>
+
+  <DatePicker ref={ref} />
+</div>;
 ```
 
 ## Props
