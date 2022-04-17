@@ -6,13 +6,11 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Button from '../Button';
 import CalendarUI from './CalendarUI';
 import IDatePicker from './IDatePicker';
+import Input from './Input';
 import {
   CalendarContainer,
-  CalendarIcon,
   DatePickerContainer,
-  DatePickerInput,
   FooterContainer,
-  IconContainer,
   PopoverContainer,
 } from './styles';
 import { DatePickerContext, useDatePicker } from './useDataPicker';
@@ -24,10 +22,10 @@ const DatePicker: FC<IDatePicker> = ({
   error,
   monthsShown,
   displayValue,
+  inputRenderer,
   ...props
 }) => {
   const datePicker = useDatePicker(props);
-  const [isFocused, setFocused] = useState(false);
 
   const { x, y, refs, floating, reference } = useFloating({
     placement: 'bottom-start',
@@ -36,33 +34,35 @@ const DatePicker: FC<IDatePicker> = ({
 
   useOnClickOutside(refs.floating, () => datePicker.setOpen(false));
 
-  function handleInputFocus() {
-    setFocused(true);
+  function handleOpenDatePicker() {
     datePicker.setOpen(true);
   }
 
-  function handleInputBlur() {
-    setFocused(false);
-  }
+  const inputProps = {
+    ref: reference,
+    placeholder: placeholder ?? 'Click to select a date',
+    disabled,
+    error,
+    onClick: handleOpenDatePicker,
+    onKeyDown: datePicker.handleKeyDown,
+    valueString: datePicker.inputValue,
+    value: datePicker.datePickerValue,
+  };
 
   return (
     <DatePickerContext.Provider value={datePicker}>
       <DatePickerContainer>
-        <DatePickerInput
-          placeholder={placeholder ?? 'Click to select a date'}
-          disabled={error}
-          error={error}
-          onClick={handleInputFocus}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          onKeyDown={datePicker.handleKeyDown}
-          readOnly
-          ref={reference}
-          value={datePicker.inputValue}
-        />
-        <IconContainer focus={isFocused} disabled={disabled} error={error}>
-          <CalendarIcon />
-        </IconContainer>
+        {inputRenderer ? (
+          inputRenderer(inputProps)
+        ) : (
+          <Input
+            {...inputProps}
+            onFocus={handleOpenDatePicker}
+            readOnly
+            value={datePicker.inputValue}
+            onIconClick={() => datePicker.setOpen(true)}
+          />
+        )}
         {datePicker.open && (
           <PopoverContainer
             ref={floating}

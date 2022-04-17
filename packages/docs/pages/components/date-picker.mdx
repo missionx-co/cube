@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { DatePicker } from '@cube/components';
+import { Button, DatePicker } from '@cube/components';
 
 import Example from '@components/Example';
 import { litteral } from '@components/Examples/utils';
@@ -24,11 +24,35 @@ import { DatePicker } from '@cube/components';
 ## Usage
 
 <Example>
-  <DatePicker value={new Date()} />
+  <DatePicker minDate={new Date()} />
 </Example>
 
 ```tsx
 <DatePicker />
+```
+
+## Customization
+
+Use `inputRenderer` to customize the DatePicker input element.
+
+<Example>
+  <DatePicker
+    inputRenderer={({ valueString, value, placeholder, ...props }) => (
+      <Button {...props}>{valueString ? valueString : placeholder}</Button>
+    )}
+    monthsShown={2}
+    mode="range"
+  />
+</Example>
+
+```jsx
+<DatePicker
+  inputRenderer={({ valueString, value, placeholder, ...props }) => (
+    <Button {...props}>{valueString ? valueString : placeholder}</Button>
+  )}
+  monthsShown={2}
+  mode="range"
+/>
 ```
 
 ## Props
@@ -101,6 +125,11 @@ import { DatePicker } from '@cube/components';
       type: '(value: IDatePickerValue | null) => string',
       description: 'Change the selected value format.',
     },
+    {
+      name: 'inputRenderer',
+      type: 'InputRenderer',
+      description: 'Change the date picker input element.',
+    },
   ]}
 />
 
@@ -109,6 +138,17 @@ type RangeDatePickerValue = {
   startDate: Date | null;
   endDate: Date | null;
 };
+
+type InputRenderer = (props: {
+  placeholder?: string;
+  disabled?: boolean;
+  error?: boolean;
+  ref: LegacyRef<HTMLElement>;
+  onClick: (e: any) => void;
+  onKeyDown: (e: any) => void;
+  valueString?: string;
+  value: DatePickerValueHelper;
+}) => ReactNode;
 
 type IDatePickerValue = Date | Date[] | RangeDatePickerValue;
 ```

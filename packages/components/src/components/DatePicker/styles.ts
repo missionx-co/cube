@@ -30,7 +30,7 @@ export const CalendarIcon = styled(
 
 export const PopoverContainer = styled(
   'div',
-  tw`absolute p-2 bg-white border border-gray-300 rounded-lg`,
+  tw`absolute z-50 p-2 bg-white border border-gray-300 rounded-lg`,
 );
 
 export const CalendarContainer = styled('div', tw`flex space-x-8`);

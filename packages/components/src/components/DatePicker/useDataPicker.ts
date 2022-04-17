@@ -148,6 +148,11 @@ export function useDatePicker(props: IDatePicker): DatePickerContext {
 
   function navigateThroughDates(e: any) {
     if (e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+      if (calendar.isDateDisabled(hoveredDate as Date)) {
+        return;
+      }
+
       onSelect(hoveredDate as Date);
       return;
     }

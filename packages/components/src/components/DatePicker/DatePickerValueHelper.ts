@@ -1,11 +1,6 @@
 import { format } from 'date-fns';
 
-import {
-  DisplayValueFormatter,
-  IDatePickerValue,
-  Mode,
-  RangeDatePickerValue,
-} from './IDatePicker';
+import { IDatePickerValue, Mode, RangeDatePickerValue } from './IDatePicker';
 import { isAfter, isBefore, isEqual, isInRange } from './utils';
 
 export default class DatePickerValue {

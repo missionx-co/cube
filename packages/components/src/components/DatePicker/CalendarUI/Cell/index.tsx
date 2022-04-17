@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 import React, { FC, useEffect, useRef } from 'react';
 import tw from 'twin.macro';
 
@@ -83,13 +83,7 @@ const Cell: FC<ICell> = ({
       aria-selected={selected}
       data-date={format(date as Date, 'Y-MM-dd')}
       data-cell-type="day"
-      tabIndex={
-        selected ||
-        hovered ||
-        (date?.getDate() === 1 && !blocked && !outOfRange)
-          ? 0
-          : -1
-      }
+      tabIndex={selected || hovered || date?.getDate() === 1 ? 0 : 1}
       selected={selected}
       isFirstOfRange={isFirstOfRange}
       isLastOfRange={isLastOfRange}
@@ -99,6 +93,9 @@ const Cell: FC<ICell> = ({
       onClick={() => onSelect && !blocked && onSelect(date as Date)}
       onMouseOver={handleHovered}
       onFocus={handleFocus}
+      aria-disabled={blocked}
+      data-disabled={blocked}
+      aria-active={selected || hovered}
     >
       {children}
     </CellContainer>

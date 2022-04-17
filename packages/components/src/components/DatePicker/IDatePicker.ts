@@ -1,3 +1,7 @@
+import { LegacyRef, ReactNode } from 'react';
+
+import DatePickerValueHelper from './DatePickerValueHelper';
+
 export type DayOfTheWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type Mode = 'single' | 'multiple' | 'range';
 
@@ -26,4 +30,14 @@ export default interface IDatePicker extends CalendarOptions {
   onChange?: (date: IDatePickerValue | null) => void;
   disabled?: boolean;
   error?: boolean;
+  inputRenderer?: (props: {
+    placeholder?: string;
+    disabled?: boolean;
+    error?: boolean;
+    ref: LegacyRef<HTMLElement>;
+    onClick: (e: any) => void;
+    onKeyDown: (e: any) => void;
+    valueString?: string;
+    value: DatePickerValueHelper;
+  }) => ReactNode;
 }
