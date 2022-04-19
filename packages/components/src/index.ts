@@ -13,6 +13,7 @@ export { default as Pagination } from './components/Pagination';
 export { default as Table } from './components/Table';
 export { default as DataTable } from './components/Table/DataTable';
 export { default as Tooltip } from './components/Tooltip';
+export { default as Transition } from './components/Transition';
 
 export { default as FormControl } from './components/FormControl';
 export { default as Checkbox } from './components/Checkbox';

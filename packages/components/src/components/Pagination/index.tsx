@@ -99,11 +99,10 @@ const Pagination: React.FC<IPagination> & {
           return prevButtonRenderer ? (
             prevButtonRenderer(page, handleMoveLeft)
           ) : (
-            <Tooltip content="Previous page">
+            <Tooltip key={page} content="Previous page">
               <PaginationPill
                 page={-1}
                 aria-label="Previous"
-                key={page}
                 onClick={handleMoveLeft}
               >
                 <span aria-hidden="true">
@@ -119,11 +118,10 @@ const Pagination: React.FC<IPagination> & {
           return nextButtonRenderer ? (
             nextButtonRenderer(page, handleMoveRight)
           ) : (
-            <Tooltip content="Next page">
+            <Tooltip key={page} content="Next page">
               <PaginationPill
                 page={-1}
                 aria-label="Next"
-                key={page}
                 onClick={handleMoveRight}
               >
                 <span aria-hidden="true">
