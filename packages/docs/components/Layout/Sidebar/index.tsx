@@ -1,20 +1,21 @@
 import { CollectionIcon as AdminPanelIcon } from '@heroicons/react/outline';
 import clsx from 'classnames';
 import Link from 'next/link';
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
 import Logo from '@components/logo';
 
 import { useSidebarContext } from '../SidebarContext';
 import { docs } from './nav';
 
-interface ISidebar {}
-
-const Sidebar: FC<ISidebar> = () => {
+const Sidebar: any = forwardRef<HTMLElement, unknown>((props, ref) => {
   const { activePage } = useSidebarContext();
 
   return (
-    <aside className="w-72 fixed top-0 left-0 flex flex-col h-screen px-6 pt-8 space-y-6 text-gray-900">
+    <aside
+      ref={ref}
+      className="w-72 lg:flex lg:translate-x-0 fixed top-0 left-0 z-10 flex-col h-screen px-6 pt-8 space-y-6 text-gray-900 transition duration-300 ease-in-out transform -translate-x-full bg-gray-100"
+    >
       <header className="flex items-center space-x-3">
         <span className="w-14 h-14 fill-current">
           <Logo />
@@ -76,6 +77,8 @@ const Sidebar: FC<ISidebar> = () => {
       </div>
     </aside>
   );
-};
+});
+
+Sidebar.displayName = 'Sidebar';
 
 export default Sidebar;

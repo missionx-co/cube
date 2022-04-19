@@ -144,8 +144,8 @@ Cube supports three sizes for the `Badge` component: `sm`, `base` and `lg`
 Use `className` property to pass Tailwind CSS classes to customize the badge however you want.
 
 <Example>
-  <div className="flex flex-col space-y-3">
-    <div className="flex items-center space-x-3">
+  <div className="flex flex-col space-y-10">
+    <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3">
       <Badge className="flex items-center space-x-1.5" area="lg">
         <span className="w-2 h-2 bg-gray-500 rounded-full" />
         <span>With dot</span>
@@ -164,7 +164,7 @@ Use `className` property to pass Tailwind CSS classes to customize the badge how
         <span className="w-5 h-5 border-2 border-gray-500 rounded-full" />
       </Badge>
     </div>
-    <div className="flex items-center space-x-3">
+    <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3">
       <Badge
         color="primary"
         className="flex items-center space-x-1.5"
