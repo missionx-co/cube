@@ -1,0 +1,64 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import ColorItem from '@components/ColorItem';
+import Example from '@components/Example';
+import Blue from '@components/Examples/Colors/Blue';
+import BlueGray from '@components/Examples/Colors/BlueGray';
+import BlueLight from '@components/Examples/Colors/BlueLight';
+import ErrorColor from '@components/Examples/Colors/ErrorColor';
+import Gray from '@components/Examples/Colors/Gray';
+import Indigo from '@components/Examples/Colors/Indigo';
+import Orange from '@components/Examples/Colors/Orange';
+import Pink from '@components/Examples/Colors/Pink';
+import Primary from '@components/Examples/Colors/Primary';
+import Purple from '@components/Examples/Colors/Purple';
+import Rose from '@components/Examples/Colors/Rose';
+import Success from '@components/Examples/Colors/Success';
+import Warning from '@components/Examples/Colors/Warning';
+import MDXPage from '@components/Layout/MDXPage';
+
+<Head>
+  <title>Colors - Cube</title>
+  <meta name="description" description="Cube default colors." />
+</Head>
+
+## Primary Colors
+
+These are the main colors that make up the majority of the colors used in the design system.
+
+<div className="flex flex-col space-y-10">
+  <Gray />
+  <Primary />
+  <ErrorColor />
+  <Warning />
+  <Success />
+</div>
+
+## Secondary Colors
+
+Along with primary colors, it's helpful to have a selection of secondary colors to use in components such as pills, alerts and labels. These secondary colors should be used sparingly or as accents, while the primary color(s) should take precendence.
+
+<div className="flex flex-col space-y-10">
+  <BlueGray />
+  <BlueLight />
+  <Blue />
+  <Indigo />
+  <Purple />
+  <Pink />
+  <Rose />
+  <Orange />
+</div>
+
+export default ({ children }) => (
+  <MDXPage title="Colors" page="colors" description="Cube default colors.">
+    {children}
+  </MDXPage>
+);

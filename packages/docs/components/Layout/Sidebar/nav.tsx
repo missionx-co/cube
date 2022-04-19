@@ -24,11 +24,6 @@ export const docs = [
         text: 'Typography',
         href: '/typography',
       },
-      {
-        id: 'shadow',
-        text: 'Shadow',
-        href: '/shadow',
-      },
     ],
   },
   {
