@@ -1,0 +1,296 @@
+import Head from 'next/head';
+import Link from 'next/link';
+
+import { DataTable } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import DataTableBasicUsage from '@components/Examples/Table/DataTableBasicUsage';
+import DataTableCutomization from '@components/Examples/Table/DataTableCutomization';
+import DataTablePagination from '@components/Examples/Table/DataTablePagination';
+import DataTableRowSelection from '@components/Examples/Table/DataTableRowSelection';
+import DataTableSorting from '@components/Examples/Table/DataTableSorting';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>DataTable - Cube</title>
+  <meta
+    name="description"
+    content="Data Table is table on steriods. It provides sorting, pagination and custom rendering with minimum effort."
+  />
+</Head>
+
+## Import
+
+```jsx
+import { DataTable } from '@cube/components';
+```
+
+## Usage
+
+<DataTableBasicUsage />
+
+```jsx
+export const headings = [
+  {
+    key: 'firstName',
+    text: 'Firstname',
+  },
+  {
+    key: 'lastName',
+    text: 'Lastname',
+  }
+];
+
+const users = [
+  ...
+  {
+    userId: 4,
+    firstName: 'Janaya',
+    lastName: 'Klosges',
+    emailAddress: 'jklosges3@amazon.de',
+    gender: 'Female',
+    phoneNumber: '502-438-7799',
+  },
+  ...
+];
+
+<DataTable uniqueKey="userId" columns={headings} items={users} />
+```
+
+## Cutomization
+
+You can provide custom rendering per column by using the `render` method of the column item.
+
+<DataTableCutomization />
+
+```jsx /render/
+export const headings = [
+  {
+    key: 'user',
+    text: 'User',
+    render: (row: any) => {
+      return (
+        <Avatar
+          alternativeNode={row.firstName.charAt(0) + row.lastName.charAt(0)}
+          name={`${row.firstName} ${row.lastName}`}
+          subtext={row.emailAddress}
+        />
+      );
+    },
+  },
+  {
+    key: 'gender',
+    text: 'Gender',
+    render: (row: any) => {
+      if (row.gender === 'Male') {
+        return (
+          <Badge area="lg" color="blue">
+            Male
+          </Badge>
+        );
+      }
+
+      return (
+        <Badge area="lg" color="pink">
+          Female
+        </Badge>
+      );
+    },
+  },
+  {
+    key: 'phoneNumber',
+    text: 'Phone',
+  },
+];
+
+<DataTable uniqueKey="userId" columns={headings} items={users} />;
+```
+
+## Sort
+
+You can provide a sorting functionlity for the data of the table based on a column values by a providing the `sort` function to the column item.
+
+You can make use of `currentPage` and `onPageChange` of the pagination property to provide your own pagination logic.
+
+<DataTableSorting />
+
+```tsx /sort/
+export const headings = [
+  {
+    key: 'userId',
+    text: 'User ID',
+    sort: (a: any, b: any) => {
+      if (a.userId > b.userId) {
+        return 1;
+      }
+
+      if (a.userId < b.userId) {
+        return -1;
+      }
+
+      return 0;
+    },
+  },
+  ...
+];
+
+<Example>
+  <DataTable uniqueKey="userId" columns={headings} items={users} />
+</Example>;
+```
+
+## Rows Selection
+
+You can enable the row selection functionality by providing the `onRowSelected` property. You can also use `headerCheckboxAriaLabel` and `checkboxAriaLabel` to provide accessibility features for the `Checkbox`.
+
+<DataTableRowSelection />
+
+```jsx
+<DataTable
+  uniqueKey="userId"
+  columns={headings}
+  items={users}
+  onRowSelected={(selected: any[]) => console.log(selected)}
+  headerCheckboxAriaLabel="Table select state."
+  checkboxAriaLabel={(row: any) => `Select ${row.firstName} ${row.lastName}`}
+/>
+```
+
+## Pagination
+
+The `DataTable` accepts a pagination property. The `pagination` property is similar to the `Pagination` <Link href="/components/pagination#pagination-component-api"><a>Components API</a></Link>.
+
+You can provide your own pagination logic by utilizing `onPageChange` and `currentPage` of the `pagination` property.
+
+<DataTablePagination />
+
+```jsx
+export const headings = [
+  {
+    key: 'user',
+    text: 'User',
+    render: (row: any) => {
+      return (
+        <Avatar
+          alternativeNode={row.firstName.charAt(0) + row.lastName.charAt(0)}
+          name={`${row.firstName} ${row.lastName}`}
+          subtext={row.emailAddress}
+        />
+      );
+    },
+  },
+  {
+    key: 'gender',
+    text: 'Gender',
+    render: (row: any) => {
+      if (row.gender === 'Male') {
+        return (
+          <Badge area="lg" color="blue">
+            Male
+          </Badge>
+        );
+      }
+
+      return (
+        <Badge area="lg" color="pink">
+          Female
+        </Badge>
+      );
+    },
+  },
+  {
+    key: 'phoneNumber',
+    text: 'Phone',
+  },
+];
+
+<DataTable
+  uniqueKey="userId"
+  columns={headings}
+  items={users}
+  pagination={{ totalItems: users.length, itemsPerPage: 2 }}
+/>;
+```
+
+## Components API
+
+<PropsList
+  props={[
+    {
+      name: 'columns',
+      type: 'IDataTableColumn[]',
+      description: 'table columns headers and accessors.',
+    },
+    {
+      name: 'items',
+      type: 'any[]',
+      description: 'table data.',
+    },
+    {
+      name: 'uniqueKey',
+      type: 'string',
+      description:
+        'The unique key accessor to be used for each row in the table.',
+    },
+    {
+      name: 'rowProps',
+      type: 'Object',
+      description: 'props to be passed to the html `tr` element.',
+    },
+    {
+      name: 'headerColumnProps',
+      type: 'Object',
+      description: 'props to be passed to the html `th` header element.',
+    },
+    {
+      name: 'bodyColumnProps',
+      type: 'Object',
+      description: 'props to be passed to the html `td` body element.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean',
+      description:
+        'Whether the data of the table is be fetched from a remote source or not.',
+      default: 'false',
+    },
+    {
+      name: 'emptyMessage',
+      type: 'ReactNode',
+      description: 'A message to show when the table has no data.',
+    },
+    {
+      name: 'onRowSelected',
+      type: '(selected: string[]) => any',
+      description:
+        'Handler that is called when the value selected rows value is changed.',
+    },
+    {
+      name: 'pagination',
+      type: 'Pagination',
+      description: 'Check the Pagination component api to find out how to use.',
+    },
+  ]}
+/>
+
+```ts
+default interface IDataTableColumn {
+  key: string;
+  text: string;
+  render?: (dataRow: any) => ReactNode;
+  sort?: (comapre1: any, comapre2: any) => -1 | 0 | 1;
+}
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="Data Table"
+    page="data-table"
+    description="Data Table is table on steriods. It provides sorting, pagination and custom rendering with minimum effort."
+  >
+    {children}
+  </MDXPage>
+);

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import IPagination from '../../Pagination/IPagination';
 import IColumn from '../Column/IColumn';
 import IHeaderColumn from '../HeaderColumn/IHeaderColumn';
@@ -20,7 +22,9 @@ export default interface IDataTable extends ITable {
   headerColumnProps?: IHeaderColumn;
   bodyColumnProps?: IColumn;
   loading?: boolean;
-  emptyMessage?: string;
+  emptyMessage?: ReactNode;
+  headerCheckboxAriaLabel?: string;
+  checkboxAriaLabel?: (row: any) => string;
   onRowSelected?: (selected: string[]) => any;
   onSort?: OnSort;
   pagination?: Omit<IPagination, 'onPageChange'> & {

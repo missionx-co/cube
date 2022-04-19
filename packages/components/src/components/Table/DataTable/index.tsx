@@ -23,6 +23,8 @@ const DataTable: React.FC<IDataTable> = ({
   onRowSelected,
   onSort: controlledOnSort,
   pagination,
+  headerCheckboxAriaLabel,
+  checkboxAriaLabel,
   ...props
 }) => {
   const {
@@ -54,6 +56,7 @@ const DataTable: React.FC<IDataTable> = ({
             {onRowSelected && (
               <Table.HeaderCell>
                 <Checkbox
+                  aria-label={headerCheckboxAriaLabel}
                   checked={isSomeSelected || isAllSelected}
                   onChange={toggleAllSelection}
                   icon={
@@ -106,6 +109,7 @@ const DataTable: React.FC<IDataTable> = ({
                 {onRowSelected && (
                   <Table.Cell>
                     <Checkbox
+                      aria-label={checkboxAriaLabel && checkboxAriaLabel(row)}
                       checked={selectedRows.includes(row[uniqueKey])}
                       onChange={(checked) =>
                         toggleRowSelection(row[uniqueKey], checked)

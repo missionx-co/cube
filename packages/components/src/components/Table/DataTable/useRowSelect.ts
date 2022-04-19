@@ -11,15 +11,15 @@ const useRowSelect = (
   const isSomeSelected = !isAllSelected && selectedRows.length > 0;
 
   const toggleRowSelection = (key: string, checked: boolean) => {
-    updateSelectedRows((selected) => {
-      if (!checked) {
-        return selected.filter((selectedKey) => selectedKey !== key);
-      }
+    let selected = [];
+    if (!checked) {
+      selected = selectedRows.filter((selectedKey) => selectedKey !== key);
+    } else {
+      selected = [...selectedRows, key];
+    }
 
-      return [...selected, key];
-    });
-
-    onRowSelected && onRowSelected(selectedRows);
+    updateSelectedRows(selected);
+    onRowSelected && onRowSelected(selected);
   };
 
   const toggleAllSelection = () => {
