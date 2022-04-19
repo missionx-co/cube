@@ -1,0 +1,144 @@
+import Head from 'next/head';
+
+import { Table } from '@cube/components';
+
+import CodeSnippet from '@components/CodeSnippet';
+import Example from '@components/Example';
+import BasicUsage from '@components/Examples/Table/BasicUsage';
+import { litteral } from '@components/Examples/utils';
+import MDXPage from '@components/Layout/MDXPage';
+import PropsList from '@components/PropsList';
+
+<Head>
+  <title>Table - Cube</title>
+  <meta
+    name="description"
+    content="Tables display sets of data. They can be fully customized"
+  />
+</Head>
+
+## Import
+
+```jsx
+import { Table } from '@cube/components';
+```
+
+## Usage
+
+The `Table` components consists of couple sub-compoments that can be composed together. This pattern provide the best functionality to build the table however your want rather than sticking with only what available.
+
+<BasicUsage />
+
+```jsx
+const headings = [
+  {
+    key: 'userId',
+    value: 'User ID',
+  },
+  {
+    key: 'firstName',
+    value: 'Firstname',
+  },
+  {
+    key: 'lastName',
+    value: 'Lastname',
+  },
+  {
+    key: 'emailAddress',
+    value: 'Email',
+  },
+  {
+    key: 'gender',
+    value: 'Gender',
+  },
+  {
+    key: 'phoneNumber',
+    value: 'Phone',
+  },
+];
+
+const users = [
+  ...
+  {
+    userId: 4,
+    firstName: 'Janaya',
+    lastName: 'Klosges',
+    emailAddress: 'jklosges3@amazon.de',
+    gender: 'Female',
+    phoneNumber: '502-438-7799',
+  },
+  ...
+];
+
+<Table>
+  <thead>
+    <Table.Row>
+      {headings.map((heading) => (
+        <Table.HeaderCell key={heading.key}>
+          {heading.value}
+        </Table.HeaderCell>
+      ))}
+    </Table.Row>
+  </thead>
+  <tbody>
+    {users.map((user) => (
+      <Table.Row key={user.userId}>
+        {headings.map((heading) => (
+          <Table.Cell key={`${user.userId}-${heading.key}`}>
+            {user[heading.key]}
+          </Table.Cell>
+        ))}
+      </Table.Row>
+    ))}
+  </tbody>
+</Table>
+```
+
+## Components API
+
+### `Table` Component API
+
+The `Table` component accepts any prop that a normal html `table` can have plus the following
+
+<PropsList
+  props={[
+    {
+      name: 'tableWrapperClassName',
+      type: 'string',
+      description:
+        'classNames to be style the `div` container arround the table.',
+    },
+    {
+      name: 'before',
+      type: 'ReactNode',
+      description: 'Add any react element before the table.',
+    },
+    {
+      name: 'after',
+      type: 'ReactNode',
+      description: 'Add any react element after the table.',
+    },
+  ]}
+/>
+
+### `Table.Row` Component API
+
+The `Table.Row` component accepts any prop that a normal html `tr` can have.
+
+### `Table.HeaderCell` Component API
+
+The `Table.HeaderCell` component accepts any prop that a normal html `th` can have.
+
+### `Table.Cell` Component API
+
+The `Table.Cell` component accepts any prop that a normal html `td` can have.
+
+export default ({ children }) => (
+  <MDXPage
+    title="Table"
+    page="table"
+    description="Tables display sets of data. They can be fully customized."
+  >
+    {children}
+  </MDXPage>
+);

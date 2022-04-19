@@ -89,7 +89,7 @@ const Checkbox: CheckboxType = ({
         className={className}
       >
         {state.isSelected &&
-          (icon ? icon() : <CheckIcon className="fill-current" />)}
+          (icon ? icon : <CheckIcon className="fill-current" />)}
       </VirtualCheckbox>
       {props.children}
     </ContainerLabel>

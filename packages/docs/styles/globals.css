@@ -9,3 +9,23 @@
 .word {
   @apply bg-gray-600 p-px
 }
+
+.prose h1, .prose h2, .prose h3{
+  @apply relative;
+}
+
+.prose h1::before, .prose h2::before, .prose h3::before{
+  @apply right-full top-1/2 absolute text-sm font-normal text-gray-300 transform -translate-x-2 -translate-y-1/2;
+}
+
+.prose h1::before {
+  content: "H1"
+}
+
+.prose h2::before {
+  content: "H2"
+}
+
+.prose h3::before {
+  content: "H3"
+}

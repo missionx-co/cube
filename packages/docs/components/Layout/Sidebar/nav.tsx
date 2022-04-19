@@ -76,9 +76,14 @@ export const docs = [
         href: '/components/pagination',
       },
       {
-        id: 'tables',
-        text: 'Tables',
-        href: '/components/tables',
+        id: 'table',
+        text: 'Table',
+        href: '/components/table',
+      },
+      {
+        id: 'data-table',
+        text: 'Data Table',
+        href: '/components/data-table',
       },
       {
         id: 'tooltips',

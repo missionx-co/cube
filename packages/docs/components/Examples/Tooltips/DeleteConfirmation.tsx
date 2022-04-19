@@ -32,7 +32,7 @@ const DeleteConfirmation: FC = () => {
           </div>
         </div>
       )}
-      className="p-4 text-gray-900 bg-white border border-gray-200 rounded-lg"
+      className="p-4 text-gray-900 bg-white border border-gray-400 rounded-lg"
       showOn="click"
     >
       <Button color="error">Click to delete Blog post</Button>

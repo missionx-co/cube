@@ -10,6 +10,8 @@ export { default as DatePicker } from './components/DatePicker';
 export { default as Dropdown } from './components/Dropdown';
 export { default as Modal } from './components/Modal';
 export { default as Pagination } from './components/Pagination';
+export { default as Table } from './components/Table';
+export { default as DataTable } from './components/Table/DataTable';
 export { default as Tooltip } from './components/Tooltip';
 
 export { default as FormControl } from './components/FormControl';
