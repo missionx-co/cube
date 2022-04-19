@@ -10,5 +10,5 @@ export const Table: StyledComponentType<any> = styled(
 
 export const TableWrapper: StyledComponentType<any> = styled(
   'div',
-  tw`shadow-base relative overflow-auto bg-white rounded-lg`,
+  tw`relative overflow-auto bg-white rounded-lg shadow-md`,
 );

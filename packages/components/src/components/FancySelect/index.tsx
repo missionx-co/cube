@@ -46,7 +46,7 @@ const SelectorIconContainer = styled('span', {
 });
 
 const OptionsList: StyledComponentType<any> = styled('ul', {
-  ...tw`max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm shadow-base absolute z-50 w-full overflow-auto bg-white border border-gray-300 rounded-md`,
+  ...tw`max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm absolute z-50 w-full overflow-auto bg-white border border-gray-300 rounded-md shadow-md`,
 });
 
 const OptionsGroupTitle: StyledComponentType<any> = styled(

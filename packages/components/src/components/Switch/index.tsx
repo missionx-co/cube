@@ -34,7 +34,7 @@ const SwitchContainer = styled('div', {
 });
 
 const HandleContainer: StyledComponentType<any> = styled('span', {
-  ...tw`block rounded-full absolute shadow-base bg-white transition duration-300 ease-in-out transform translate-x-0 left-0.5`,
+  ...tw`block rounded-full absolute shadow-md bg-white transition duration-300 ease-in-out transform translate-x-0 left-0.5`,
   variants: {
     area: {
       base: tw`h-5 w-5`,

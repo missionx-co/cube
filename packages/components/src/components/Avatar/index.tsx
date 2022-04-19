@@ -36,7 +36,7 @@ const NameContainer = styled('div', {
     area: {
       sm: tw`text-sm`,
       base: tw`text-sm`,
-      lg: tw`text-md`,
+      lg: tw`text-base`,
       xl: tw`text-lg`,
     },
   },
@@ -48,8 +48,8 @@ const SubTextContainer = styled('div', {
     area: {
       sm: tw`text-xs`,
       base: tw`text-sm`,
-      lg: tw`text-md`,
-      xl: tw`text-md`,
+      lg: tw`text-base`,
+      xl: tw`text-base`,
     },
   },
 });
