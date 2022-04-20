@@ -1,0 +1,95 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import Example from '@components/Example';
+import MDXPage from '@components/Layout/MDXPage';
+import TextItem from '@components/TextItem';
+
+<Head>
+  <title>Typography - Cube</title>
+  <meta
+    name="description"
+    description="Cube default font-type, sizes and weight."
+  />
+</Head>
+
+<div className="flex flex-col text-gray-900 max-w-sm">
+  <span className="text-display-sm">Rubik</span>
+  <span className="text-display-2xl">Ag</span>
+  <span className="text-display-xs">{`ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 !@#$%^&*()`}</span>
+</div>
+
+<div className="flex flex-col space-y-20 mt-20">
+  <TextItem
+    name="Display 2xl"
+    description="Font size: 72px / 4.5rem | Line height: 90px / 5.625rem | Tracking: -2%"
+    className="text-display-2xl"
+  />
+  <TextItem
+    name="Display xl"
+    description="Font size: 60px / 3.75rem | Line height: 72px / 4.625rem | Tracking: -2%"
+    className="text-display-xl"
+  />
+  <TextItem
+    name="Display lg"
+    description="Font size: 48px / 3rem | Line height: 60px / 3.75rem | Tracking: -2%"
+    className="text-display-lg"
+  />
+  <TextItem
+    name="Display md"
+    description="Font size: 36px / 2.25rem | Line height: 44px / 2.75rem | Tracking: -2%"
+    className="text-display-md"
+  />
+  <TextItem
+    name="Display sm"
+    description="Font size: 30px / 1.875rem | Line height: 38px / 2.375rem"
+    className="text-display-sm"
+  />
+  <TextItem
+    name="Display xs"
+    description="Font size: 24px / 1.5rem | Line height: 32px / 2rem"
+    className="text-display-xs"
+  />
+  <TextItem
+    name="Text xl"
+    description="Font size: 20px / 1.25rem | Line height: 30px / 1.875rem"
+    className="text-xl"
+  />
+  <TextItem
+    name="Text lg"
+    description="Font size: 18px / 1.125rem | Line height: 28px / 1.75rem"
+    className="text-lg"
+  />
+  <TextItem
+    name="Text base"
+    description="Font size: 16px / 1rem | Line height: 24px / 1.5rem"
+    className="text-base"
+  />
+  <TextItem
+    name="Text sm"
+    description="Font size: 14px / 0.875rem | Line height: 20px / 1.25rem"
+    className="text-sm"
+  />
+  <TextItem
+    name="Text xs"
+    description="Font size: 12px / 0.75rem | Line height: 18px / 1.125rem"
+    className="text-xs"
+  />
+</div>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Typography"
+    page="typography"
+    description="Cube default font-type, sizes and weight."
+  >
+    {children}
+  </MDXPage>
+);
