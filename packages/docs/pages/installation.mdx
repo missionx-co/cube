@@ -22,7 +22,7 @@ import TextItem from '@components/TextItem';
 
 Cube is built on top of **React**, **Tailwind CSS** and **Stitches**. before you start Cube installation process you need to go through [Tailwind CSS installation process](https://tailwindcss.com/docs/installation).
 
-## 1. Install Cube foundation package
+### 1. Install Cube foundation package
 
 Cube's design system (colors, typography, font size, font weight and shadows) is packaged as a Tailwind CSS plugin. Run the following command to install the foundation package.
 
@@ -65,7 +65,7 @@ module.exports = {
 };
 ```
 
-## 2. Install cube components package
+### 2. Install cube components package
 
 Start using Cube's different components by installing the `@cube/components` package in your app.
 
@@ -75,7 +75,22 @@ npm install @cube/components
 yarn add @cube/components
 ```
 
-## 3. Integration with Next.js. (Optional)
+### 3. Add Global Styles to your app
+
+```jsx /cubeStyles/
+import { cubeStyles } from '@cube/components';
+
+function MyApp({ Component, pageProps }) {
+  cubeStyles();
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
+}
+```
+
+### 4. Integration with Next.js. (Optional)
 
 To avoid the ugly Flash Of Unstyled Content, add a server stylesheet in `pages/_document.tsx` that gets read by Next.js:
 

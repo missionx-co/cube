@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  cubeStyles();
   return (
     <Layout>
       <Component {...pageProps} />
