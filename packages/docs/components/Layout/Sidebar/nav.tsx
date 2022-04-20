@@ -8,6 +8,11 @@ export const docs = [
         text: 'Installation',
         href: '/installation',
       },
+      {
+        id: 'credits',
+        text: 'Credits',
+        href: '/credits',
+      },
     ],
   },
   {
@@ -59,6 +64,11 @@ export const docs = [
         id: 'date-picker',
         text: 'Date picker',
         href: '/components/date-picker',
+      },
+      {
+        id: 'markdown-editor',
+        text: 'Markdown text editor',
+        href: '/components/markdown-editor',
       },
       {
         id: 'modals',

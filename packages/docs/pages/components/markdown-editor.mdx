@@ -1,0 +1,40 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import Example from '@components/Example';
+import MDXPage from '@components/Layout/MDXPage';
+import TextItem from '@components/TextItem';
+
+<Head>
+  <title>Markdown text editor - Cube</title>
+  <meta
+    name="description"
+    description="Rich text editor that supports markdown, image upload, table insertion and commands. built on top of Tiptap."
+  />
+</Head>
+
+<div className="space-x-3">
+  <h3>We're still working on it .....</h3>
+  <p>
+    Thank you for showing your interenest in cube and the Markdown text editor.
+    we're still working on this one and we'll make sure to get it done as soon
+    as we can.
+  </p>
+</div>
+
+export default ({ children }) => (
+  <MDXPage
+    title="Markdown text editor"
+    page="markdown-editor"
+    description="Rich text editor that supports markdown, image upload, table insertion and commands. built on top of Tiptap."
+  >
+    {children}
+  </MDXPage>
+);

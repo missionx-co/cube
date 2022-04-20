@@ -1,0 +1,131 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import Example from '@components/Example';
+import MDXPage from '@components/Layout/MDXPage';
+import TextItem from '@components/TextItem';
+
+<Head>
+  <title>Installation - Cube</title>
+  <meta
+    name="description"
+    description="How to install Cube and get up and running."
+  />
+</Head>
+
+Cube is built on top of **React**, **Tailwind CSS** and **Stitches**. before you start Cube installation process you need to go through [Tailwind CSS installation process](https://tailwindcss.com/docs/installation).
+
+## 1. Install Cube foundation package
+
+Cube's design system (colors, typography, font size, font weight and shadows) is packaged as a Tailwind CSS plugin. Run the following command to install the foundation package.
+
+```
+npm install @cube/foundation
+
+yarn add @cube/foundation
+```
+
+Afterwards, you need to add the plugin to the Tailwind CSS config file. In your `tailwind.config.js` file add the following
+
+```js /require('@cube/foundation/dist/plugin')/
+module.exports = {
+  ...
+  theme: {
+    ...
+  },
+  plugins: [
+    ...
+    require('@cube/foundation/dist/plugin'),
+    ...
+  ],
+};
+```
+
+Finally, in order to make sure that your styles overrides Cube's components styles add the important flag to your Tailwind CSS config file.
+
+```js /important: true/
+module.exports = {
+  important: true,
+  ...
+  theme: {
+    ...
+  },
+  plugins: [
+    ...
+    require('@cube/foundation/dist/plugin'),
+    ...
+  ],
+};
+```
+
+## 2. Install cube components package
+
+Start using Cube's different components by installing the `@cube/components` package in your app.
+
+```
+npm install @cube/components
+
+yarn add @cube/components
+```
+
+## 3. Integration with Next.js. (Optional)
+
+To avoid the ugly Flash Of Unstyled Content, add a server stylesheet in `pages/_document.tsx` that gets read by Next.js:
+
+```jsx /getCubeCssText/
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
+
+import { getCubeCssText } from '@cube/components';
+
+export default class Document extends NextDocument {
+  static async getInitialProps(ctx: any) {
+    try {
+      const initialProps = await NextDocument.getInitialProps(ctx);
+
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {/* Stitches CSS for SSR */}
+            <style
+              id="stitches"
+              dangerouslySetInnerHTML={{ __html: getCubeCssText() }}
+            />
+          </>
+        ),
+      };
+    } finally {
+    }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+```
+
+export default ({ children }) => (
+  <MDXPage
+    title="Installation"
+    page="installation"
+    description="How to install Cube and get up and running."
+  >
+    {children}
+  </MDXPage>
+);

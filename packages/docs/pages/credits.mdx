@@ -1,0 +1,30 @@
+import {
+  ChevronDownIcon,
+  DuplicateIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
+import Head from 'next/head';
+
+import { Button, Dropdown } from '@cube/components';
+
+import Example from '@components/Example';
+import MDXPage from '@components/Layout/MDXPage';
+import TextItem from '@components/TextItem';
+
+<Head>
+  <title>Credits - Cube</title>
+</Head>
+
+**Cube** is created by [Mohammed Manssour](https://mohammedmanssour.me) of [MissionX](https://missionx.co)
+
+## Credit where credit's due:
+
+1. **Untitled UI**: [link](https://www.untitledui.com/), Cube is heavilly inspired by UntitledUI and this project would never be done with the free version of the Figma Design System.
+2. **twin.macro**: [link](https://github.com/ben-rogerson/twin.macro). `twin.macro` has made all of this possible and easy.
+
+export default ({ children }) => (
+  <MDXPage title="Credits" page="credits">
+    {children}
+  </MDXPage>
+);
