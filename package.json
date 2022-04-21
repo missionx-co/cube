@@ -4,6 +4,7 @@
   "description": "Design System, UI Kit and an Admin dashboard built with React and Tailwind CSS. Based on Untitled UI",
   "private": true,
   "scripts": {
+    "foundation:build": "yarn workspace @cube-ui/foundation build",
     "components:watch": "yarn workspace @cube-ui/components dev",
     "components:types": "yarn workspace @cube-ui/components types",
     "docs:watch": "yarn workspace @cube-ui/docs dev",
