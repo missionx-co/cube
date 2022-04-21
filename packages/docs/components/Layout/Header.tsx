@@ -1,7 +1,6 @@
+import { Button } from '@cube-ui/components';
 import { MenuIcon } from '@heroicons/react/outline';
 import { FC } from 'react';
-
-import { Button } from '@cube/components';
 
 import Logo from '@components/logo';
 

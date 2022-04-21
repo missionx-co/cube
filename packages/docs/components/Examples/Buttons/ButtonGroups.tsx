@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-import { Button } from '@cube/components';
+import { Button } from '@cube-ui/components';
 
 import Example from '@components/Example';
 

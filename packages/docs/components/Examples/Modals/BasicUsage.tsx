@@ -1,6 +1,5 @@
+import { Button, Modal } from '@cube-ui/components';
 import { FC, Fragment, useState } from 'react';
-
-import { Button, Modal } from '@cube/components';
 
 import Example from '@components/Example';
 

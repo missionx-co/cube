@@ -1,3 +1,4 @@
+import { Button, Dropdown } from '@cube-ui/components';
 import {
   ChevronDownIcon,
   DuplicateIcon,
@@ -5,8 +6,6 @@ import {
   TrashIcon,
 } from '@heroicons/react/outline';
 import Head from 'next/head';
-
-import { Button, Dropdown } from '@cube/components';
 
 import CodeSnippet from '@components/CodeSnippet';
 import Example from '@components/Example';
@@ -26,7 +25,7 @@ import PropsList from '@components/PropsList';
 ## Import
 
 ```jsx
-import { Dropdown } from '@cube/components';
+import { Dropdown } from '@cube-ui/components';
 ```
 
 ## Usage
@@ -76,14 +75,13 @@ component that you want to use and you may pass any props to `Dropdown.Button` w
 </Example>
 
 ```jsx
+import { Button, Dropdown } from '@cube-ui/components';
 import {
   ChevronDownIcon,
   DuplicateIcon,
   PencilAltIcon,
   TrashIcon,
 } from '@heroicons/react/outline';
-
-import { Button, Dropdown } from '@cube/components';
 
 <Dropdown
   buttonRenderer={({ ref }) => (

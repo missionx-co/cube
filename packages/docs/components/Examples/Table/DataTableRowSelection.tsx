@@ -1,6 +1,5 @@
+import { Avatar, Badge, DataTable } from '@cube-ui/components';
 import React from 'react';
-
-import { Avatar, Badge, DataTable } from '@cube/components';
 
 import Example from '@components/Example';
 

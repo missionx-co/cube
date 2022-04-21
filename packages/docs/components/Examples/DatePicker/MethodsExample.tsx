@@ -1,6 +1,5 @@
+import { Button, DatePicker } from '@cube-ui/components';
 import { FC, useRef } from 'react';
-
-import { Button, DatePicker } from '@cube/components';
 
 import Example from '@components/Example';
 

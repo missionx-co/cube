@@ -1,4 +1,4 @@
-import { Color } from '@cube/foundation';
+import { Color } from '@cube-ui/foundation';
 import { HTMLProps } from 'react';
 
 export type AlertVariant = 'light' | 'filled';

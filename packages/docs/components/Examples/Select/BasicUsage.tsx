@@ -1,4 +1,4 @@
-import { Select } from '@cube/components';
+import { Select } from '@cube-ui/components';
 
 import Example from '@components/Example';
 

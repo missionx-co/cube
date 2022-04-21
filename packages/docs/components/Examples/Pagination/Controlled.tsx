@@ -1,6 +1,5 @@
+import { Pagination } from '@cube-ui/components';
 import React, { FC, useState } from 'react';
-
-import { Pagination } from '@cube/components';
 
 import Example from '@components/Example';
 

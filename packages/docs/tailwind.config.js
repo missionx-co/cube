@@ -12,7 +12,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('@cube/foundation/dist/plugin'),
+    require('@cube-ui/foundation/dist/plugin'),
     require('@tailwindcss/typography'),
   ],
 };

@@ -1,6 +1,5 @@
+import { Avatar, Combobox } from '@cube-ui/components';
 import { FC } from 'react';
-
-import { Avatar, Combobox } from '@cube/components';
 
 import Example from '@components/Example';
 

@@ -1,6 +1,5 @@
+import { Avatar, FancySelect } from '@cube-ui/components';
 import { FC, useState } from 'react';
-
-import { Avatar, FancySelect } from '@cube/components';
 
 import Example from '@components/Example';
 

@@ -1,6 +1,5 @@
+import { Transition } from '@cube-ui/components';
 import { FC, ReactNode, useEffect, useLayoutEffect, useState } from 'react';
-
-import { Transition } from '@cube/components';
 
 interface IPage {
   title?: string;

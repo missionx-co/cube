@@ -1,6 +1,5 @@
+import { getCubeCssText } from '@cube-ui/components';
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
-
-import { getCubeCssText } from '@cube/components';
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: any) {

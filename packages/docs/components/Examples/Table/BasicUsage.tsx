@@ -1,6 +1,5 @@
+import { Table } from '@cube-ui/components';
 import React from 'react';
-
-import { Table } from '@cube/components';
 
 import Example from '@components/Example';
 

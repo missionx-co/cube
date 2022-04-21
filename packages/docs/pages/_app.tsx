@@ -1,6 +1,5 @@
+import { cubeStyles } from '@cube-ui/components';
 import type { AppProps } from 'next/app';
-
-import { cubeStyles } from '@cube/components';
 
 import Layout from '../components/Layout';
 import '../styles/globals.css';

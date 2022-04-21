@@ -1,6 +1,5 @@
+import { Button, Tooltip } from '@cube-ui/components';
 import { FC, useState } from 'react';
-
-import { Button, Tooltip } from '@cube/components';
 
 const DeleteConfirmation: FC = () => {
   return (

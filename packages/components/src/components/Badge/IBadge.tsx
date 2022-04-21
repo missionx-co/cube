@@ -1,7 +1,7 @@
-import { HTMLProps } from "react";
-import { Color } from "@cube/foundation";
+import { Color } from '@cube-ui/foundation';
+import { HTMLProps } from 'react';
 
 export default interface IBadge extends HTMLProps<HTMLSpanElement> {
   color?: Color;
-  area?: "sm" | "base" | "lg";
+  area?: 'sm' | 'base' | 'lg';
 }

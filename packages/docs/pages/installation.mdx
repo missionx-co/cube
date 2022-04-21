@@ -1,3 +1,4 @@
+import { Button, Dropdown } from '@cube-ui/components';
 import {
   ChevronDownIcon,
   DuplicateIcon,
@@ -5,8 +6,6 @@ import {
   TrashIcon,
 } from '@heroicons/react/outline';
 import Head from 'next/head';
-
-import { Button, Dropdown } from '@cube/components';
 
 import Example from '@components/Example';
 import MDXPage from '@components/Layout/MDXPage';
@@ -27,14 +26,14 @@ Cube is built on top of **React**, **Tailwind CSS** and **Stitches**. before you
 Cube's design system (colors, typography, font size, font weight and shadows) is packaged as a Tailwind CSS plugin. Run the following command to install the foundation package.
 
 ```
-npm install @cube/foundation
+npm install @cube-ui/foundation
 
-yarn add @cube/foundation
+yarn add @cube-ui/foundation
 ```
 
 Afterwards, you need to add the plugin to the Tailwind CSS config file. In your `tailwind.config.js` file add the following
 
-```js /require('@cube/foundation/dist/plugin')/
+```js /require('@cube-ui/foundation/dist/plugin')/
 module.exports = {
   ...
   theme: {
@@ -42,7 +41,7 @@ module.exports = {
   },
   plugins: [
     ...
-    require('@cube/foundation/dist/plugin'),
+    require('@cube-ui/foundation/dist/plugin'),
     ...
   ],
 };
@@ -59,7 +58,7 @@ module.exports = {
   },
   plugins: [
     ...
-    require('@cube/foundation/dist/plugin'),
+    require('@cube-ui/foundation/dist/plugin'),
     ...
   ],
 };
@@ -67,18 +66,18 @@ module.exports = {
 
 ### 2. Install cube components package
 
-Start using Cube's different components by installing the `@cube/components` package in your app.
+Start using Cube's different components by installing the `@cube-ui/components` package in your app.
 
 ```
-npm install @cube/components
+npm install @cube-ui/components
 
-yarn add @cube/components
+yarn add @cube-ui/components
 ```
 
 ### 3. Add Global Styles to your app
 
 ```jsx /cubeStyles/
-import { cubeStyles } from '@cube/components';
+import { cubeStyles } from '@cube-ui/components';
 
 function MyApp({ Component, pageProps }) {
   cubeStyles();
@@ -95,9 +94,8 @@ function MyApp({ Component, pageProps }) {
 To avoid the ugly Flash Of Unstyled Content, add a server stylesheet in `pages/_document.tsx` that gets read by Next.js:
 
 ```jsx /getCubeCssText/
+import { getCubeCssText } from '@cube-ui/components';
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
-
-import { getCubeCssText } from '@cube/components';
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: any) {

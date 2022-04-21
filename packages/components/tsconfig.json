@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
   },
   "include": ["./src"],
   "exclude": [
