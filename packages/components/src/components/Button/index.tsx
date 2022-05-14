@@ -6,7 +6,8 @@ import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import { styled } from '../../stitches.config';
 import Group, { IButtonsGroup } from './Group';
 import IButton from './IButton';
-import { base, error, primary } from './styles';
+import Spinner from './Spinner';
+import { base, error, primary, success } from './styles';
 
 type IButtonType = ForwardedComponent<IButton, HTMLButtonElement> & {
   Group: FC<IButtonsGroup>;
@@ -41,20 +42,26 @@ const StyledButton: StyledComponentType<any> = styled('button', {
       outline: {},
       link: {},
     },
+    loading: {
+      true: tw`opacity-90 cursor-not-allowed`,
+      false: {},
+    },
   },
-  compoundVariants: [...primary, ...error],
+  compoundVariants: [...primary, ...error, ...success],
 });
 
 const Button: any = forwardRef<HTMLButtonElement, IButton>(
-  ({ color, variant, area, children, ...props }, ref) => (
+  ({ color, variant, area, loading, disabled, children, ...props }, ref) => (
     <StyledButton
       ref={ref}
       color={color}
       area={area}
       variant={variant}
+      loading={loading}
+      disabled={loading || disabled}
       {...props}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </StyledButton>
   ),
 );
@@ -63,6 +70,7 @@ Button.defaultProps = {
   color: 'primary',
   variant: 'fill',
   area: 'base',
+  loading: false,
 };
 
 Button.Group = Group;

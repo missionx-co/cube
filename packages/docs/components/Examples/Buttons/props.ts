@@ -8,12 +8,17 @@ export const propsList = [
   },
   {
     name: 'color',
-    type: litteral(['primary', 'error']),
+    type: litteral(['primary', 'error', 'success']),
     default: 'primary',
   },
   {
     name: 'variant',
     type: litteral(['fill', 'light', 'outline', 'link']),
     default: 'fill',
+  },
+  {
+    name: 'loading',
+    type: 'boolean',
+    default: 'false',
   },
 ];
