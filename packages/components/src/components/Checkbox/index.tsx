@@ -24,7 +24,7 @@ export const VirtualCheckbox = styled('div', {
       base: tw`w-6 h-6`,
     },
     focus: {
-      true: tw`ring-1 ring-primary-300`,
+      true: tw`ring-2 ring-offset-1 ring-primary-300`,
     },
     disabled: {
       true: tw`bg-gray-100 border-gray-200 cursor-not-allowed`,

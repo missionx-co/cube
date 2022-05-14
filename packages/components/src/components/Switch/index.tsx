@@ -13,7 +13,7 @@ import ISwitch from './ISwitch';
 const ContainerLabel = styled('label', tw`flex items-center`);
 
 const SwitchContainer = styled('div', {
-  ...tw`block rounded-xl relative p-0.5 transition-colors duration-300 ease-in-out`,
+  ...tw`block rounded-xl relative p-0.5 transition-colors duration-300 ease-in-out shadow-inner`,
   variants: {
     area: {
       base: tw`w-11 h-6`,
@@ -21,10 +21,10 @@ const SwitchContainer = styled('div', {
     },
     selected: {
       true: tw`bg-primary-600`,
-      false: tw`bg-gray-100 hover:bg-gray-200`,
+      false: tw`bg-gray-100 hover:bg-gray-200 border border-gray-200`,
     },
     focus: {
-      true: tw`ring-4 ring-primary-100`,
+      true: tw`ring-2 ring-offset-1 ring-primary-200`,
     },
     disabled: {
       true: tw`bg-gray-50 cursor-not-allowed`,
