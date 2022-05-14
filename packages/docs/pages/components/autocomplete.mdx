@@ -46,25 +46,24 @@ import { Combobox } from '@cube-ui/components';
 </Example>
 
 ```jsx
-<FancySelect
-  options={[
-    {
-      id: 'asia',
-      value: 'asia',
-      text: 'Asia',
-    },
-    {
-      id: 'afria',
-      value: 'afria',
-      text: 'Africa',
-    },
-    {
-      id: 'europe',
-      value: 'europe',
-      text: 'Europe',
-      disabled: true,
-    },
-  ]}
+<Combobox
+  options={() =>
+    Promise.resolve([
+      {
+        value: 'asia',
+        text: 'Asia',
+      },
+      {
+        value: 'afria',
+        text: 'Africa',
+      },
+      {
+        value: 'europe',
+        text: 'Europe',
+        disabled: true,
+      },
+    ])
+  }
 />
 ```
 

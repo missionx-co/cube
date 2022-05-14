@@ -5186,11 +5186,6 @@ react-aria@^3.14.0:
     "@react-aria/utils" "^3.11.3"
     "@react-aria/visually-hidden" "^3.2.6"
 
-react-css-transition-hook@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-css-transition-hook/-/react-css-transition-hook-2.1.0.tgz#28ed45d1cd7103c2349e4a76503ec5ec4f2624d4"
-  integrity sha512-i0RC/GdedRzpovpVlF5NckUwUQp/gjokiNl0YY5RUZpBNdLqxxIFaFGI03MGgEZdmyKu7ZQMX6e1RKTZO8cTKw==
-
 react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"

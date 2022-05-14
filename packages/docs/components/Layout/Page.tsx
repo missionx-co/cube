@@ -1,5 +1,5 @@
 import { Transition } from '@cube-ui/components';
-import { FC, ReactNode, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 interface IPage {
   title?: string;
@@ -9,7 +9,7 @@ interface IPage {
 const Page: FC<IPage> = ({ title, description, children }) => {
   const [show, setShow] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let timeout = setTimeout(() => setShow(true), 150);
     return () => clearTimeout(timeout);
   }, []);

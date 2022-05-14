@@ -1,24 +1,24 @@
-import tw from "twin.macro";
-import React, { FC, useLayoutEffect } from "react";
-import { useFloating, shift, flip, offset } from "@floating-ui/react-dom";
-import { useOverlay, DismissButton, FocusScope } from "react-aria";
-import { styled } from "../../stitches.config";
+import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
+import { StyledComponentType } from '@stitches/core/types/styled-component';
+import React, { FC, useEffect } from 'react';
+import { DismissButton, FocusScope, useOverlay } from 'react-aria';
+import tw from 'twin.macro';
 
-import { StyledComponentType } from "@stitches/core/types/styled-component";
-import IPopover from "./IPopover";
+import { styled } from '../../stitches.config';
+import IPopover from './IPopover';
 
-const Container: StyledComponentType<any> = styled("div", {
+const Container: StyledComponentType<any> = styled('div', {
   ...tw`absolute z-10 w-full mt-2 overflow-hidden bg-white border border-gray-300 rounded-md`,
 });
 
 const Popover: FC<IPopover> = (props) => {
   const { x, y, refs, floating, reference, strategy } = useFloating({
-    placement: "bottom",
+    placement: 'bottom',
     middleware: [
       shift(),
       flip(),
       offset(({ placement }) => {
-        if (placement.includes("top")) {
+        if (placement.includes('top')) {
           return 17;
         }
         return 0;
@@ -34,10 +34,10 @@ const Popover: FC<IPopover> = (props) => {
       shouldCloseOnBlur: true,
       isDismissable: false,
     },
-    refs.floating
+    refs.floating,
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     reference(props.triggerRef.current);
   }, [props.triggerRef.current]);
 
@@ -46,7 +46,7 @@ const Popover: FC<IPopover> = (props) => {
       <Container
         ref={floating}
         {...overlayProps}
-        style={{ potition: strategy, top: y ?? "", left: x ?? "" }}
+        style={{ potition: strategy, top: y ?? '', left: x ?? '' }}
       >
         {children}
         <DismissButton onDismiss={onClose} />

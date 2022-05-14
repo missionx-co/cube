@@ -9,14 +9,7 @@ import {
   useListNavigation,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import React, {
-  FC,
-  Fragment,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 
 import Input from '../Input';
 import ICombobox, { Option } from './ICombobox';
@@ -77,7 +70,7 @@ const Combobox: FC<ICombobox> & {
       ],
     });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Wait for `size` to have performed its work, avoids infinite loops
     // and jumps.
     const frame = requestAnimationFrame(() => {

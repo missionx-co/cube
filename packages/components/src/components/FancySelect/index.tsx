@@ -17,10 +17,8 @@ import { SelectorIcon } from '@heroicons/react/outline';
 import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, {
   FC,
-  Fragment,
   ReactNode,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -230,7 +228,7 @@ const FancySelect: FC<IFancySelect> & {
 
   // Scroll the active or selected item into view when in `controlledScrolling`
   // mode (i.e. arrow key nav).
-  useLayoutEffect(() => {
+  useEffect(() => {
     const floating = floatingRef.current;
 
     if (!open || !controlledScrolling || !floating) {
@@ -265,7 +263,7 @@ const FancySelect: FC<IFancySelect> & {
   }, [open, controlledScrolling, prevActiveIndex, activeIndex]);
 
   // Sync the height and the scrollTop values
-  useLayoutEffect(() => {
+  useEffect(() => {
     const floating = refs.floating.current;
     if (open && floating && floating.offsetHeight < floating.scrollHeight) {
       const item = listItemsRef.current[selectedIndex];

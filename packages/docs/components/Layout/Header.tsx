@@ -2,20 +2,13 @@ import { Button } from '@cube-ui/components';
 import { MenuIcon } from '@heroicons/react/outline';
 import { FC } from 'react';
 
-import Logo from '@components/logo';
+import Cube from '@components/Cube';
 
 const Header: FC<{ onMenuClicked: () => void }> = ({ onMenuClicked }) => {
   return (
     <header className="lg:hidden h-20 py-2 border-b border-gray-200 shadow-md">
       <div className="container flex flex-row justify-between px-20 mx-auto">
-        <div className="flex items-center space-x-3">
-          <span className="w-14 h-14 fill-current">
-            <Logo />
-          </span>
-          <span className="text-display-sm bg-clip-text bg-gradient-to-r from-primary-900 to-primary-700 font-medium text-transparent">
-            Cube
-          </span>
-        </div>
+        <Cube />
 
         <Button
           variant="outline"

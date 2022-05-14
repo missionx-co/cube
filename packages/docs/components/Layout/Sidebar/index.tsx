@@ -3,7 +3,7 @@ import clsx from 'classnames';
 import Link from 'next/link';
 import { forwardRef } from 'react';
 
-import Logo from '@components/logo';
+import Cube from '@components/Cube';
 
 import { useSidebarContext } from '../SidebarContext';
 import { docs } from './nav';
@@ -16,13 +16,8 @@ const Sidebar: any = forwardRef<HTMLElement, unknown>((props, ref) => {
       ref={ref}
       className="w-72 lg:flex lg:translate-x-0 fixed top-0 left-0 z-10 flex-col h-screen px-6 pt-8 space-y-6 text-gray-900 transition duration-300 ease-in-out transform -translate-x-full bg-gray-100"
     >
-      <header className="flex items-center space-x-3">
-        <span className="w-14 h-14 fill-current">
-          <Logo />
-        </span>
-        <span className="text-display-sm bg-clip-text bg-gradient-to-r from-primary-900 to-primary-700 font-medium text-transparent">
-          Cube
-        </span>
+      <header>
+        <Cube />
       </header>
       <nav className="space-y-2">
         <Link href="/admin-panel">
