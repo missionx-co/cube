@@ -51,7 +51,7 @@ function Home({ exampleCode }: any) {
           </div>
         </div>
       </header>
-      <div className="my-14 md:mt-40 md:mb-20 max-w-3xl px-2 mx-auto space-y-5 text-center">
+      <div className="my-14 md:my-40 max-w-3xl px-2 mx-auto space-y-5 text-center">
         <h1 className="text-display-md font-bold text-center">
           Accessible, Productive and Customizable
         </h1>
@@ -138,7 +138,7 @@ function Home({ exampleCode }: any) {
           <Button>Create new account</Button>
         </div>
         <div
-          className="lg:w-1/2 overflow-scroll bg-[#0d1117] p-4 rounded-lg font-mono h-[620px]"
+          className="lg:w-1/2 overflow-scroll bg-[#222222] p-4 rounded-lg font-mono h-[620px]"
           dangerouslySetInnerHTML={{ __html: exampleCode }}
         />
       </div>
@@ -223,10 +223,10 @@ export async function getStaticProps() {
 </div>`;
 
   const highlighter = await shiki.getHighlighter({
-    theme: 'github-dark',
+    theme: 'slack-dark',
   });
 
-  const exampleCode = highlighter.codeToHtml(code, { lang: 'jsx' });
+  const exampleCode = highlighter.codeToHtml(code, { lang: 'js' });
 
   return {
     props: {
