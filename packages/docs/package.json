@@ -10,7 +10,7 @@
   "homepage": "https://cube.mohammedmanssour.me",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules"

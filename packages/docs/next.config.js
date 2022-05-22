@@ -30,6 +30,7 @@ const withMDX = require('@next/mdx')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
   images: {
     domains: ['images.unsplash.com'],
   },
