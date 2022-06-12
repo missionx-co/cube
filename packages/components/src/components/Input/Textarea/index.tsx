@@ -1,11 +1,12 @@
-import React, { FC } from "react";
-import tw from "twin.macro";
-import { styled } from "../../../stitches.config";
+import { StyledComponentProps } from '@stitches/core/types/styled-component';
+import React, { FC } from 'react';
+import tw from 'twin.macro';
 
-import { StyledComponentProps } from "@stitches/core/types/styled-component";
+import { styled } from '../../../stitches.config';
+import ITextarea from './ITextarea';
 
-const StyledTextarea: StyledComponentProps<any> = styled("textarea", {
-  ...tw`w-full px-3.5 py-2.5 border rounded-lg w-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed`,
+const StyledTextarea: StyledComponentProps<any> = styled('textarea', {
+  ...tw`px-3.5 py-2.5 focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed w-full text-gray-900 placeholder-gray-500 border rounded-lg`,
   variants: {
     error: {
       true: {
@@ -18,8 +19,11 @@ const StyledTextarea: StyledComponentProps<any> = styled("textarea", {
   },
 });
 
-import ITextarea from "./ITextarea";
-
-const Textarea: FC<ITextarea> = (props) => <StyledTextarea {...props} />;
+const Textarea: FC<ITextarea> = ({ error, ...props }) => (
+  <StyledTextarea error={error} {...props} />
+);
+Textarea.defaultProps = {
+  error: false,
+};
 
 export default Textarea;
