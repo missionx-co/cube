@@ -14,7 +14,7 @@ import { LEFT_PAGE, RIGHT_PAGE, fetchPageNumbers } from './utils';
 
 const PaginationContainer: StyledComponentType<any> = styled(
   'nav',
-  tw`flex space-x-2`,
+  tw`flex space-x-2 text-sm`,
 );
 
 const ChevronDoubleLeftIconContainer: StyledComponentType<any> = styled(
