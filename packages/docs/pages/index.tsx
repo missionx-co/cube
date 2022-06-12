@@ -13,6 +13,8 @@ import * as shiki from 'shiki';
 import Cube from '@components/Cube';
 import GithubIcon from '@components/GithubIcon';
 
+import HomepageExample from '../components/Examples/HomepageExample/index';
+
 function Home({ exampleCode }: any) {
   const router = useRouter();
 
@@ -50,97 +52,38 @@ function Home({ exampleCode }: any) {
           </div>
         </div>
       </header>
-      <div className="my-14 md:my-40 max-w-3xl px-2 mx-auto space-y-5 text-center">
-        <h1 className="text-display-md font-bold text-center">
-          Accessible, Productive and Customizable
-        </h1>
-        <p className="text-xl leading-relaxed">
-          <strong className="text-primary-600 font-medium">Cube</strong> is a
-          simple Design system, React Components Library and UI Kit built with{' '}
-          <strong className="text-primary-600 font-medium">React</strong>,{' '}
-          <strong className="text-primary-600 font-medium">Tailwind CSS</strong>{' '}
-          and{' '}
-          <strong className="text-primary-600 font-medium">stitches.dev</strong>
-          .
-        </p>
-        <div className="space-x-5">
-          <Button onClick={goToInstallation}>Get Started</Button>
-          <Button
-            onClick={goToGithub}
-            variant="light"
-            className="hover:bg-gray-200 text-gray-700 bg-gray-100"
-          >
-            Star on Github
-          </Button>
+      <div className="lg:flex-row lg:space-y-0 lg:space-x-10 container flex flex-col items-center px-2 mx-auto my-12 space-y-10">
+        <div className="lg:w-1/2 flex-shrink-0 w-full space-y-5">
+          <h1 className="text-display-md font-bold">
+            Accessible-ish, Productive and Customizable
+          </h1>
+          <p className="text-xl leading-relaxed">
+            <strong className="text-primary-600 font-medium">Cube</strong> is a
+            simple Design system, React Components Library and UI Kit built with{' '}
+            <strong className="text-primary-600 font-medium">React</strong>,{' '}
+            <strong className="text-primary-600 font-medium">
+              Tailwind CSS
+            </strong>{' '}
+            and{' '}
+            <strong className="text-primary-600 font-medium">
+              stitches.dev
+            </strong>
+            .
+          </p>
+          <div className="space-x-5">
+            <Button onClick={goToInstallation}>Get Started</Button>
+            <Button
+              onClick={goToGithub}
+              variant="light"
+              className="hover:bg-gray-200 text-gray-700 bg-gray-100"
+            >
+              Star on Github
+            </Button>
+          </div>
         </div>
+        <HomepageExample exampleCode={exampleCode} />
       </div>
-      <h1 className="text-display-sm mb-10 font-medium text-center">
-        Let{"'"}s see some code
-      </h1>
-      <div className="lg:flex-row lg:space-y-0 lg:space-x-5 container flex flex-col p-2 mx-auto space-y-5">
-        <div className="bordar-gray-200 lg:w-1/2 p-4 space-y-5 border border-gray-200 rounded-lg">
-          <h1 className="text-lg font-medium">Example Signup Form</h1>
-          <FormControl id="name" fieldLabel="name">
-            <Input id="name" name="name" placeholder="Mohammed Manssour" />
-          </FormControl>
 
-          <FormControl
-            id="email"
-            fieldLabel="Email"
-            error="Please enter valid email"
-          >
-            <Input
-              id="email"
-              name="email"
-              placeholder="hello@mohammedmanssour.me"
-            />
-          </FormControl>
-          <FormControl
-            id="password"
-            fieldLabel="Password"
-            hint="Password must be 8 charachters at least."
-          >
-            <Input id="password" name="password" type="password" />
-          </FormControl>
-          <FormControl id="Timezone" fieldLabel="Timezone">
-            <Combobox
-              placeholder="Type to find your timezone"
-              options={(searchQuery: string) =>
-                Promise.resolve(
-                  [
-                    {
-                      value: 'Asia/Dubai',
-                      text: 'Dubai, United Arab Emirates',
-                    },
-                    {
-                      value: 'UTC',
-                      text: 'UTC',
-                    },
-                  ].filter((person) =>
-                    person.text
-                      .toLocaleLowerCase()
-                      .includes(searchQuery.toLocaleLowerCase()),
-                  ),
-                )
-              }
-            />
-          </FormControl>
-          <Checkbox className="items-center w-10 h-10 p-1 rounded-full">
-            <Checkbox.Label className="flex flex-col ml-4">
-              <span>Terms and conditions</span>
-              <span className="font-normal text-gray-500">
-                I agree on terms and conditions.
-              </span>
-            </Checkbox.Label>
-          </Checkbox>
-
-          <Button>Create new account</Button>
-        </div>
-        <div
-          className="lg:w-1/2 overflow-scroll bg-[#222222] p-4 rounded-lg font-mono h-[620px]"
-          dangerouslySetInnerHTML={{ __html: exampleCode }}
-        />
-      </div>
       <footer className="py-10 text-center">
         Built by{' '}
         <a
