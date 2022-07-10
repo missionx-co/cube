@@ -146,6 +146,7 @@ const Combobox: FC<ICombobox> & {
                 items[activeIndex] &&
                 !items[activeIndex].disabled
               ) {
+                event.preventDefault();
                 onItemSelect(items[activeIndex]);
               }
             },
