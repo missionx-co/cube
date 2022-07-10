@@ -134,6 +134,7 @@ const Combobox: FC<ICombobox> & {
         <Input
           error={error}
           disabled={disabled}
+          autoComplete="off"
           {...getReferenceProps({
             ref: reference,
             onChange: onInputChange,
