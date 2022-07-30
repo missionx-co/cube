@@ -1,6 +1,6 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 import { addMonths } from 'date-fns';
-import React, { FC, forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef } from 'react';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -8,12 +8,6 @@ import Button from '../Button';
 import CalendarUI from './CalendarUI';
 import IDatePicker from './IDatePicker';
 import Input from './Input';
-import {
-  CalendarContainer,
-  DatePickerContainer,
-  FooterContainer,
-  PopoverContainer,
-} from './styles';
 import { DatePickerContext, useDatePicker } from './useDataPicker';
 
 const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
@@ -53,7 +47,7 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
 
     return (
       <DatePickerContext.Provider value={datePicker}>
-        <DatePickerContainer>
+        <div className="relative flex w-full">
           {inputRenderer ? (
             inputRenderer({
               ...inputProps,
@@ -71,7 +65,8 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
             />
           )}
           {datePicker.open && (
-            <PopoverContainer
+            <div
+              className="absolute z-50 p-2 bg-white border border-gray-300 rounded-lg"
               ref={floating}
               style={{ top: y ?? '', left: x ?? '' }}
               onKeyDown={datePicker.handleKeyDown}
@@ -79,7 +74,7 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
               aria-modal={true}
               aria-label={placeholder ?? 'Choose Date'}
             >
-              <CalendarContainer>
+              <div className="flex space-x-8">
                 {[...Array(monthsShown).keys()].map((month) => (
                   <CalendarUI
                     key={month}
@@ -90,8 +85,8 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
                     }
                   />
                 ))}
-              </CalendarContainer>
-              <FooterContainer>
+              </div>
+              <div className="flex items-center justify-end pt-2 space-x-3 border-t border-gray-200 border-dotted">
                 <Button
                   area="sm"
                   variant="outline"
@@ -103,10 +98,10 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
                 <Button area="sm" onClick={datePicker.onApply}>
                   Apply
                 </Button>
-              </FooterContainer>
-            </PopoverContainer>
+              </div>
+            </div>
           )}
-        </DatePickerContainer>
+        </div>
       </DatePickerContext.Provider>
     );
   },
