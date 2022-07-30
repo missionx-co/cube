@@ -1,7 +1,7 @@
 {
   "name": "@cube-ui/components",
   "description": "cube shared components",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "license": "MIT",
@@ -38,12 +38,6 @@
   },
   "dependencies": {
     "@cube-ui/foundation": "~0.0.2",
-    "@stitches/core": "^1.2.7",
-    "@stitches/react": "^1.2.7",
-    "classnames": "^2.3.1",
-    "react": "^17.0.2",
-    "react-aria": "^3.14.0",
-    "date-fns": "^2.28.0",
     "@floating-ui/dom": "^0.4.1",
     "@floating-ui/react-dom": "^0.6.0",
     "@floating-ui/react-dom-interactions": "^0.1.1",
@@ -57,10 +51,17 @@
     "@react-aria/visually-hidden": "^3.2.7",
     "@react-stately/radio": "^3.3.5",
     "@react-stately/toggle": "^3.2.6",
-    "tailwindcss": "^3.0.23",
+    "@stitches/core": "^1.2.7",
+    "@stitches/react": "^1.2.7",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.28.0",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-aria": "^3.14.0",
     "react-stately": "^3.12.2",
-    "transition-hook": "^1.5.2",
-    "lodash": "^4.17.21"
+    "tailwind-merge": "^1.5.1",
+    "tailwindcss": "^3.0.23",
+    "transition-hook": "^1.5.2"
   },
   "keywords": [
     "react",
