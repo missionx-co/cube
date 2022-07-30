@@ -1,21 +1,13 @@
-import get from 'lodash/get';
+import getAlertStyles from '@cube-ui/styles/dist/alert';
 import React, { FC } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import IAlert from './IAlert';
 import Title, { TitleType } from './Title';
-import styles from './styles';
 
 const Alert: FC<IAlert> & {
   Title: TitleType;
 } = ({ color, variant, children, className, ...props }) => {
-  const twClass = twMerge(
-    styles.base,
-    get(styles, variant as string),
-    get(styles, color as string),
-    get(styles, `${color}-${variant}`),
-    className,
-  );
+  const twClass = getAlertStyles({ variant, color }, className);
   return (
     <div className={twClass} role="alert" {...props}>
       {children}

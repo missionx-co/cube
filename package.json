@@ -8,8 +8,10 @@
     "components:watch": "yarn workspace @cube-ui/components dev",
     "components:types": "yarn workspace @cube-ui/components types",
     "docs:watch": "yarn workspace @cube-ui/docs dev",
+    "styles:watch": "yarn workspace @cube-ui/styles dev",
+    "styles:types": "yarn workspace @cube-ui/styles types",
     "types": "yarn workspace @cube-ui/components types && yarn workspace @cube-ui/foundation types",
-    "build": "yarn workspace @cube-ui/foundation build && yarn workspace @cube-ui/components build",
+    "build": "yarn workspace @cube-ui/foundation build && yarn workspace @cube-ui/styles build && yarn workspace @cube-ui/components build",
     "clean": "rm -rf node_modules && yarn workspaces run clean"
   },
   "workspaces": [

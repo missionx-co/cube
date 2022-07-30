@@ -1,12 +1,12 @@
+import { getAlertTitleStyles } from '@cube-ui/styles/dist/alert';
 import React, { FC, HTMLProps } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 interface ITitle extends HTMLProps<HTMLHeadingElement> {}
 
 export type TitleType = FC<ITitle>;
 
 const Title: TitleType = ({ children, className, ...props }) => (
-  <h3 className={twMerge('mr-3 font-medium', className)} {...props}>
+  <h3 className={getAlertTitleStyles(className)} {...props}>
     {children}
   </h3>
 );

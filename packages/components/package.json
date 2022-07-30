@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@cube-ui/foundation": "~0.0.2",
+    "@cube-ui/styles": "0.3.0",
     "@floating-ui/dom": "^0.4.1",
     "@floating-ui/react-dom": "^0.6.0",
     "@floating-ui/react-dom-interactions": "^0.1.1",
