@@ -29,3 +29,10 @@
 .prose h3::before {
   content: "H3"
 }
+
+.not-prose h1::before,
+.not-prose h2::before,
+.not-prose h3::before
+{
+  content: ""
+}

@@ -1,20 +1,14 @@
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { FC, HTMLProps } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
-
-interface ITitle extends HTMLProps<HTMLElement> {}
-
-const TitleContainer: StyledComponentType<any> = styled(
-  'h3',
-  tw`mr-3 font-medium`,
-);
+interface ITitle extends HTMLProps<HTMLHeadingElement> {}
 
 export type TitleType = FC<ITitle>;
 
-const Title: TitleType = ({ children, ...props }) => (
-  <TitleContainer {...props}>{children}</TitleContainer>
+const Title: TitleType = ({ children, className, ...props }) => (
+  <h3 className={twMerge('mr-3 font-medium', className)} {...props}>
+    {children}
+  </h3>
 );
 
 export default Title;

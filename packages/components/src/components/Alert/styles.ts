@@ -1,59 +1,14 @@
-import { StyledComponentType } from '@stitches/core/types/styled-component';
-import tw from 'twin.macro';
+const styles = {
+  base: 'flex flex-row w-full px-5 py-3 rounded-lg',
+  filled: 'text-white',
+  'primary-light': 'bg-primary-100 text-primary-600',
+  'primary-filled': 'bg-primary-500',
+  'success-light': 'bg-success-100 text-success-600',
+  'success-filled': 'bg-success-400',
+  'error-light': 'bg-error-100 text-error-600',
+  'error-filled': 'bg-error-400',
+  'warning-light': 'bg-warning-100 text-warning-600',
+  'warning-filled': 'bg-warning-500',
+};
 
-import { styled } from '../../stitches.config';
-
-export const AlertContainer: StyledComponentType<any> = styled('div', {
-  ...tw`flex flex-row w-full px-5 py-3 rounded-lg`,
-  variants: {
-    color: {
-      primary: {},
-    },
-    variant: {
-      light: {},
-      filled: {},
-    },
-  },
-  compoundVariants: [
-    {
-      color: 'primary',
-      variant: 'light',
-      css: tw`bg-primary-100 text-primary-600`,
-    },
-    {
-      color: 'primary',
-      variant: 'filled',
-      css: tw`bg-primary-500 text-white`,
-    },
-    {
-      color: 'success',
-      variant: 'light',
-      css: tw`bg-success-100 text-success-600`,
-    },
-    {
-      color: 'success',
-      variant: 'filled',
-      css: tw`bg-success-400 text-white`,
-    },
-    {
-      color: 'error',
-      variant: 'light',
-      css: tw`bg-error-100 text-error-600`,
-    },
-    {
-      color: 'error',
-      variant: 'filled',
-      css: tw`bg-error-400 text-white`,
-    },
-    {
-      color: 'warning',
-      variant: 'light',
-      css: tw`bg-warning-100 text-warning-600`,
-    },
-    {
-      color: 'warning',
-      variant: 'filled',
-      css: tw`bg-warning-500 text-white`,
-    },
-  ],
-});
+export default styles;
