@@ -1,7 +1,5 @@
 import getAvatarStyles from '@cube-ui/styles/dist/avatar';
-import get from 'lodash/get';
 import React, { FC } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import IAvatar from './IAvatar';
 

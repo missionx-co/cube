@@ -6,7 +6,6 @@ import React, {
   ReactElement,
   cloneElement,
 } from 'react';
-import tw from 'twin.macro';
 
 import IButton from '../IButton';
 

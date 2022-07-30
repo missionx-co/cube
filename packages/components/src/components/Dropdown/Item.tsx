@@ -1,8 +1,6 @@
-import React, { FC, HTMLProps, ReactNode } from "react";
-import { Menu } from "@headlessui/react";
-import tw from "twin.macro";
-import { styled } from "../../stitches.config";
-import { StyledComponentType } from "@stitches/core/types/styled-component";
+import { getItemStyles } from '@cube-ui/styles/dist/dropdown';
+import { Menu } from '@headlessui/react';
+import React, { FC, HTMLProps, ReactNode } from 'react';
 
 interface IItem extends HTMLProps<HTMLButtonElement> {
   disabled?: boolean;
@@ -12,31 +10,25 @@ interface IItem extends HTMLProps<HTMLButtonElement> {
     | ((props: { active: boolean; disabled: boolean }) => ReactNode);
 }
 
-const StyledItem: StyledComponentType<any> = styled("button", {
-  ...tw`disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-gray-50 w-full px-4 py-2 text-left text-gray-900`,
-  variants: {
-    active: {
-      true: {
-        ...tw`bg-gray-100`,
-      },
-    },
-  },
-});
-
 export type ItemType = FC<IItem>;
 
-const Item: ItemType = ({ disabled, children, ...props }) => {
+const Item: ItemType = ({ disabled, children, className, type, ...props }) => {
   return (
     <Menu.Item disabled={disabled}>
       {({ active, disabled }) => {
-        if (typeof children === "function") {
+        if (typeof children === 'function') {
           return children({ active, disabled });
         }
 
         return (
-          <StyledItem active={active} disabled={disabled} {...props}>
+          <button
+            type={type as any}
+            disabled={disabled}
+            className={getItemStyles(active, className)}
+            {...props}
+          >
             {children}
-          </StyledItem>
+          </button>
         );
       }}
     </Menu.Item>
