@@ -1,58 +1,15 @@
+import get from 'lodash/get';
 import React, { FC } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
 import IAvatar from './IAvatar';
-
-const UserAvatarContainer = styled('div', {
-  ...tw`relative flex items-center`,
-  variants: {
-    area: {
-      sm: tw`space-x-2.5`,
-      base: tw`space-x-3`,
-      lg: tw`space-x-3`,
-      xl: tw`space-x-4`,
-    },
-  },
-});
-
-const AvatarContainer = styled('div', {
-  ...tw`bg-primary-50 text-primary-600 flex items-center justify-center overflow-hidden rounded-full`,
-  variants: {
-    area: {
-      sm: tw`w-8 h-8`,
-      base: tw`w-10 h-10`,
-      lg: tw`w-12 h-12`,
-      xl: tw`w-14 h-14`,
-    },
-  },
-});
-
-const UserTextContainer = styled('div', tw`flex flex-col items-start`);
-
-const NameContainer = styled('div', {
-  ...tw`font-medium text-gray-700`,
-  variants: {
-    area: {
-      sm: tw`text-sm`,
-      base: tw`text-sm`,
-      lg: tw`text-base`,
-      xl: tw`text-lg`,
-    },
-  },
-});
-
-const SubTextContainer = styled('div', {
-  ...tw`font-normal text-gray-500`,
-  variants: {
-    area: {
-      sm: tw`text-xs`,
-      base: tw`text-sm`,
-      lg: tw`text-base`,
-      xl: tw`text-base`,
-    },
-  },
-});
+import {
+  avatarStyles,
+  nameStyles,
+  subTextStyles,
+  userAvatarStyles,
+  userTextStyles,
+} from './styles';
 
 const Avatar: FC<IAvatar> = ({
   image,
@@ -63,26 +20,48 @@ const Avatar: FC<IAvatar> = ({
   alternativeNode,
   classNames,
 }) => {
+  const userAvatarClassName = twMerge(
+    userAvatarStyles.base,
+    get(userAvatarStyles.area, area as string),
+    classNames?.containerClassName,
+  );
+
+  const avatarClassName = twMerge(
+    avatarStyles.base,
+    get(avatarStyles.area, area as string),
+    classNames?.avatarClassName,
+  );
+
+  const userInfoClassName = twMerge(
+    userTextStyles.base,
+    get(userTextStyles, ['area', area as string]),
+  );
+
+  const nameClassName = twMerge(
+    nameStyles.base,
+    get(nameStyles, ['area', area as string]),
+  );
+
+  const subTextClassName = twMerge(
+    subTextStyles.base,
+    get(subTextStyles, ['area', area as string]),
+    classNames?.userSubtextClassName,
+  );
+
   return (
-    <UserAvatarContainer area={area} className={classNames?.containerClassName}>
-      <AvatarContainer area={area} className={classNames?.avatarClassName}>
+    <div className={userAvatarClassName}>
+      <div role="img" aria-label={alt} className={avatarClassName}>
         {Boolean(image) ? <img src={image} alt={alt} /> : alternativeNode}
-      </AvatarContainer>
+      </div>
       {(Boolean(name) || Boolean(subtext)) && (
-        <UserTextContainer className={classNames?.userInfoClassName}>
-          {Boolean(name) && (
-            <NameContainer className={classNames?.userNameClassName}>
-              {name}
-            </NameContainer>
-          )}
+        <div className={userInfoClassName}>
+          {Boolean(name) && <div className={nameClassName}>{name}</div>}
           {Boolean(subtext) && (
-            <SubTextContainer className={classNames?.userSubtextClassName}>
-              {subtext}
-            </SubTextContainer>
+            <div className={subTextClassName}>{subtext}</div>
           )}
-        </UserTextContainer>
+        </div>
       )}
-    </UserAvatarContainer>
+    </div>
   );
 };
 

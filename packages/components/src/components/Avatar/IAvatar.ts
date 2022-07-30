@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
+export type Area = 'sm' | 'base' | 'lg' | 'xl';
 export default interface IAvatar {
   image?: string;
   alt?: string;
   alternativeNode?: ReactNode;
-  area?: 'sm' | 'base' | 'lg' | 'xl';
+  area?: Area;
   name?: ReactNode;
   subtext?: ReactNode;
   classNames?: {
