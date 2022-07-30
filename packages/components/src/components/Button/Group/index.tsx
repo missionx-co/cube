@@ -1,14 +1,14 @@
+import clsx from 'classnames';
 import React, {
   Children,
   FC,
-  cloneElement,
   Fragment,
   ReactElement,
-} from "react";
-import tw from "twin.macro";
-import clsx from "classnames";
+  cloneElement,
+} from 'react';
+import tw from 'twin.macro';
 
-import IButton from "../IButton";
+import IButton from '../IButton';
 
 export interface IButtonsGroup {
   children: IButton | IButton[];
@@ -26,27 +26,21 @@ const ButtonsGroup: FC<IButtonsGroup> = ({ children }) => {
         const item = child as ReactElement<any, any>;
         if (index === 0) {
           return cloneElement(item, {
-            css: {
-              ...item.props.css,
-              ...tw`rounded-r-none`,
-            },
+            className: clsx('rounded-r-none', item.props.className),
           });
         }
 
         if (index === totalChildrenCount - 1) {
           return cloneElement(item, {
-            css: {
-              ...item.props.css,
-              ...tw`border-l-0 rounded-l-none`,
-            },
+            className: clsx('border-l-0 rounded-l-none', item.props.className),
           });
         }
 
         return cloneElement(item, {
-          css: {
-            ...item.props.css,
-            ...tw`border-l-0 border-r rounded-l-none rounded-r-none`,
-          },
+          className: clsx(
+            'border-l-0 border-r rounded-l-none rounded-r-none',
+            item.props.className,
+          ),
         });
       })}
     </div>
