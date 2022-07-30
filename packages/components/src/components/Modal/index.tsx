@@ -1,6 +1,5 @@
 import { FloatingPortal } from '@floating-ui/react-dom-interactions';
 import React from 'react';
-import tw from 'twin.macro';
 
 import Content, { ContentType } from './Content';
 import { ModalContext } from './Context';

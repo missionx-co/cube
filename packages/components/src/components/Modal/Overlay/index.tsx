@@ -1,28 +1,27 @@
 import { FloatingOverlay } from '@floating-ui/react-dom-interactions';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../../stitches.config';
 import Transition from '../../Transition';
 import { useModalContext } from '../Context';
 import IOverlay from './IOverlay';
-
-const StyledOverlay: StyledComponentType<any> = styled(FloatingOverlay, {
-  ...tw`bg-opacity-30 fixed inset-0 z-40 flex w-full h-full transition duration-150 ease-in-out bg-black`,
-});
 
 export type OverlayType = React.FC<IOverlay>;
 
 const Overlay: OverlayType = ({ className, lockScroll, transition }) => {
   const { open } = useModalContext();
 
+  const overlayClassName = twMerge(
+    'bg-opacity-30 fixed inset-0 z-40 flex w-full h-full transition duration-150 ease-in-out bg-black',
+    className,
+  );
+
   return (
     <Transition
       show={open}
-      as={StyledOverlay}
+      as={FloatingOverlay}
       lockScroll={lockScroll}
-      className={className}
+      className={overlayClassName}
       {...transition}
     />
   );
