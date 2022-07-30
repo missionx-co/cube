@@ -4,30 +4,13 @@ import {
 } from '@heroicons/react/outline';
 import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { ElementType, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 import tw from 'twin.macro';
 
-import { styled } from '../../stitches.config';
 import Tooltip from '../Tooltip';
 import IPagination, { PageNeighbours } from './IPagination';
 import PaginationPill from './PaginationPill';
 import { LEFT_PAGE, RIGHT_PAGE, fetchPageNumbers } from './utils';
-
-const PaginationContainer: StyledComponentType<any> = styled(
-  'nav',
-  tw`flex space-x-2 text-sm`,
-);
-
-const ChevronDoubleLeftIconContainer: StyledComponentType<any> = styled(
-  ChevronDoubleLeftIcon,
-  tw`w-4 h-4`,
-);
-
-const ChevronDoubleRightIconContainer: StyledComponentType<any> = styled(
-  ChevronDoubleRightIcon,
-  tw`w-4 h-4`,
-);
-
-const SROnly: StyledComponentType<any> = styled('span', tw`sr-only`);
 
 const Pagination: React.FC<IPagination> & {
   Button: ElementType;
@@ -93,7 +76,11 @@ const Pagination: React.FC<IPagination> & {
   };
 
   return (
-    <PaginationContainer role="navigation" className={className} {...props}>
+    <nav
+      role="navigation"
+      className={twMerge('flex space-x-2 text-sm', className)}
+      {...props}
+    >
       {pages.map((page) => {
         if (page === LEFT_PAGE) {
           return prevButtonRenderer ? (
@@ -106,9 +93,9 @@ const Pagination: React.FC<IPagination> & {
                 onClick={handleMoveLeft}
               >
                 <span aria-hidden="true">
-                  <ChevronDoubleLeftIconContainer />
+                  <ChevronDoubleLeftIcon className="w-4 h-4" />
                 </span>
-                <SROnly>Previous</SROnly>
+                <span className="sr-only">Previous</span>
               </PaginationPill>
             </Tooltip>
           );
@@ -125,9 +112,9 @@ const Pagination: React.FC<IPagination> & {
                 onClick={handleMoveRight}
               >
                 <span aria-hidden="true">
-                  <ChevronDoubleRightIconContainer />
+                  <ChevronDoubleRightIcon className="w-4 h-4" />
                 </span>
-                <SROnly>Next</SROnly>
+                <span className="sr-only">Next</span>
               </PaginationPill>
             </Tooltip>
           );
@@ -147,7 +134,7 @@ const Pagination: React.FC<IPagination> & {
           </PaginationPill>
         );
       })}
-    </PaginationContainer>
+    </nav>
   );
 };
 

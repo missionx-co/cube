@@ -1,38 +1,38 @@
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { forwardRef } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
 import ForwardedComponent from '../../../SharedType/ForwardedComponent';
-import { styled } from '../../../stitches.config';
 import IPaginationPill from './IPaginationPill';
 
-const PaginationPillContainer: StyledComponentType<any> = styled('button', {
-  ...tw`hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary-100 flex items-center justify-center w-8 h-8 p-1 bg-white border border-gray-200 rounded-md cursor-pointer`,
-  variants: {
-    active: {
-      true: tw`bg-primary-600 hover:bg-primary-600 text-white cursor-not-allowed`,
-    },
-  },
-});
+const styles = {
+  base: 'hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary-100 flex items-center justify-center w-8 h-8 p-1 bg-white border border-gray-200 rounded-md cursor-pointer',
+  active: 'bg-primary-600 hover:bg-primary-600 text-white cursor-not-allowed',
+};
 
 const PaginationPill: ForwardedComponent<IPaginationPill, HTMLButtonElement> =
   forwardRef(
-    ({ page, children, className, onClick, active, ...props }, ref) => {
+    ({ page, children, className, onClick, active, type, ...props }, ref) => {
       const handleClick = (e: any) => {
         onClick && onClick(page);
       };
 
+      const pillClassName = twMerge(
+        styles.base,
+        active && styles.active,
+        className,
+      );
+
       return (
-        <PaginationPillContainer
-          active={active}
+        <button
           onClick={handleClick}
           aria-current={active}
+          type={type as any}
           {...props}
           ref={ref}
-          className={className}
+          className={pillClassName}
         >
           {children}
-        </PaginationPillContainer>
+        </button>
       );
     },
   );
