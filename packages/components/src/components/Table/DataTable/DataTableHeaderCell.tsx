@@ -1,8 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline';
+import clsx from 'classnames';
 import React from 'react';
-import tw from 'twin.macro';
 
-import { styled } from '../../../stitches.config';
 import IHeaderColumn from '../HeaderColumn/IHeaderColumn';
 import Table from '../index';
 import { SortDirection } from './IDataTable';
@@ -18,17 +17,6 @@ interface IDataTableHeaderCell {
   };
 }
 
-const ChevronUp = styled(ChevronUpIcon, tw`block w-5 h-5`);
-const ChevronDown = styled(ChevronDownIcon, tw`block w-5 h-5`);
-
-const SortableHeaderColumn = styled(Table.HeaderCell, {
-  variants: {
-    sortable: {
-      true: tw`cursor-pointer`,
-    },
-  },
-});
-
 const DataTableHeaderCell: React.FC<IDataTableHeaderCell> = ({
   column,
   cellProps,
@@ -39,21 +27,23 @@ const DataTableHeaderCell: React.FC<IDataTableHeaderCell> = ({
   const shouldShowDirectionChevron = column.sort && isDataSortedByColumn;
 
   return (
-    <SortableHeaderColumn
-      sortable={Boolean(column.sort)}
+    <Table.HeaderCell
+      className={clsx({
+        'cursor-pointer': Boolean(column.sort),
+      })}
       onClick={column.sort ? () => onSort(column.key) : null}
       {...cellProps}
     >
       <span className="flex items-center">
         <span>{column.text}</span>
         {shouldShowDirectionChevron && sortByCriteria.direction === 'desc' && (
-          <ChevronUp />
+          <ChevronUpIcon className="block w-5 h-5" />
         )}
         {shouldShowDirectionChevron && sortByCriteria.direction === 'asc' && (
-          <ChevronDown />
+          <ChevronDownIcon className="block w-5 h-5" />
         )}
       </span>
-    </SortableHeaderColumn>
+    </Table.HeaderCell>
   );
 };
 

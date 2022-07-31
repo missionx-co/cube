@@ -1,10 +1,19 @@
+import { tableHeaderCell } from '@cube-ui/styles/dist/table';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import IHeaderColumn from './IHeaderColumn';
-import { TableHeadColumn } from './styles';
 
-const HeaderColumn: React.FC<IHeaderColumn> = ({ children, ...props }) => {
-  return <TableHeadColumn {...props}>{children}</TableHeadColumn>;
+const HeaderColumn: React.FC<IHeaderColumn> = ({
+  children,
+  className,
+  ...props
+}) => {
+  return (
+    <th className={twMerge(tableHeaderCell.base, className)} {...props}>
+      {children}
+    </th>
+  );
 };
 
 export default HeaderColumn;

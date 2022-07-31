@@ -1,10 +1,15 @@
+import { tableCellStyles } from '@cube-ui/styles/dist/table';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import IColumn from './IColumn';
-import { TableBodyCell } from './styles';
 
-const Column: React.FC<IColumn> = ({ children, ...props }) => {
-  return <TableBodyCell {...props}>{children}</TableBodyCell>;
+const Column: React.FC<IColumn> = ({ children, className, ...props }) => {
+  return (
+    <td className={twMerge(tableCellStyles.base, className)} {...props}>
+      {children}
+    </td>
+  );
 };
 
 export default Column;

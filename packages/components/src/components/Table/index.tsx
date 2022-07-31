@@ -1,10 +1,14 @@
+import {
+  tableContainerStyles,
+  tableWrapperStyles,
+} from '@cube-ui/styles/dist/table';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import Column from './Column';
 import HeaderColumn from './HeaderColumn';
 import ITable from './ITable';
 import Row from './Row';
-import { Table as TableContainer, TableWrapper } from './styles';
 
 const Table: React.FC<ITable> & {
   Row: React.ElementType;
@@ -19,13 +23,16 @@ const Table: React.FC<ITable> & {
   ...props
 }) => {
   return (
-    <TableWrapper className={tableWrapperClassName}>
+    <div className={twMerge(tableWrapperStyles.base, tableWrapperClassName)}>
       {before}
-      <TableContainer className={className} {...props}>
+      <table
+        className={twMerge(tableContainerStyles.base, className)}
+        {...props}
+      >
         {children}
-      </TableContainer>
+      </table>
       {after}
-    </TableWrapper>
+    </div>
   );
 };
 
