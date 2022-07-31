@@ -28,7 +28,7 @@ function Home({ exampleCode }: any) {
         <title>Cube - Build React SPAs faster with React and TailwindCSS</title>
         <meta
           name="description"
-          content="Design System, UI Kit and an Admin dashboard built with React, Tailwind CSS and Stitches.dev"
+          content="Design System, UI Kit and an Admin dashboard built with React and Tailwind CSS"
         />
         <meta
           name="keywords"
@@ -60,13 +60,9 @@ function Home({ exampleCode }: any) {
           <p className="text-xl leading-relaxed">
             <strong className="text-primary-600 font-medium">Cube</strong> is a
             simple Design system, React Components Library and UI Kit built with{' '}
-            <strong className="text-primary-600 font-medium">React</strong>,{' '}
+            <strong className="text-primary-600 font-medium">React</strong> and{' '}
             <strong className="text-primary-600 font-medium">
               Tailwind CSS
-            </strong>{' '}
-            and{' '}
-            <strong className="text-primary-600 font-medium">
-              stitches.dev
             </strong>
             .
           </p>
