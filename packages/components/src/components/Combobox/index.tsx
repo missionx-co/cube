@@ -1,3 +1,4 @@
+import { panelContainer } from '@cube-ui/styles/dist/fancy-select';
 import {
   autoUpdate,
   flip,
@@ -14,7 +15,6 @@ import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import Input from '../Input';
 import ICombobox, { Option } from './ICombobox';
 import Item, { OptionType } from './Option';
-import { InputContainer, PanelContainer } from './styles';
 
 const Combobox: FC<ICombobox> & {
   Option: OptionType;
@@ -130,7 +130,7 @@ const Combobox: FC<ICombobox> & {
 
   return (
     <Fragment>
-      <InputContainer>
+      <div className="relative w-full">
         <Input
           error={error}
           disabled={disabled}
@@ -162,10 +162,11 @@ const Combobox: FC<ICombobox> & {
             },
           })}
         />
-      </InputContainer>
+      </div>
 
       {open && (
-        <PanelContainer
+        <div
+          className={panelContainer.base}
           {...getFloatingProps({
             ref: floating,
             style: {
@@ -220,7 +221,7 @@ const Combobox: FC<ICombobox> & {
               })
             )}
           </ul>
-        </PanelContainer>
+        </div>
       )}
     </Fragment>
   );

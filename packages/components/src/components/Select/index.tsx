@@ -1,23 +1,7 @@
-import { StyledComponentProps } from "@stitches/core/types/styled-component";
-import React, { FC } from "react";
-import tw from "twin.macro";
-import { styled } from "../../stitches.config";
+import getSelectStyles from '@cube-ui/styles/dist/select';
+import React, { FC } from 'react';
 
-import ISelect, { Option } from "./ISelect";
-
-const StyledSelect: StyledComponentProps<any> = styled("select", {
-  ...tw`px-3.5 py-2.5 focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed w-full text-gray-900 placeholder-gray-500 border rounded-lg`,
-  variants: {
-    error: {
-      true: {
-        ...tw`border-error-300 focus:border-error-300 focus:ring-error-300`,
-      },
-      false: {
-        ...tw`focus:border-primary-300 focus:ring-primary-300 border-gray-300`,
-      },
-    },
-  },
-});
+import ISelect, { Option } from './ISelect';
 
 const mapThroughOptions = (options: Option[]) => {
   return options.map((option) => {
@@ -45,8 +29,12 @@ const mapThroughOptions = (options: Option[]) => {
   });
 };
 
-const Select: FC<ISelect> = ({ options, ...props }) => {
-  return <StyledSelect {...props}>{mapThroughOptions(options)}</StyledSelect>;
+const Select: FC<ISelect> = ({ options, className, error, ...props }) => {
+  return (
+    <select className={getSelectStyles({ error, className })} {...props}>
+      {mapThroughOptions(options)}
+    </select>
+  );
 };
 
 export default Select;

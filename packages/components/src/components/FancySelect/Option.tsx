@@ -1,13 +1,10 @@
+import { getOptionStyles } from '@cube-ui/styles/dist/fancy-select';
 import { CheckIcon } from '@heroicons/react/outline';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { FC, Fragment, HTMLProps, Key, forwardRef } from 'react';
-import tw from 'twin.macro';
 
-import { styled } from '../../stitches.config';
+import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import { Option as OptionModal, OptionRenderer } from './IFancySelect';
 import { useSelectContext } from './SelectContext';
-
-const CheckIconContainer = styled('span', tw`flex items-center w-5 h-5`);
 
 interface IOption extends HTMLProps<HTMLLIElement> {
   option: OptionModal;
@@ -17,31 +14,33 @@ interface IOption extends HTMLProps<HTMLLIElement> {
   optionRenderer?: OptionRenderer;
 }
 
-export type OptionType = FC<IOption>;
-
-export const OptionLI: StyledComponentType<any> = styled('li', {
-  ...tw`flex flex-row justify-between px-4 py-2`,
-  variants: {
-    active: {
-      true: {
-        ...tw`bg-gray-100`,
-      },
-    },
-    selected: {
-      true: {
-        ...tw`bg-primary-100`,
-      },
-    },
-    disabled: {
-      true: {
-        ...tw`text-gray-500 cursor-not-allowed`,
-      },
-      false: {
-        ...tw`hover:bg-gray-50 text-gray-900 cursor-pointer`,
-      },
-    },
+export type OptionType = ForwardedComponent<
+  HTMLProps<HTMLLIElement> & {
+    disabled?: boolean;
+    active?: boolean;
+    selected?: boolean;
   },
-});
+  HTMLLIElement
+>;
+
+export const OptionLI: OptionType = forwardRef(
+  ({ className, disabled, active, selected, children, ...props }, ref) => {
+    return (
+      <li
+        className={getOptionStyles({
+          selected,
+          active,
+          disabled,
+          className,
+        })}
+        {...props}
+        ref={ref}
+      >
+        {children}
+      </li>
+    );
+  },
+);
 
 export const Option: FC<IOption> = ({
   children,
@@ -50,6 +49,7 @@ export const Option: FC<IOption> = ({
   selected,
   option,
   optionRenderer,
+  className,
   ...props
 }) => {
   const {
@@ -108,9 +108,9 @@ export const Option: FC<IOption> = ({
     <OptionLI {...optionProps}>
       {children}
       {selected && (
-        <CheckIconContainer>
+        <span className="flex items-center w-5 h-5">
           <CheckIcon />
-        </CheckIconContainer>
+        </span>
       )}
     </OptionLI>
   );

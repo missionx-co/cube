@@ -12,7 +12,7 @@ const Item: OptionType = forwardRef<HTMLLIElement, IOption>(
     const id = useId();
     return (
       <OptionLI
-        ref={ref}
+        ref={ref as any}
         role="option"
         id={id}
         active={active}

@@ -14,42 +14,41 @@ import {
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
 import { SelectorIcon } from '@heroicons/react/outline';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, {
   FC,
+  HTMLProps,
   ReactNode,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
 import IFancySelect, {
-  Option as IOption,
   OptionGroupRenderer,
   OptionRenderer,
   ProcessedOption,
 } from './IFancySelect';
 import Input, { InputType } from './Input';
-import Option, { OptionLI } from './Option';
+import Option, { OptionLI, OptionType } from './Option';
 import { SelectContext } from './SelectContext';
 import { usePrevious } from './hooks';
-import useSelectValue from './useSelectValue';
 import { flattenOptionsAndAddIndex } from './utils';
 
-const SelectorIconContainer = styled('span', {
-  ...tw`w-5 h-5`,
-});
+export type OptionsGroupTitleType = FC<HTMLProps<HTMLSpanElement>>;
 
-const OptionsList: StyledComponentType<any> = styled('ul', {
-  ...tw`max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm absolute z-50 w-full overflow-auto bg-white border border-gray-300 rounded-md shadow-md`,
-});
-
-const OptionsGroupTitle: StyledComponentType<any> = styled(
-  'span',
-  tw`px-4 py-2 text-sm text-gray-300`,
+const OptionsGroupTitle: OptionsGroupTitleType = ({
+  children,
+  className,
+  ...props
+}) => (
+  <span
+    className={twMerge('px-4 py-2 text-sm text-gray-300', className)}
+    {...props}
+  >
+    {children}
+  </span>
 );
 
 function renderOptions(
@@ -93,8 +92,8 @@ function renderOptions(
 
 const FancySelect: FC<IFancySelect> & {
   Input: InputType;
-  OptionsGroupTitle: StyledComponentType<any>;
-  Option: StyledComponentType<any>;
+  OptionsGroupTitle: OptionsGroupTitleType;
+  Option: OptionType;
 } = ({
   options,
   placeholder,
@@ -332,15 +331,16 @@ const FancySelect: FC<IFancySelect> & {
                   .text ??
                 flattenedOptions[pairs.optionIndexToIndex[selectedIndex]].value}
           </span>
-          <SelectorIconContainer>
+          <span className="w-5 h-5">
             <SelectorIcon />
-          </SelectorIconContainer>
+          </span>
         </Input>
       )}
 
       {open && (
         <FloatingOverlay lockScroll>
-          <OptionsList
+          <ul
+            className="max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm absolute z-50 w-full overflow-auto bg-white border border-gray-300 rounded-md shadow-md"
             {...getFloatingProps({
               ref: floating,
               style: {
@@ -367,7 +367,7 @@ const FancySelect: FC<IFancySelect> & {
               optionGroupRenderer,
               optionRenderer,
             )}
-          </OptionsList>
+          </ul>
         </FloatingOverlay>
       )}
     </SelectContext.Provider>
