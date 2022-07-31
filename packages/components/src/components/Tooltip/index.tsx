@@ -1,5 +1,5 @@
+import { tooltipContainer } from '@cube-ui/styles/dist/tooltip';
 import {
-  Placement,
   autoUpdate,
   flip,
   offset,
@@ -22,16 +22,10 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
 import Transition from '../Transition';
 import ITooltip from './ITooltip';
-
-const TooltipContainer = styled(
-  'div',
-  tw`px-2.5 z-50 py-1 text-white transition duration-150 ease-in-out bg-gray-900 bg-opacity-75 rounded`,
-);
 
 const Tooltip: FC<ITooltip> = ({
   content,
@@ -39,6 +33,7 @@ const Tooltip: FC<ITooltip> = ({
   showOn,
   children,
   transition,
+  className,
   ...props
 }) => {
   const totalChildrenCount = Children.count(children);
@@ -86,7 +81,8 @@ const Tooltip: FC<ITooltip> = ({
       <Transition
         show={open}
         {...transition}
-        as={TooltipContainer}
+        as="div"
+        className={twMerge(tooltipContainer.base, className)}
         {...getFloatingProps({
           ref: floating,
           ...props,
