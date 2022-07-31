@@ -1,34 +1,16 @@
+import {
+  container,
+  contentContainer,
+  errorContainer,
+  errorIcon,
+  hintContainer,
+  label,
+} from '@cube-ui/styles/dist/form-control';
 import { InformationCircleIcon } from '@heroicons/react/outline';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { FC } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
 import IFormControl from './IFormControl';
-
-const Container: StyledComponentType<any> = styled('div', {
-  ...tw`space-y-1.5 block w-full`,
-});
-
-const Label: StyledComponentType<any> = styled('label', {
-  ...tw`text-sm font-medium text-gray-700`,
-});
-
-const ErrorIconContainer: StyledComponentType<any> = styled('span', {
-  ...tw`top-1/2 right-2 text-error-500 absolute flex w-4 h-4 transform -translate-y-1/2`,
-});
-
-const ContentContainer: StyledComponentType<any> = styled('div', {
-  ...tw`relative block w-full`,
-});
-
-const ErrorContainer: StyledComponentType<any> = styled('span', {
-  ...tw`block text-sm text-red-500`,
-});
-
-const HintContainer: StyledComponentType<any> = styled('span', {
-  ...tw`block text-sm text-gray-500`,
-});
 
 const FormControl: FC<IFormControl> = ({
   id,
@@ -37,37 +19,52 @@ const FormControl: FC<IFormControl> = ({
   error,
   atoms,
   children,
+  className,
   ...props
 }) => {
   const hasLabel = Boolean(fieldLabel);
   const hasError = Boolean(error);
 
+  const { className: labelClassName, ...labelProps } = atoms?.label || {};
+  const { className: errorClassName, ...errorProps } = atoms?.error || {};
+  const { className: hintClassName, ...hintProps } = atoms?.hint || {};
+
   return (
-    <Container {...props}>
+    <div className={twMerge(container.base, className)} {...props}>
       {hasLabel && (
-        <Label htmlFor={id} {...(atoms?.label ? atoms.label : {})}>
+        <label
+          htmlFor={id}
+          className={twMerge(label.base, labelClassName)}
+          {...labelProps}
+        >
           {fieldLabel}
-        </Label>
+        </label>
       )}
-      <ContentContainer>
+      <div className={contentContainer.base}>
         {children}
         {hasError && (
-          <ErrorIconContainer>
+          <span className={errorIcon.base}>
             <InformationCircleIcon />
-          </ErrorIconContainer>
+          </span>
         )}
-      </ContentContainer>
+      </div>
       {hasError && (
-        <ErrorContainer {...(atoms?.error ? atoms.error : {})}>
+        <span
+          className={twMerge(errorContainer.base, errorClassName)}
+          {...errorProps}
+        >
           {error}
-        </ErrorContainer>
+        </span>
       )}
       {!hasError && (
-        <HintContainer {...(atoms?.hint ? atoms.hint : {})}>
+        <span
+          className={twMerge(hintContainer.base, hintClassName)}
+          {...hintProps}
+        >
           {hint}
-        </HintContainer>
+        </span>
       )}
-    </Container>
+    </div>
   );
 };
 
