@@ -1,4 +1,3 @@
-import { cubeStyles } from '@cube-ui/components';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,7 +7,6 @@ import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  cubeStyles();
 
   if (router.pathname === '/') {
     return (
