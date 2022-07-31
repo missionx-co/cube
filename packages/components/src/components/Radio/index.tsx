@@ -3,7 +3,6 @@ import { CheckIcon } from '@heroicons/react/solid';
 import { useFocusRing } from '@react-aria/focus';
 import { useRadio } from '@react-aria/radio';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import clsx from 'classnames';
 import React, { forwardRef, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';

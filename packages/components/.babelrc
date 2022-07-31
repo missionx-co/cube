@@ -10,8 +10,5 @@
                 "allowDeclareFields": true
             }
         ]
-    ],
-    "plugins": [
-        "babel-plugin-macros"
     ]
 }

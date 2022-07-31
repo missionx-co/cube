@@ -1,6 +1,3 @@
-export { getCssText as getCubeCssText } from './stitches.config';
-export { default as cubeStyles } from './globalStyles';
-
 // Components
 export { default as Alert } from './components/Alert';
 export { default as Avatar } from './components/Avatar';

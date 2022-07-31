@@ -2,10 +2,8 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
 } from '@heroicons/react/outline';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { ElementType, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import tw from 'twin.macro';
 
 import Tooltip from '../Tooltip';
 import IPagination, { PageNeighbours } from './IPagination';

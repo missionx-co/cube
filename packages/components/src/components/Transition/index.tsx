@@ -1,10 +1,8 @@
 import clsx from 'classnames';
 import React, { ElementType, createElement, forwardRef } from 'react';
 import { useTransition } from 'transition-hook';
-import tw from 'twin.macro';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
-import { getClassName } from '../../utils';
 import ITransition from './ITransition';
 
 const Transition: ForwardedComponent<ITransition, HTMLElement> = forwardRef<
@@ -44,8 +42,8 @@ const Transition: ForwardedComponent<ITransition, HTMLElement> = forwardRef<
 
 Transition.defaultProps = {
   as: 'div',
-  enter: getClassName(tw`opacity-100`),
-  exit: getClassName(tw`opacity-0`),
+  enter: 'opacity-100',
+  exit: 'opacity-0',
   duration: 150,
 };
 
