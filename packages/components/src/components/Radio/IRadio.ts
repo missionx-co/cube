@@ -7,5 +7,5 @@ export default interface IRadio extends Omit<AriaRadioProps, 'isDisabled'> {
   area?: 'base' | 'sm';
   variant?: 'outline' | 'filled';
   disabled?: boolean;
-  icon?: () => ReactNode;
+  icon?: ReactNode;
 }

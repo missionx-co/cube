@@ -1,52 +1,29 @@
+import getCheckboxStyles, {
+  container,
+  label as labelStyles,
+} from '@cube-ui/styles/dist/checkbox';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useCheckbox } from '@react-aria/checkbox';
 import { useFocusRing } from '@react-aria/focus';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useToggleState } from '@react-stately/toggle';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
-import React, { FC } from 'react';
-import tw from 'twin.macro';
+import React, { FC, HTMLProps } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
 import ICheckbox from './ICheckbox';
 
-export const ContainerLabel = styled('label', tw`flex items-center`);
+export type LabelType = FC<HTMLProps<HTMLSpanElement>>;
 
-export const VirtualCheckbox = styled('div', {
-  ...tw`flex items-center justify-center border-2 rounded`,
-  variants: {
-    variant: {
-      filled: {},
-      outline: {},
-    },
-    area: {
-      sm: tw`w-5 h-5`,
-      base: tw`w-6 h-6`,
-    },
-    focus: {
-      true: tw`ring-2 ring-offset-1 ring-primary-300`,
-    },
-    disabled: {
-      true: tw`bg-gray-100 border-gray-200 cursor-not-allowed`,
-      false: tw`hover:border-primary-600 hover:bg-primary-50 bg-white border-gray-300 cursor-pointer`,
-    },
-    selected: {
-      true: tw`border-primary-600 bg-primary-50 text-primary-600`,
-    },
-  },
-  compoundVariants: [
-    {
-      variant: 'filled',
-      selected: true,
-      css: tw`bg-primary-600 hover:bg-primary-600 text-white`,
-    },
-  ],
-});
-
-export const Label = styled('span', tw`ml-2 text-sm font-medium text-gray-700`);
+export const Label: LabelType = ({ className, children, ...props }) => {
+  return (
+    <span className={twMerge(labelStyles.base, className)} {...props}>
+      {children}
+    </span>
+  );
+};
 
 type CheckboxType = FC<ICheckbox> & {
-  Label: StyledComponentType<any>;
+  Label: LabelType;
 };
 
 const Checkbox: CheckboxType = ({
@@ -67,7 +44,7 @@ const Checkbox: CheckboxType = ({
     isDisabled: disabled,
     isRequired: required,
     defaultSelected: defaultChecked,
-    selected: defaultChecked,
+    selected: checked,
     isReadOnly: readonly,
   };
   let state = useToggleState(reactAriaProps);
@@ -76,23 +53,25 @@ const Checkbox: CheckboxType = ({
   let { isFocusVisible, focusProps } = useFocusRing();
 
   return (
-    <ContainerLabel className={containerClassName}>
+    <label className={twMerge(container.base, containerClassName)}>
       <VisuallyHidden>
         <input {...inputProps} {...focusProps} ref={ref} />
       </VisuallyHidden>
-      <VirtualCheckbox
-        disabled={inputProps.disabled}
-        selected={state.isSelected}
-        focus={isFocusVisible}
-        area={area}
-        variant={variant}
-        className={className}
+      <div
+        className={getCheckboxStyles({
+          disabled: inputProps.disabled,
+          focus: isFocusVisible,
+          selected: state.isSelected,
+          area,
+          variant,
+          className,
+        })}
       >
         {state.isSelected &&
           (icon ? icon : <CheckIcon className="fill-current" />)}
-      </VirtualCheckbox>
+      </div>
       {props.children}
-    </ContainerLabel>
+    </label>
   );
 };
 

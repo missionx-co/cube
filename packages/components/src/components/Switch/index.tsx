@@ -1,54 +1,20 @@
+import {
+  container,
+  getHandleSwitch,
+  getSwitchStyles,
+} from '@cube-ui/styles/dist/switch';
 import { useFocusRing } from '@react-aria/focus';
 import { useSwitch } from '@react-aria/switch';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useToggleState } from '@react-stately/toggle';
-import { StyledComponentType } from '@stitches/core/types/styled-component';
 import React, { FC } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
-import { styled } from '../../stitches.config';
-import { Label } from '../Checkbox';
+import { Label, LabelType } from '../Checkbox';
 import ISwitch from './ISwitch';
 
-const ContainerLabel = styled('label', tw`flex items-center`);
-
-const SwitchContainer = styled('div', {
-  ...tw`block rounded-xl relative p-0.5 transition-colors duration-300 ease-in-out shadow-inner`,
-  variants: {
-    area: {
-      base: tw`w-11 h-6`,
-      sm: tw`w-9 h-5`,
-    },
-    selected: {
-      true: tw`bg-primary-600`,
-      false: tw`bg-gray-100 hover:bg-gray-200 border border-gray-200`,
-    },
-    focus: {
-      true: tw`ring-2 ring-offset-1 ring-primary-200`,
-    },
-    disabled: {
-      true: tw`bg-gray-50 cursor-not-allowed`,
-      false: tw`cursor-pointer`,
-    },
-  },
-});
-
-const HandleContainer: StyledComponentType<any> = styled('span', {
-  ...tw`block rounded-full absolute shadow-md bg-white transition duration-300 ease-in-out transform translate-x-0 left-0.5`,
-  variants: {
-    area: {
-      base: tw`h-5 w-5`,
-      sm: tw`w-4 h-4`,
-    },
-    selected: {
-      true: tw`translate-x-full`,
-      false: tw``,
-    },
-  },
-});
-
 type SwitchType = FC<ISwitch> & {
-  Label: StyledComponentType<any>;
+  Label: LabelType;
 };
 
 const Switch: SwitchType = ({
@@ -75,21 +41,25 @@ const Switch: SwitchType = ({
   let { isFocusVisible, focusProps } = useFocusRing();
 
   return (
-    <ContainerLabel className={containerClassname}>
+    <label className={twMerge(container.base, containerClassname)}>
       <VisuallyHidden>
         <input {...inputProps} {...focusProps} ref={ref} />
       </VisuallyHidden>
-      <SwitchContainer
-        area={area}
-        selected={state.isSelected}
-        focus={isFocusVisible}
-        disabled={disabled}
-        className={className}
+      <div
+        className={getSwitchStyles({
+          area,
+          selected: state.isSelected,
+          focus: isFocusVisible,
+          className,
+          disabled: inputProps.disabled,
+        })}
       >
-        <HandleContainer area={area} selected={state.isSelected} />
-      </SwitchContainer>
+        <span
+          className={getHandleSwitch({ area, selected: state.isSelected })}
+        />
+      </div>
       {props.children}
-    </ContainerLabel>
+    </label>
   );
 };
 

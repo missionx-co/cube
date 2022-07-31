@@ -1,23 +1,22 @@
+import getCheckboxStyles, { container } from '@cube-ui/styles/dist/checkbox';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useFocusRing } from '@react-aria/focus';
 import { useRadio } from '@react-aria/radio';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { StyledComponentType } from '@stitches/core/types/styled-component';
+import clsx from 'classnames';
 import React, { forwardRef, useRef } from 'react';
-import tw from 'twin.macro';
+import { twMerge } from 'tailwind-merge';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
-import { styled } from '../../stitches.config';
-import { ContainerLabel, Label, VirtualCheckbox } from '../Checkbox';
+import { Label, LabelType } from '../Checkbox';
 import IRadio from './IRadio';
 import RadioGroup, { RadioContext, RadioGroupType } from './RadioGroup';
 
 type RadioType = ForwardedComponent<IRadio, HTMLInputElement> & {
   Group: RadioGroupType;
-  Label: StyledComponentType<any>;
+  Label: LabelType;
 };
-
-const VirtualRadio = styled(VirtualCheckbox, tw`rounded-full`);
 
 const Radio: any = forwardRef<HTMLElement, IRadio>(
   (
@@ -49,23 +48,24 @@ const Radio: any = forwardRef<HTMLElement, IRadio>(
     let isSelected = state.selectedValue === props.value;
 
     return (
-      <ContainerLabel className={containerClassName}>
+      <label className={twMerge(container.base, containerClassName)}>
         <VisuallyHidden>
-          <input {...inputProps} {...focusProps} ref={finalRef as any} />
+          <input {...inputProps} {...focusProps} />
         </VisuallyHidden>
-        <VirtualRadio
-          disabled={inputProps.disabled}
-          selected={isSelected}
-          focus={isFocusVisible}
-          area={area}
-          variant={variant}
-          className={className}
+        <div
+          className={getCheckboxStyles({
+            disabled: inputProps.disabled,
+            focus: isFocusVisible,
+            selected: isSelected,
+            area,
+            variant,
+            className: clsx('rounded-full', className),
+          })}
         >
-          {isSelected &&
-            (icon ? icon() : <CheckIcon className="fill-current" />)}
-        </VirtualRadio>
+          {isSelected && (icon ? icon : <CheckIcon className="fill-current" />)}
+        </div>
         {children}
-      </ContainerLabel>
+      </label>
     );
   },
 );
