@@ -74,11 +74,12 @@ const FancySelectCustomization: FC = () => (
           </FancySelect.Input>
         );
       }}
-      optionRenderer={(option, props) => {
+      optionRenderer={(option, { ref, ...props }) => {
         const person = option as any;
         return (
           <FancySelect.Option
             {...props}
+            ref={ref as any}
             className="justify-start space-x-3 border border-gray-200 border-dotted"
           >
             <Avatar
