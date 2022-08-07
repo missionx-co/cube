@@ -1,6 +1,6 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 import { addMonths } from 'date-fns';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -13,7 +13,6 @@ import { DatePickerContext, useDatePicker } from './useDataPicker';
 const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
   (
     {
-      onChange,
       placeholder,
       disabled,
       error,
