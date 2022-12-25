@@ -5,11 +5,12 @@ import { twMerge } from 'tailwind-merge';
 import ICell from './ICell';
 
 const styles = {
-  base: 'flex items-center justify-center w-10 h-10 text-sm text-gray-500 rounded-none',
+  base: 'flex items-center justify-center w-10 h-10 text-sm rounded-none',
   isFirstOfRange: 'bg-primary-600 text-white rounded-l-full',
   isLastOfRange: 'bg-primary-600 text-white rounded-r-full',
   outOfRange: 'text-gray-300',
   blocked: 'opacity-25 cursor-not-allowed',
+  highlighted: 'bg-orange-100',
 };
 
 const Cell: FC<ICell> = ({
@@ -21,6 +22,7 @@ const Cell: FC<ICell> = ({
   selected,
   hovered,
   blocked,
+  highlighted,
   onSelect,
   onHover,
 }) => {
@@ -48,6 +50,7 @@ const Cell: FC<ICell> = ({
 
   const className = twMerge(
     styles.base,
+    highlighted && styles.highlighted,
     isFirstOfRange && styles.isFirstOfRange,
     isLastOfRange && styles.isLastOfRange,
     outOfRange && styles.outOfRange,

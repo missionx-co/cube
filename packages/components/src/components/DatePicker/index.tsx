@@ -1,6 +1,7 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 import { addMonths } from 'date-fns';
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import ForwardedComponent from '../../SharedType/ForwardedComponent';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -19,6 +20,7 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
       monthsShown,
       displayValue,
       inputRenderer,
+      panelClassName,
       ...props
     },
     ref,
@@ -34,6 +36,10 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
 
     function handleOpenDatePicker() {
       datePicker.setOpen(true);
+    }
+
+    function handleNavigateToToday() {
+      datePicker.goToMonth(new Date());
     }
 
     const inputProps = {
@@ -65,7 +71,10 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
           )}
           {datePicker.open && (
             <div
-              className="absolute z-50 p-2 bg-white border border-gray-300 rounded-lg"
+              className={twMerge(
+                'absolute z-50 p-2 bg-white border border-gray-300 rounded-lg',
+                panelClassName,
+              )}
               ref={floating}
               style={{ top: y ?? '', left: x ?? '' }}
               onKeyDown={datePicker.handleKeyDown}
@@ -85,18 +94,29 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
                   />
                 ))}
               </div>
-              <div className="flex items-center justify-end pt-2 space-x-3 border-t border-gray-200 border-dotted">
-                <Button
-                  area="sm"
-                  variant="outline"
-                  color="error"
-                  onClick={datePicker.onDiscard}
-                >
-                  Discard
-                </Button>
-                <Button area="sm" onClick={datePicker.onApply}>
-                  Apply
-                </Button>
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200 border-dotted">
+                {!datePicker.calendar.isDateDisabled(new Date()) && (
+                  <Button
+                    onClick={handleNavigateToToday}
+                    variant="link"
+                    className="font-normal px-3"
+                  >
+                    Today
+                  </Button>
+                )}
+                <div className="flex items-center justify-end space-x-3">
+                  <Button
+                    area="sm"
+                    variant="outline"
+                    color="error"
+                    onClick={datePicker.onDiscard}
+                  >
+                    Discard
+                  </Button>
+                  <Button area="sm" onClick={datePicker.onApply}>
+                    Apply
+                  </Button>
+                </div>
               </div>
             </div>
           )}
@@ -113,6 +133,7 @@ DatePicker.defaultProps = {
   firstDayOfWeek: 1,
   disabledDates: [],
   monthsShown: 1,
+  highlightDates: [new Date()],
 };
 
 export default DatePicker;

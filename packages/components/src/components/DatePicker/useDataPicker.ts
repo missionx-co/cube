@@ -37,6 +37,7 @@ export interface DatePickerContext {
   goToPreviousMonth: () => any;
   goToPreviousYear: () => any;
   handleKeyDown: (e: any, context?: 'dialog' | 'input' | 'day') => any;
+  goToMonth: (date: Date) => any;
 }
 
 export const DatePickerContext = createContext<DatePickerContext>({
@@ -59,6 +60,7 @@ export const DatePickerContext = createContext<DatePickerContext>({
   goToPreviousMonth: () => {},
   goToPreviousYear: () => {},
   handleKeyDown: () => {},
+  goToMonth: () => {},
 });
 
 function formatValue(
@@ -100,6 +102,7 @@ export function useDatePicker(
   const calendar = new Calendar({
     firstDayOfTheWeek: props.firstDayOfWeek,
     disabledDates: props.disabledDates,
+    highlightDates: props.highlightDates,
     minDate: props.minDate,
     maxDate: props.maxDate,
   });
@@ -125,6 +128,10 @@ export function useDatePicker(
 
   function onDiscard() {
     close();
+  }
+
+  function goToMonth(date: Date) {
+    setActiveMonth(date);
   }
 
   function goToNextMonth() {
@@ -245,6 +252,7 @@ export function useDatePicker(
     goToPreviousMonth,
     goToPreviousYear,
     handleKeyDown,
+    goToMonth,
   };
 }
 

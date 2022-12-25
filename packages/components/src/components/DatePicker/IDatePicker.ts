@@ -40,4 +40,6 @@ export default interface IDatePicker extends CalendarOptions {
     valueString?: string;
     value: DatePickerValueHelper;
   }) => ReactNode;
+  panelClassName?: string;
+  highlightDates?: Date[];
 }

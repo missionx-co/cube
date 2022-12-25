@@ -18,6 +18,7 @@ import { isAfter, isBefore, isEqual, isInRange } from '../utils';
 type Options = {
   firstDayOfTheWeek?: DayOfTheWeek;
   disabledDates?: Date[];
+  highlightDates?: Date[];
   minDate?: Date;
   maxDate?: Date;
 };
@@ -25,6 +26,7 @@ type Options = {
 export default class Calendar {
   firstDayOfTheWeek: number;
   disabledDates: Date[];
+  highlightDates: Date[];
   minDate?: Date;
   maxDate?: Date;
 
@@ -33,6 +35,8 @@ export default class Calendar {
       options.firstDayOfTheWeek !== undefined ? options.firstDayOfTheWeek : 1;
     this.disabledDates =
       options.disabledDates !== undefined ? options.disabledDates : [];
+    this.highlightDates =
+      options.highlightDates !== undefined ? options.highlightDates : [];
     this.minDate = options.minDate;
     this.maxDate = options.maxDate;
   }
@@ -164,5 +168,13 @@ export default class Calendar {
     }
 
     return datePickerValue.isDateSelected(date);
+  }
+
+  isDateHighlighted(date: Date) {
+    const highlightedFound = this.highlightDates.find((highlightedDay) =>
+      isEqual(date, highlightedDay),
+    );
+
+    return Boolean(highlightedFound);
   }
 }

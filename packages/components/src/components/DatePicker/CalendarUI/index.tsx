@@ -46,6 +46,7 @@ const CalendarUI: FC<ICalendarUI> = ({ month }) => {
             outOfRange={!calendar.isDateOfMonth(day, month)}
             onSelect={onSelect}
             onHover={setHoveredDate}
+            highlighted={calendar.isDateHighlighted(day)}
           >
             {format(day, 'd')}
           </Cell>

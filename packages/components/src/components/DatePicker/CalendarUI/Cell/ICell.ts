@@ -4,6 +4,7 @@ export interface CellState {
   isFirstOfRange?: boolean;
   isLastOfRange?: boolean;
   selected?: boolean;
+  highlighted?: boolean;
   hovered?: boolean;
   outOfRange?: boolean;
   blocked?: boolean;
