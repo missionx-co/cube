@@ -44,7 +44,7 @@ const Checkbox: CheckboxType = ({
     isDisabled: disabled,
     isRequired: required,
     defaultSelected: defaultChecked,
-    selected: checked,
+    isSelected: checked,
     isReadOnly: readonly,
   };
   let state = useToggleState(reactAriaProps);
