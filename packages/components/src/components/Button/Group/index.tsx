@@ -6,21 +6,23 @@ import React, {
   ReactElement,
   cloneElement,
 } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import IButton from '../IButton';
 
 export interface IButtonsGroup {
   children: IButton | IButton[];
+  className?: string;
 }
 
-const ButtonsGroup: FC<IButtonsGroup> = ({ children }) => {
+const ButtonsGroup: FC<IButtonsGroup> = ({ children, className }) => {
   const totalChildrenCount = Children.count(children);
   if (totalChildrenCount === 1) {
     return <Fragment>{children}</Fragment>;
   }
 
   return (
-    <div className="flex items-center">
+    <div className={twMerge('flex items-center', className)}>
       {Children.map(Children.toArray(children), (child, index) => {
         const item = child as ReactElement<any, any>;
         if (index === 0) {
