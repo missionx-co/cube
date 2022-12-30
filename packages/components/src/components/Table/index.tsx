@@ -5,15 +5,15 @@ import {
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import Column from './Column';
-import HeaderColumn from './HeaderColumn';
+import Column, { ColumnType } from './Column';
+import HeaderColumn, { HeaderColumnType } from './HeaderColumn';
 import ITable from './ITable';
-import Row from './Row';
+import Row, { RowType } from './Row';
 
 const Table: React.FC<ITable> & {
-  Row: React.ElementType;
-  Cell: React.ElementType;
-  HeaderCell: React.ElementType;
+  Row: RowType;
+  Cell: ColumnType;
+  HeaderCell: HeaderColumnType;
 } = ({
   children,
   tableWrapperClassName,

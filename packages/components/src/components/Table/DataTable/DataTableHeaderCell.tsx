@@ -31,7 +31,7 @@ const DataTableHeaderCell: React.FC<IDataTableHeaderCell> = ({
       className={clsx({
         'cursor-pointer': Boolean(column.sort),
       })}
-      onClick={column.sort ? () => onSort(column.key) : null}
+      onClick={column.sort ? () => onSort(column.key) : undefined}
       {...cellProps}
     >
       <span className="flex items-center">

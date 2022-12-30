@@ -20,4 +20,6 @@ export default interface ICombobox {
   options: (query: string) => Promise<Option[] | false>;
   displayValue?: (item: Option) => string;
   optionRenderer?: (item: Option, props: IOption) => ReactNode;
+  defaultValue?: Option;
+  panelClassName?: string;
 }

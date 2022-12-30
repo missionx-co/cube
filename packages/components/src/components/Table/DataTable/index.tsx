@@ -85,7 +85,7 @@ const DataTable: React.FC<IDataTable> = ({
           {loading && (
             <Table.Row>
               <Table.Cell
-                twStyle={{ textAlign: 'text-center' }}
+                className="text-center"
                 colSpan={columns.length + (onRowSelected ? 1 : 0)}
               >
                 Loading...
@@ -95,7 +95,7 @@ const DataTable: React.FC<IDataTable> = ({
           {!loading && sortedData.length === 0 && (
             <Table.Row>
               <Table.Cell
-                twStyle={{ textAlign: 'text-center' }}
+                className="text-center"
                 colSpan={columns.length + (onRowSelected ? 1 : 0)}
               >
                 {emptyMessage}

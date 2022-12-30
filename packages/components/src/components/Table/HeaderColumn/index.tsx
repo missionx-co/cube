@@ -4,11 +4,9 @@ import { twMerge } from 'tailwind-merge';
 
 import IHeaderColumn from './IHeaderColumn';
 
-const HeaderColumn: React.FC<IHeaderColumn> = ({
-  children,
-  className,
-  ...props
-}) => {
+export type HeaderColumnType = React.FC<IHeaderColumn>;
+
+const HeaderColumn: HeaderColumnType = ({ children, className, ...props }) => {
   return (
     <th className={twMerge(tableHeaderCell.base, className)} {...props}>
       {children}

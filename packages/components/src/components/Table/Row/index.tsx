@@ -3,7 +3,9 @@ import React from 'react';
 
 import IRow from './IRow';
 
-const Row: React.FC<IRow> = ({ children, ...props }) => {
+export type RowType = React.FC<IRow>;
+
+const Row: RowType = ({ children, ...props }) => {
   return <tr {...props}>{children}</tr>;
 };
 

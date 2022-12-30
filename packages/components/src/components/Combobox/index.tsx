@@ -11,6 +11,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import Input from '../Input';
 import ICombobox, { Option } from './ICombobox';
@@ -27,6 +28,8 @@ const Combobox: FC<ICombobox> & {
   options,
   displayValue,
   optionRenderer,
+  defaultValue,
+  panelClassName,
 }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -109,7 +112,7 @@ const Combobox: FC<ICombobox> & {
     }
   }
 
-  function onItemSelect(item: Option) {
+  function setInputValue(item: Option) {
     let inputValue;
     if (displayValue) {
       inputValue = displayValue(item);
@@ -117,6 +120,10 @@ const Combobox: FC<ICombobox> & {
       inputValue = item.text ?? item.value;
     }
     updateSearchQuery(inputValue);
+  }
+
+  function onItemSelect(item: Option) {
+    setInputValue(item);
     setActiveIndex(null);
     setOpen(false);
     onChange && onChange(item.value);
@@ -127,6 +134,14 @@ const Combobox: FC<ICombobox> & {
       return autoUpdate(refs.reference.current, refs.floating.current, update);
     }
   }, [open, update, refs.reference, refs.floating]);
+
+  useEffect(() => {
+    if (!defaultValue) {
+      return;
+    }
+
+    setInputValue(defaultValue);
+  }, []);
 
   return (
     <Fragment>
@@ -166,7 +181,7 @@ const Combobox: FC<ICombobox> & {
 
       {open && (
         <div
-          className={panelContainer.base}
+          className={twMerge(panelContainer.base, panelClassName)}
           {...getFloatingProps({
             ref: floating,
             style: {

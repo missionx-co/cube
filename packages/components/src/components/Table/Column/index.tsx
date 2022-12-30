@@ -4,7 +4,9 @@ import { twMerge } from 'tailwind-merge';
 
 import IColumn from './IColumn';
 
-const Column: React.FC<IColumn> = ({ children, className, ...props }) => {
+export type ColumnType = React.FC<IColumn>;
+
+const Column: ColumnType = ({ children, className, ...props }) => {
   return (
     <td className={twMerge(tableCellStyles.base, className)} {...props}>
       {children}
