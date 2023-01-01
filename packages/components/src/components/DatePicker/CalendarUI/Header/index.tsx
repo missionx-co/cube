@@ -25,6 +25,7 @@ const Header: FC<IHeader> = ({ className, month, ...props }) => {
     >
       <Tooltip content="Go to previous year">
         <button
+          type="button"
           className="hover:text-gray-600 flex-shrink-0 block w-4 h-4 text-gray-400"
           onClick={goToPreviousYear}
           aria-label="previous year"
@@ -34,6 +35,7 @@ const Header: FC<IHeader> = ({ className, month, ...props }) => {
       </Tooltip>
       <Tooltip content="Go to previous month">
         <button
+          type="button"
           className="hover:text-gray-600 flex-shrink-0 block w-4 h-4 text-gray-400"
           onClick={goToPreviousMonth}
           aria-label="previous month"
@@ -47,6 +49,7 @@ const Header: FC<IHeader> = ({ className, month, ...props }) => {
       </h4>
       <Tooltip content="Go to next month">
         <button
+          type="button"
           className="hover:text-gray-600 flex-shrink-0 block w-4 h-4 text-gray-400"
           onClick={goToNextMonth}
           aria-label="next month"
@@ -56,6 +59,7 @@ const Header: FC<IHeader> = ({ className, month, ...props }) => {
       </Tooltip>
       <Tooltip content="Go to next year">
         <button
+          type="button"
           className="hover:text-gray-600 flex-shrink-0 block w-4 h-4 text-gray-400"
           onClick={goToNextYear}
           aria-label="next year"

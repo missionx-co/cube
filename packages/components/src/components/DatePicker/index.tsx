@@ -100,6 +100,7 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
                     onClick={handleNavigateToToday}
                     variant="link"
                     className="font-normal px-3"
+                    type="button"
                   >
                     Today
                   </Button>
@@ -110,10 +111,11 @@ const DatePicker: ForwardedComponent<IDatePicker, any> = forwardRef(
                     variant="outline"
                     color="error"
                     onClick={datePicker.onDiscard}
+                    type="button"
                   >
                     Discard
                   </Button>
-                  <Button area="sm" onClick={datePicker.onApply}>
+                  <Button type="button" area="sm" onClick={datePicker.onApply}>
                     Apply
                   </Button>
                 </div>
