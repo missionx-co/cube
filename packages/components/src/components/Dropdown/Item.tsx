@@ -1,38 +1,58 @@
 import { getItemStyles } from '@cube-ui/styles/dist/dropdown';
 import { Menu } from '@headlessui/react';
-import React, { FC, HTMLProps, ReactNode } from 'react';
+import React, { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
 
-interface IItem extends HTMLProps<HTMLButtonElement> {
+import ForwardedComponent from '../../SharedType/ForwardedComponent';
+
+interface IItem extends Omit<HTMLProps<HTMLButtonElement>, 'className'> {
   disabled?: boolean;
+  className?:
+    | string
+    | ((props: { active: boolean; disabled: boolean }) => string);
   children:
     | ReactNode
     | ReactNode[]
-    | ((props: { active: boolean; disabled: boolean }) => ReactNode);
+    | ((props: {
+        ref: ForwardedRef<any>;
+        active: boolean;
+        disabled: boolean;
+      }) => ReactNode);
 }
 
-export type ItemType = FC<IItem>;
+export type ItemType = ForwardedComponent<IItem, any>;
 
-const Item: ItemType = ({ disabled, children, className, type, ...props }) => {
-  return (
-    <Menu.Item disabled={disabled}>
-      {({ active, disabled }) => {
-        if (typeof children === 'function') {
-          return children({ active, disabled });
-        }
+const Item: ItemType = forwardRef(
+  ({ disabled, children, className, type, ...props }, ref) => {
+    return (
+      <Menu.Item disabled={disabled}>
+        {({ active, disabled }) => {
+          if (typeof children === 'function') {
+            return children({ ref, active, disabled });
+          }
 
-        return (
-          <button
-            type={type as any}
-            disabled={disabled}
-            className={getItemStyles(active, className)}
-            {...props}
-          >
-            {children}
-          </button>
-        );
-      }}
-    </Menu.Item>
-  );
-};
+          let classNames: string = '';
+          if (className) {
+            classNames =
+              typeof className === 'function'
+                ? className({ active, disabled })
+                : className;
+          }
+
+          return (
+            <button
+              ref={ref}
+              type={(type as any) || 'button'}
+              disabled={disabled}
+              className={getItemStyles(active, classNames)}
+              {...props}
+            >
+              {children}
+            </button>
+          );
+        }}
+      </Menu.Item>
+    );
+  },
+);
 
 export default Item;
